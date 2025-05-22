@@ -21,6 +21,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        LoginPanel.setOpaque(false);
+
         
         // Make sure this is your background label
         // Scale background image to fit jLabel1
@@ -57,9 +59,12 @@ jLabel5.setIcon(new ImageIcon(scaledImage));
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        LoginPanel = new javax.swing.JPanel();
+        AdminButton = new javax.swing.JButton();
+        EmployeeButton = new javax.swing.JButton();
+        UserButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        BgImageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -79,18 +84,47 @@ jLabel5.setIcon(new ImageIcon(scaledImage));
         jLabel4.setText("Comfortable.secure.your way.");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 200, -1));
 
-        jLabel5.setText("jLabel5");
-        jPanel1.add(jLabel5);
+        LoginPanel.setBackground(new java.awt.Color(0, 0, 0, 120)
+        );
+        LoginPanel.setVerifyInputWhenFocusTarget(false);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 290, 300));
+        AdminButton.setText("Admin");
+        AdminButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdminButtonActionPerformed(evt);
+            }
+        });
+        LoginPanel.add(AdminButton);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Aeroplane image 1.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 490));
+        EmployeeButton.setText("Employee");
+        LoginPanel.add(EmployeeButton);
+
+        UserButton.setText("User");
+        UserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserButtonActionPerformed(evt);
+            }
+        });
+        LoginPanel.add(UserButton);
+        LoginPanel.add(jLabel5);
+
+        getContentPane().add(LoginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 290, 300));
+
+        BgImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Aeroplane image 1.jpg"))); // NOI18N
+        BgImageLabel.setText("BgImage");
+        getContentPane().add(BgImageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 490));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void UserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserButtonActionPerformed
+
+    private void AdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AdminButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,11 +162,14 @@ jLabel5.setIcon(new ImageIcon(scaledImage));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton AdminButton;
+    private javax.swing.JLabel BgImageLabel;
+    private javax.swing.JButton EmployeeButton;
+    private javax.swing.JPanel LoginPanel;
+    private javax.swing.JButton UserButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
