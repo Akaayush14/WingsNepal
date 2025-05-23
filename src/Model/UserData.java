@@ -8,6 +8,7 @@ package Model;
  *
  * @author Aayush Kharel
  */
+//It is a Java class.
 public class UserData {
     //private attributes
     //public methods
