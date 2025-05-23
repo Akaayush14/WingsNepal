@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 
 
+
 /**
  *
  * @author Aayush Kharel
@@ -21,29 +22,25 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        LoginPanel.setOpaque(false);
 
-        
-        // Make sure this is your background label
-        // Scale background image to fit jLabel1
-        // ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/bg.jpg"));
-        // Image originalImage = originalIcon.getImage();
-        // Image scaledImage = originalImage.getScaledInstance(jLabel5.getWidth(), jLabel5.getHeight(), Image.SCALE_SMOOTH);
-        // jLabel5.setIcon(new ImageIcon(scaledImage));
-    
-        ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/bg.jpg")); // adjust path
-        Image originalImage = originalIcon.getImage();
+       
+      // Make sure this is your background label
+      // Scale background image to fit jLabel1
+      // Image originalImage = originalIcon.getImage();
+      // Image scaledImage = originalImage.getScaledInstance(jLabel5.getWidth(), jLabel5.getHeight(), Image.SCALE_SMOOTH);
+   
+       ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/Aeroplane image.jpg")); // adjust path
+       Image originalImage = originalIcon.getImage();
 
-        // Get label size (make sure label is already sized)
-        int labelWidth = jLabel5.getWidth();
-        int labelHeight = jLabel5.getHeight();
+       // Get label size (make sure label is already sized)
+       int labelWidth = jLabel5.getWidth();
+       int labelHeight = jLabel5.getHeight();
 
-        // Scale image to label size smoothly
-        Image scaledImage = originalImage.getScaledInstance(labelWidth, labelHeight, Image.SCALE_SMOOTH);
+       // Scale image to label size smoothly
+       Image scaledImage = originalImage.getScaledInstance(labelWidth, labelHeight, Image.SCALE_SMOOTH);
 
-// Set the scaled image back as icon
-jLabel5.setIcon(new ImageIcon(scaledImage));
-
+       // Set the scaled image back as icon
+       jLabel5.setIcon(new ImageIcon(scaledImage));
 
     }
 
@@ -56,14 +53,24 @@ jLabel5.setIcon(new ImageIcon(scaledImage));
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         LoginPanel = new javax.swing.JPanel();
-        AdminButton = new javax.swing.JButton();
-        EmployeeButton = new javax.swing.JButton();
-        UserButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        UsernameLabel = new javax.swing.JLabel();
+        PasswordLabel = new javax.swing.JLabel();
+        UsernameField = new javax.swing.JTextField();
+        PasswordField = new javax.swing.JPasswordField();
+        Rememberme = new javax.swing.JCheckBox();
+        ForgotPassword = new javax.swing.JButton();
+        LoginButton = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        RegisterButton = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        RoleLabel = new javax.swing.JLabel();
+        Rolebox = new javax.swing.JComboBox<>();
         BgImageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,29 +91,126 @@ jLabel5.setIcon(new ImageIcon(scaledImage));
         jLabel4.setText("Comfortable.secure.your way.");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 200, -1));
 
-        LoginPanel.setBackground(new java.awt.Color(0, 0, 0, 120)
-        );
+        LoginPanel.setBackground(new java.awt.Color(255, 255, 255));
         LoginPanel.setVerifyInputWhenFocusTarget(false);
 
-        AdminButton.setText("Admin");
-        AdminButton.addActionListener(new java.awt.event.ActionListener() {
+        UsernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        UsernameLabel.setText("Username");
+
+        PasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        PasswordLabel.setText("Password");
+
+        UsernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AdminButtonActionPerformed(evt);
+                UsernameFieldActionPerformed(evt);
             }
         });
-        LoginPanel.add(AdminButton);
 
-        EmployeeButton.setText("Employee");
-        LoginPanel.add(EmployeeButton);
-
-        UserButton.setText("User");
-        UserButton.addActionListener(new java.awt.event.ActionListener() {
+        Rememberme.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        Rememberme.setText("Remember me");
+        Rememberme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UserButtonActionPerformed(evt);
+                RemembermeActionPerformed(evt);
             }
         });
-        LoginPanel.add(UserButton);
-        LoginPanel.add(jLabel5);
+
+        ForgotPassword.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        ForgotPassword.setText("Forgot password?");
+        ForgotPassword.setBorder(null);
+
+        LoginButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        LoginButton.setText("Login");
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Don't have an acount?");
+
+        RegisterButton.setForeground(new java.awt.Color(255, 0, 102));
+        RegisterButton.setText("Register");
+        RegisterButton.setBorder(null);
+        RegisterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegisterButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel8.setText("WingsNepal | @ 2025");
+
+        RoleLabel.setText("Role");
+
+        Rolebox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Employee", "User" }));
+        Rolebox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RoleboxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout LoginPanelLayout = new javax.swing.GroupLayout(LoginPanel);
+        LoginPanel.setLayout(LoginPanelLayout);
+        LoginPanelLayout.setHorizontalGroup(
+            LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LoginPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(UsernameLabel)
+                    .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(RoleLabel)
+                        .addComponent(PasswordLabel)))
+                .addGap(18, 18, 18)
+                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(LoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PasswordField)
+                    .addComponent(UsernameField)
+                    .addGroup(LoginPanelLayout.createSequentialGroup()
+                        .addComponent(Rememberme)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ForgotPassword))
+                    .addGroup(LoginPanelLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel8))
+                    .addGroup(LoginPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(RegisterButton))
+                    .addComponent(Rolebox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(jLabel5)
+                .addGap(45, 45, 45))
+        );
+        LoginPanelLayout.setVerticalGroup(
+            LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LoginPanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(UsernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UsernameLabel))
+                .addGap(18, 18, 18)
+                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PasswordLabel))
+                .addGap(23, 23, 23)
+                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RoleLabel)
+                    .addComponent(Rolebox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Rememberme)
+                    .addComponent(ForgotPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(RegisterButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jLabel8))
+        );
 
         getContentPane().add(LoginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 290, 300));
 
@@ -118,58 +222,56 @@ jLabel5.setIcon(new ImageIcon(scaledImage));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserButtonActionPerformed
+    private void UsernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UserButtonActionPerformed
+    }//GEN-LAST:event_UsernameFieldActionPerformed
 
-    private void AdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminButtonActionPerformed
+    private void RemembermeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemembermeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AdminButtonActionPerformed
+    }//GEN-LAST:event_RemembermeActionPerformed
+
+    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RegisterButtonActionPerformed
+
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LoginButtonActionPerformed
+
+    private void RoleboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RoleboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RoleboxActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+public static void main(String[] args) {
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new Login().setVisible(true); // ✅ Show the Login frame
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
-    }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AdminButton;
     private javax.swing.JLabel BgImageLabel;
-    private javax.swing.JButton EmployeeButton;
+    private javax.swing.JButton ForgotPassword;
+    private javax.swing.JButton LoginButton;
     private javax.swing.JPanel LoginPanel;
-    private javax.swing.JButton UserButton;
+    private javax.swing.JPasswordField PasswordField;
+    private javax.swing.JLabel PasswordLabel;
+    private javax.swing.JButton RegisterButton;
+    private javax.swing.JCheckBox Rememberme;
+    private javax.swing.JLabel RoleLabel;
+    private javax.swing.JComboBox<String> Rolebox;
+    private javax.swing.JTextField UsernameField;
+    private javax.swing.JLabel UsernameLabel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
