@@ -19,25 +19,8 @@ public class LoginPage extends javax.swing.JFrame {
     public LoginPage() {
         initComponents();
         scaleImage();
-        
-        //Styling ForgotPassword button to make it look like a link.
-        ForgotButton.setContentAreaFilled(false);
-        ForgotButton.setBorderPainted(false);
-        ForgotButton.setFocusPainted(false);
-        ForgotButton.setOpaque(false);
-        ForgotButton.setFocusable(false);
-        ForgotButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ForgotButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        
-        //Styling SignUpButton button to make it look like a link.
-        SignUpButton.setContentAreaFilled(false);
-        SignUpButton.setBorderPainted(false);
-        SignUpButton.setFocusPainted(false);
-        SignUpButton.setOpaque(false);
-        SignUpButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        SignUpButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        
     }
+    
     public void scaleImage(){
         ImageIcon icon = new ImageIcon("C:\\Users\\Aayush Kharel\\Desktop\\Java project\\WingsNepal\\src\\wingsnepal\\image\\Aeroplane image.jpg");
         //scaling image to fit in the hlabel.
@@ -64,11 +47,11 @@ public class LoginPage extends javax.swing.JFrame {
         UsernameTextField = new javax.swing.JTextField();
         PasswordTextField = new javax.swing.JPasswordField();
         RoleComboBox = new javax.swing.JComboBox<>();
-        ForgotButton = new javax.swing.JButton();
         LoginButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        SignUpButton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -101,14 +84,6 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
 
-        ForgotButton.setText("Forgot password?");
-        ForgotButton.setBorder(null);
-        ForgotButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ForgotButtonActionPerformed(evt);
-            }
-        });
-
         LoginButton.setFont(new java.awt.Font("Segoe UI Emoji", 0, 16)); // NOI18N
         LoginButton.setText("Login");
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -120,31 +95,28 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         jLabel7.setText("Don't have an account?");
 
-        SignUpButton.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        SignUpButton.setForeground(new java.awt.Color(255, 0, 51));
-        SignUpButton.setText("Sign up");
-        SignUpButton.setBorder(null);
-        SignUpButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SignUpButtonActionPerformed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Segoe UI Emoji", 0, 10)); // NOI18N
         jLabel8.setText("WingsNepal@2025");
+
+        jLabel4.setText("Forgot password?");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 51, 0));
+        jLabel5.setText("Sign up");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(ForgotButton))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(UsernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,13 +138,12 @@ public class LoginPage extends javax.swing.JFrame {
                         .addGap(55, 55, 55)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SignUpButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,13 +161,13 @@ public class LoginPage extends javax.swing.JFrame {
                     .addComponent(RoleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RoleLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ForgotButton)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(SignUpButton))
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8))
         );
@@ -234,17 +205,9 @@ public class LoginPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordTextFieldActionPerformed
 
-    private void ForgotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForgotButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ForgotButtonActionPerformed
-
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_LoginButtonActionPerformed
-
-    private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SignUpButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,18 +246,18 @@ public class LoginPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BgLabel;
-    private javax.swing.JButton ForgotButton;
     private javax.swing.JButton LoginButton;
     private javax.swing.JLabel PasswordLabel;
     private javax.swing.JPasswordField PasswordTextField;
     private javax.swing.JComboBox<String> RoleComboBox;
     private javax.swing.JLabel RoleLabel;
-    private javax.swing.JButton SignUpButton;
     private javax.swing.JLabel UsernameLabel;
     private javax.swing.JTextField UsernameTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
