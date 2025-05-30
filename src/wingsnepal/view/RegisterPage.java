@@ -98,7 +98,7 @@ public class RegisterPage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 153, 80));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153, 65));
 
         NameLabel.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
         NameLabel.setText("Fullname");
