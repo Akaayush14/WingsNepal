@@ -5,7 +5,12 @@
         <group>
             <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/LoginPage.java</file>
             <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/RegisterPage.java</file>
+<<<<<<< Updated upstream
             <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/UserPortal.java</file>
+=======
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/ResetPassword.java</file>
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/ForgotPassword.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>
