@@ -6,7 +6,6 @@ package wingsnepal.view;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 /**
  *
@@ -31,7 +30,7 @@ public class RegisterPage extends javax.swing.JFrame {
             BgImageLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
             
             // Load image from path into ImageIcon.
-            ImageIcon icon = new ImageIcon("C:\\Users\\Aayush Kharel\\Desktop\\Java project\\WingsNepal\\src\\wingsnepal\\image\\Aeroplane Image.jpg");
+            ImageIcon icon = new ImageIcon("C:\\Users\\Aayush Kharel\\Desktop\\Java project\\WingsNepal\\src\\imagepicker\\Aeroplane Image 2.jpg");
             
             //Get Image from the icon.
             Image img1 = icon.getImage();
@@ -237,11 +236,12 @@ public class RegisterPage extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 460, -1));
 
-        BgImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wingsnepal/image/Aeroplane image 1.jpg"))); // NOI18N
+        BgImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Aeroplane Image 2.jpg"))); // NOI18N
         BgImageLabel.setText("BgLabel");
         getContentPane().add(BgImageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
