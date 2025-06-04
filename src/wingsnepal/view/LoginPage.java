@@ -19,6 +19,9 @@ public class LoginPage extends javax.swing.JFrame {
     public LoginPage() {
         initComponents();
         scaleImage();
+        setResizable(false);         //Disable maximize button
+        setLocationRelativeTo(null); //Center window
+        
     }
     public void scaleImage(){
         ImageIcon icon = new ImageIcon("C:\\Users\\Aayush Kharel\\Desktop\\Java project\\WingsNepal\\src\\imagepicker\\Aeroplane image 1.jpg");
@@ -81,7 +84,7 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
 
-        LoginButton.setBackground(new java.awt.Color(0, 51, 255));
+        LoginButton.setBackground(new java.awt.Color(0, 102, 153));
         LoginButton.setFont(new java.awt.Font("Segoe UI Emoji", 0, 16)); // NOI18N
         LoginButton.setForeground(new java.awt.Color(255, 255, 255));
         LoginButton.setText("Login");
