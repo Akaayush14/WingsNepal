@@ -21,7 +21,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         scaleImage();
     }
         public void scaleImage(){
-        ImageIcon icon = new ImageIcon("C:\\Users\\Aayush Kharel\\Desktop\\Java project\\WingsNepal\\src\\wingsnepal\\image\\Aeroplane image 2.jpg");
+        ImageIcon icon = new ImageIcon("C:\\Users\\Aayush Kharel\\Desktop\\Java project\\WingsNepal\\src\\imagepicker\\Aeroplane Image 2.jpg");
         //scaling image to fit in the hlabel.
         Image img1 = icon.getImage();
         Image imgScale = img1.getScaledInstance(BgLabel.getWidth(), BgLabel.getHeight(), Image.SCALE_SMOOTH);
@@ -132,12 +132,13 @@ public class ForgotPassword extends javax.swing.JFrame {
 
         getContentPane().add(ForgotPasswordPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 350, 370));
 
-        BgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wingsnepal/image/Aeroplane Image 2.jpg"))); // NOI18N
+        BgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Aeroplane Image 2.jpg"))); // NOI18N
         BgLabel.setText("BgLabel");
         BgLabel.setAutoscrolls(true);
         getContentPane().add(BgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void OtpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OtpButtonActionPerformed

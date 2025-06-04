@@ -21,7 +21,7 @@ public class LoginPage extends javax.swing.JFrame {
         scaleImage();
     }
     public void scaleImage(){
-        ImageIcon icon = new ImageIcon("C:\\Users\\Aayush Kharel\\Desktop\\Java project\\WingsNepal\\src\\wingsnepal\\image\\Aeroplane image 1.jpg");
+        ImageIcon icon = new ImageIcon("C:\\Users\\Aayush Kharel\\Desktop\\Java project\\WingsNepal\\src\\imagepicker\\Aeroplane image 1.jpg");
         //scaling image to fit in the hlabel.
         Image img1 = icon.getImage();
         Image imgScale = img1.getScaledInstance(BgLabel.getWidth(), BgLabel.getHeight(), Image.SCALE_SMOOTH);
@@ -192,7 +192,7 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel3.setText("Comfortable.secure.your.way.");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 90, 290, -1));
 
-        BgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wingsnepal/image/Aeroplane image 1.jpg"))); // NOI18N
+        BgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Aeroplane image 1.jpg"))); // NOI18N
         BgLabel.setText("BgImageLabel");
         getContentPane().add(BgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 

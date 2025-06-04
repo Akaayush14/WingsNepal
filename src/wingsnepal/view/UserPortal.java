@@ -4,18 +4,67 @@
  */
 package wingsnepal.view;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Aayush Kharel
  */
-public class UserPortal extends javax.swing.JFrame {
+public class UserPortal extends javax.swing.JFrame{
 
     /**
      * Creates new form UserPortal
      */
     public UserPortal() {
         initComponents();
+        scaleImage1();  
+        scaleImage2();
+        scaleImage3();
+        scaleImage4();
+        scaleImage5();
     }
+        public void scaleImage1(){
+        ImageIcon icon1 = new ImageIcon(getClass().getResource("/imagepicker/Dashboard.png"));
+        //scaling image to fit in the hlabel.
+        Image img1 = icon1.getImage();
+        Image imgScale1 = img1.getScaledInstance(DashboardIcon.getWidth(), DashboardIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon1 = new ImageIcon(imgScale1);
+        DashboardIcon.setIcon(scaledIcon1);
+    }
+        public void scaleImage2(){
+        ImageIcon icon2 = new ImageIcon(getClass().getResource("/imagepicker/Search.png"));
+        //scaling image to fit in the hlabel.
+        Image img2 = icon2.getImage();
+        Image imgScale2 = img2.getScaledInstance(SearchFlightIcon.getWidth(), SearchFlightIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon2 = new ImageIcon(imgScale2);
+        SearchFlightIcon.setIcon(scaledIcon2);
+    }
+        public void scaleImage3(){
+        ImageIcon icon3 = new ImageIcon(getClass().getResource("/imagepicker/Book.png"));
+        //scaling image to fit in the hlabel.
+        Image img3 = icon3.getImage();
+        Image imgScale3 = img3.getScaledInstance(BookFlightIcon.getWidth(), BookFlightIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon3 = new ImageIcon(imgScale3);
+        BookFlightIcon.setIcon(scaledIcon3);
+    }
+        public void scaleImage4(){
+        ImageIcon icon4 = new ImageIcon(getClass().getResource("/imagepicker/CheckIn.png"));
+        //scaling image to fit in the hlabel.
+        Image img4 = icon4.getImage();
+        Image imgScale4 = img4.getScaledInstance(CheckInIcon.getWidth(), CheckInIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon4 = new ImageIcon(imgScale4);
+        CheckInIcon.setIcon(scaledIcon4);
+    }
+        public void scaleImage5(){
+        ImageIcon icon5 = new ImageIcon(getClass().getResource("/imagepicker/LogOut.png"));
+        //scaling image to fit in the hlabel.
+        Image img5 = icon5.getImage();
+        Image imgScale5 = img5.getScaledInstance(LogOutIcon.getWidth(), LogOutIcon.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon5 = new ImageIcon(imgScale5);
+        LogOutIcon.setIcon(scaledIcon5);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,21 +75,182 @@ public class UserPortal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        DashboardIcon = new javax.swing.JLabel();
+        SearchFlightIcon = new javax.swing.JLabel();
+        BookFlightIcon = new javax.swing.JLabel();
+        CheckInIcon = new javax.swing.JLabel();
+        LogOutIcon = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(46, 62, 79));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        DashboardIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Dashboard.png"))); // NOI18N
+        jPanel1.add(DashboardIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 20, 20));
+
+        SearchFlightIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/search.png"))); // NOI18N
+        jPanel1.add(SearchFlightIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 30, 30));
+
+        BookFlightIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Book.png"))); // NOI18N
+        BookFlightIcon.setText("jLabel5");
+        jPanel1.add(BookFlightIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 40, 40));
+
+        CheckInIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/CheckIn.png"))); // NOI18N
+        jPanel1.add(CheckInIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 30, 30));
+
+        LogOutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Logout.png"))); // NOI18N
+        LogOutIcon.setText("jLabel1");
+        jPanel1.add(LogOutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 30, 30));
+
+        jButton1.setBackground(new java.awt.Color(46, 62, 79));
+        jButton1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("User Dashboard");
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setVerifyInputWhenFocusTarget(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 230, -1));
+
+        jButton2.setBackground(new java.awt.Color(46, 62, 79));
+        jButton2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Search Flights");
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 230, 35));
+
+        jButton3.setBackground(new java.awt.Color(46, 62, 79));
+        jButton3.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Book Flights");
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
+        jButton3.setVerifyInputWhenFocusTarget(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 230, 35));
+
+        jButton4.setBackground(new java.awt.Color(46, 62, 79));
+        jButton4.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Check in");
+        jButton4.setBorderPainted(false);
+        jButton4.setContentAreaFilled(false);
+        jButton4.setVerifyInputWhenFocusTarget(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 334, 230, 35));
+
+        jButton5.setBackground(new java.awt.Color(46, 62, 79));
+        jButton5.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setText("Log out");
+        jButton5.setBorderPainted(false);
+        jButton5.setContentAreaFilled(false);
+        jButton5.setVerifyInputWhenFocusTarget(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 230, 35));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 230, 640));
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setText("Aayush1");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, -1, -1));
+
+        jTabbedPane1.addTab("tab1", jPanel2);
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("Aayush2");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 50, 40));
+
+        jTabbedPane1.addTab("tab2", jPanel3);
+
+        jLabel3.setText("Aayush3");
+        jPanel4.add(jLabel3);
+
+        jTabbedPane1.addTab("tab3", jPanel4);
+
+        jLabel4.setText("Aayush4");
+        jPanel5.add(jLabel4);
+
+        jTabbedPane1.addTab("tab4", jPanel5);
+
+        jLabel5.setText("Aayush5");
+        jPanel6.add(jLabel5);
+
+        jTabbedPane1.addTab("tab5", jPanel6);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -40, 790, 670));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(0);//Dashboard tab
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(1);//Search Flights tab
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(2); //Book Flights tab
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(3); //Check in
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(4);//Log out
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +288,27 @@ public class UserPortal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BookFlightIcon;
+    private javax.swing.JLabel CheckInIcon;
+    private javax.swing.JLabel DashboardIcon;
+    private javax.swing.JLabel LogOutIcon;
+    private javax.swing.JLabel SearchFlightIcon;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
