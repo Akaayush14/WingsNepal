@@ -18,6 +18,8 @@ public class UserPortal extends javax.swing.JFrame{
      */
     public UserPortal() {
         initComponents();
+        setResizable(false);         //Disable maximize button
+        setLocationRelativeTo(null); //Center window
         scaleImage1();  
         scaleImage2();
         scaleImage3();

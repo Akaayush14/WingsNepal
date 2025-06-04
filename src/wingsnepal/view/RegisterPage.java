@@ -19,6 +19,8 @@ public class RegisterPage extends javax.swing.JFrame {
     public RegisterPage() {
         initComponents();
         scaleImage();
+        setResizable(false);         //Disable maximize button
+        setLocationRelativeTo(null); //Center window
     }
         public void scaleImage(){
             // Avoid scaling if label is not yet visible or sized

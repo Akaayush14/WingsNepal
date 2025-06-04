@@ -19,6 +19,8 @@ public class ForgotPassword extends javax.swing.JFrame {
     public ForgotPassword() {
         initComponents();
         scaleImage();
+        setResizable(false);         //Disable maximize button
+        setLocationRelativeTo(null); //Center window
     }
         public void scaleImage(){
         ImageIcon icon = new ImageIcon("C:\\Users\\Aayush Kharel\\Desktop\\Java project\\WingsNepal\\src\\imagepicker\\Aeroplane Image 2.jpg");
