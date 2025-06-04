@@ -25,6 +25,7 @@ public class UserPortal extends javax.swing.JFrame{
         scaleImage3();
         scaleImage4();
         scaleImage5();
+        scaleImage6();
     }
         public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/imagepicker/Dashboard.png"));
@@ -66,6 +67,14 @@ public class UserPortal extends javax.swing.JFrame{
         ImageIcon scaledIcon5 = new ImageIcon(imgScale5);
         LogOutIcon.setIcon(scaledIcon5);
     }
+        public void scaleImage6(){
+        ImageIcon icon6 = new ImageIcon(getClass().getResource("/imagepicker/WingsNepalLogo.jpg"));
+        //scaling image to fit in the hlabel.
+        Image img6 = icon6.getImage();
+        Image imgScale6 = img6.getScaledInstance(WingsNepalLogo.getWidth(), WingsNepalLogo.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon6 = new ImageIcon(imgScale6);
+        WingsNepalLogo.setIcon(scaledIcon6);
+    }
 
 
     /**
@@ -88,11 +97,23 @@ public class UserPortal extends javax.swing.JFrame{
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        WingsNepalLogo = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
+        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
+        jTextField3 = new javax.swing.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -107,21 +128,21 @@ public class UserPortal extends javax.swing.JFrame{
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DashboardIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Dashboard.png"))); // NOI18N
-        jPanel1.add(DashboardIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 20, 20));
+        jPanel1.add(DashboardIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 20, 20));
 
         SearchFlightIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/search.png"))); // NOI18N
-        jPanel1.add(SearchFlightIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 30, 30));
+        jPanel1.add(SearchFlightIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 30, 30));
 
         BookFlightIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Book.png"))); // NOI18N
         BookFlightIcon.setText("jLabel5");
-        jPanel1.add(BookFlightIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 40, 40));
+        jPanel1.add(BookFlightIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 40, 40));
 
         CheckInIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/CheckIn.png"))); // NOI18N
-        jPanel1.add(CheckInIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 30, 30));
+        jPanel1.add(CheckInIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 30, 30));
 
         LogOutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Logout.png"))); // NOI18N
         LogOutIcon.setText("jLabel1");
-        jPanel1.add(LogOutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 30, 30));
+        jPanel1.add(LogOutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 30, 30));
 
         jButton1.setBackground(new java.awt.Color(46, 62, 79));
         jButton1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -135,7 +156,7 @@ public class UserPortal extends javax.swing.JFrame{
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 230, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 230, 30));
 
         jButton2.setBackground(new java.awt.Color(46, 62, 79));
         jButton2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -148,7 +169,7 @@ public class UserPortal extends javax.swing.JFrame{
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 230, 35));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 230, 35));
 
         jButton3.setBackground(new java.awt.Color(46, 62, 79));
         jButton3.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -162,7 +183,7 @@ public class UserPortal extends javax.swing.JFrame{
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 230, 35));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 230, 35));
 
         jButton4.setBackground(new java.awt.Color(46, 62, 79));
         jButton4.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -176,7 +197,7 @@ public class UserPortal extends javax.swing.JFrame{
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 334, 230, 35));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 230, 35));
 
         jButton5.setBackground(new java.awt.Color(46, 62, 79));
         jButton5.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -190,21 +211,85 @@ public class UserPortal extends javax.swing.JFrame{
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 230, 35));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 230, 35));
+
+        WingsNepalLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/WingsNepalLogo.jpg"))); // NOI18N
+        jPanel1.add(WingsNepalLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -40, 280, 240));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 230, 640));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("Aayush1");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, -1, -1));
-
         jTabbedPane1.addTab("tab1", jPanel2);
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Aayush2");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 50, 40));
+        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jLabel2.setText("From");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jLabel6.setText("To");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jLabel7.setText("Date");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+
+        jTextField1.setText("Enter departure city or airport");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 260, 30));
+
+        jTextField2.setText("Enter destination city or airport");
+        jPanel3.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 260, 30));
+
+        jScrollPane1.setViewportView(jTree1);
+
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 490, 600));
+        jPanel3.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 80, 30));
+        jPanel3.add(jMonthChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 130, 30));
+
+        jTextField3.setText("Day");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 50, 30));
+
+        jPanel7.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Search Flights");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(306, 306, 306)
+                .addComponent(jLabel1)
+                .addContainerGap(328, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
+        );
+
+        jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 50));
+
+        jButton6.setBackground(new java.awt.Color(0, 102, 153));
+        jButton6.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setText("Search Flights");
+        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 260, 40));
 
         jTabbedPane1.addTab("tab2", jPanel3);
 
@@ -254,6 +339,14 @@ public class UserPortal extends javax.swing.JFrame{
         jTabbedPane1.setSelectedIndex(4);//Log out
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -295,22 +388,34 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JLabel DashboardIcon;
     private javax.swing.JLabel LogOutIcon;
     private javax.swing.JLabel SearchFlightIcon;
+    private javax.swing.JLabel WingsNepalLogo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTree jTree1;
+    private com.toedter.calendar.JYearChooser jYearChooser1;
     // End of variables declaration//GEN-END:variables
 }

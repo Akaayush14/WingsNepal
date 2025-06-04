@@ -84,7 +84,7 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
 
-        LoginButton.setBackground(new java.awt.Color(0, 51, 255));
+        LoginButton.setBackground(new java.awt.Color(0, 102, 153));
         LoginButton.setFont(new java.awt.Font("Segoe UI Emoji", 0, 16)); // NOI18N
         LoginButton.setForeground(new java.awt.Color(255, 255, 255));
         LoginButton.setText("Login");
