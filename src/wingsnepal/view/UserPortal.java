@@ -3,9 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package wingsnepal.view;
-
 import java.awt.Image;
+import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
+import wingsnepal.dao.SearchFlightDao;
+import wingsnepal.model.SearchFlight;
+
+
+
 
 /**
  *
@@ -26,6 +32,7 @@ public class UserPortal extends javax.swing.JFrame{
         scaleImage4();
         scaleImage5();
         scaleImage6();
+        
     }
         public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/imagepicker/Dashboard.png"));
@@ -75,6 +82,32 @@ public class UserPortal extends javax.swing.JFrame{
         ImageIcon scaledIcon6 = new ImageIcon(imgScale6);
         WingsNepalLogo.setIcon(scaledIcon6);
     }
+        
+        //It calls Dao, fetches flights and fills the jTable. 
+        private void SearchFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {
+            String from = FromTextField.getText();
+            String to = ToTextField.getText();
+            int year = jYearChooser1.getYear();
+            int month = jMonthChooser1.getMonth() + 1; // months are 0-indexed
+            String day = jDayChooser1.getText();
+
+            String date = year + "-" + String.format("%02d", month) + "-" + day;
+
+            SearchFlightDao dao = new SearchFlightDao();
+            List<SearchFlight> flights = dao.searchFlights(from, to, date);
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0); // Clear old data
+
+            for (SearchFlight f : flights) {
+                model.addRow(new Object[]{
+                    f.getFlightName(),
+                    f.getTime(),
+                    f.getPrice(),
+                    f.getDuration()
+                });
+            }
+        }
 
 
     /**
@@ -101,19 +134,19 @@ public class UserPortal extends javax.swing.JFrame{
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        FromLabel = new javax.swing.JLabel();
+        ToLabel = new javax.swing.JLabel();
+        DateLabel = new javax.swing.JLabel();
+        FromTextField = new javax.swing.JTextField();
+        ToTextField = new javax.swing.JTextField();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
         jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
-        jTextField3 = new javax.swing.JTextField();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        jDayChooser1 = new javax.swing.JTextField();
+        HeadingPanel = new javax.swing.JPanel();
+        SearchFlightLabel = new javax.swing.JLabel();
+        SearchFlightButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -223,73 +256,97 @@ public class UserPortal extends javax.swing.JFrame{
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
-        jLabel2.setText("From");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        FromLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        FromLabel.setText("From");
+        jPanel3.add(FromLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
-        jLabel6.setText("To");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+        ToLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        ToLabel.setText("To");
+        jPanel3.add(ToLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
-        jLabel7.setText("Date");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+        DateLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        DateLabel.setText("Date");
+        jPanel3.add(DateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
 
-        jTextField1.setText("Enter departure city or airport");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        FromTextField.setText("Enter departure city or airport");
+        FromTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                FromTextFieldActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 260, 30));
+        jPanel3.add(FromTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 260, 30));
 
-        jTextField2.setText("Enter destination city or airport");
-        jPanel3.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 260, 30));
-
-        jScrollPane1.setViewportView(jTree1);
-
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 490, 600));
+        ToTextField.setText("Enter destination city or airport");
+        jPanel3.add(ToTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 260, 30));
         jPanel3.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 80, 30));
         jPanel3.add(jMonthChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 130, 30));
 
-        jTextField3.setText("Day");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jDayChooser1.setText("Day");
+        jDayChooser1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                jDayChooser1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 50, 30));
+        jPanel3.add(jDayChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 50, 30));
 
-        jPanel7.setBackground(new java.awt.Color(153, 153, 153));
+        HeadingPanel.setBackground(new java.awt.Color(153, 153, 153));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Search Flights");
+        SearchFlightLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
+        SearchFlightLabel.setForeground(new java.awt.Color(255, 255, 255));
+        SearchFlightLabel.setText("Search Flights");
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout HeadingPanelLayout = new javax.swing.GroupLayout(HeadingPanel);
+        HeadingPanel.setLayout(HeadingPanelLayout);
+        HeadingPanelLayout.setHorizontalGroup(
+            HeadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HeadingPanelLayout.createSequentialGroup()
                 .addGap(306, 306, 306)
-                .addComponent(jLabel1)
+                .addComponent(SearchFlightLabel)
                 .addContainerGap(328, Short.MAX_VALUE))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+        HeadingPanelLayout.setVerticalGroup(
+            HeadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeadingPanelLayout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(SearchFlightLabel)
                 .addContainerGap())
         );
 
-        jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 50));
+        jPanel3.add(HeadingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 50));
 
-        jButton6.setBackground(new java.awt.Color(0, 102, 153));
-        jButton6.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Search Flights");
-        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 260, 40));
+        SearchFlightButton.setBackground(new java.awt.Color(0, 102, 153));
+        SearchFlightButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        SearchFlightButton.setForeground(new java.awt.Color(255, 255, 255));
+        SearchFlightButton.setText("Search Flights");
+        SearchFlightButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchFlightButtonActionPerformed(evt);
+            }
+        });
+        jPanel3.add(SearchFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 260, 40));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Flight", "Time", "Price", "Duration "
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 490, 530));
 
         jTabbedPane1.addTab("tab2", jPanel3);
 
@@ -339,13 +396,13 @@ public class UserPortal extends javax.swing.JFrame{
         jTabbedPane1.setSelectedIndex(4);//Log out
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void FromTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FromTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_FromTextFieldActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void jDayChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDayChooser1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_jDayChooser1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,22 +443,26 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JLabel BookFlightIcon;
     private javax.swing.JLabel CheckInIcon;
     private javax.swing.JLabel DashboardIcon;
+    private javax.swing.JLabel DateLabel;
+    private javax.swing.JLabel FromLabel;
+    private javax.swing.JTextField FromTextField;
+    private javax.swing.JPanel HeadingPanel;
     private javax.swing.JLabel LogOutIcon;
+    private javax.swing.JButton SearchFlightButton;
     private javax.swing.JLabel SearchFlightIcon;
+    private javax.swing.JLabel SearchFlightLabel;
+    private javax.swing.JLabel ToLabel;
+    private javax.swing.JTextField ToTextField;
     private javax.swing.JLabel WingsNepalLogo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField jDayChooser1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -409,13 +470,9 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JTable jTable1;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     // End of variables declaration//GEN-END:variables
 }

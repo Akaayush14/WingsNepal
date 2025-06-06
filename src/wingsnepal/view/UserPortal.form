@@ -276,7 +276,7 @@
             <Property name="useNullLayout" type="boolean" value="false"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="FromLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI Emoji" size="18" style="1"/>
@@ -289,7 +289,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel6">
+            <Component class="javax.swing.JLabel" name="ToLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI Emoji" size="18" style="1"/>
@@ -302,7 +302,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel7">
+            <Component class="javax.swing.JLabel" name="DateLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI Emoji" size="18" style="1"/>
@@ -315,12 +315,12 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="FromTextField">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Enter departure city or airport"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FromTextFieldActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -328,7 +328,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField2">
+            <Component class="javax.swing.JTextField" name="ToTextField">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Enter destination city or airport"/>
               </Properties>
@@ -338,22 +338,6 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-              <AuxValues>
-                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-              </AuxValues>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="300" y="50" width="490" height="600"/>
-                </Constraint>
-              </Constraints>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JTree" name="jTree1">
-                </Component>
-              </SubComponents>
-            </Container>
             <Component class="com.toedter.calendar.JYearChooser" name="jYearChooser1">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -368,12 +352,12 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField3">
+            <Component class="javax.swing.JTextField" name="jDayChooser1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Day"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jDayChooser1ActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -381,7 +365,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Container class="javax.swing.JPanel" name="jPanel7">
+            <Container class="javax.swing.JPanel" name="HeadingPanel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="99" type="rgb"/>
@@ -398,7 +382,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="306" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="SearchFlightLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="328" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -407,14 +391,14 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="17" max="32767" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="SearchFlightLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel1">
+                <Component class="javax.swing.JLabel" name="SearchFlightLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI Emoji" size="24" style="1"/>
@@ -427,7 +411,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButton6">
+            <Component class="javax.swing.JButton" name="SearchFlightButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="66" red="0" type="rgb"/>
@@ -440,12 +424,41 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Search Flights"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SearchFlightButtonActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="10" y="440" width="260" height="40"/>
                 </Constraint>
               </Constraints>
             </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="300" y="110" width="490" height="530"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jTable1">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="4" rowCount="4">
+                        <Column editable="true" title="Flight" type="java.lang.String"/>
+                        <Column editable="true" title="Time" type="java.lang.Integer"/>
+                        <Column editable="true" title="Price" type="java.lang.Integer"/>
+                        <Column editable="true" title="Duration " type="java.lang.Integer"/>
+                      </Table>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel4">
