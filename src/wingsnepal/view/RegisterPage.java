@@ -133,7 +133,7 @@ public class RegisterPage extends javax.swing.JFrame {
         UserLabel.setText("User");
 
         UserComboBox.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        UserComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Employee", "User" }));
+        UserComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Employee" }));
         UserComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UserComboBoxActionPerformed(evt);

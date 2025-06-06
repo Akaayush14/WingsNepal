@@ -78,7 +78,7 @@ public class LoginPage extends javax.swing.JFrame {
         RoleLabel.setForeground(new java.awt.Color(255, 255, 255));
         RoleLabel.setText("Role");
 
-        RoleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Employee", "User" }));
+        RoleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
         RoleComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RoleComboBoxActionPerformed(evt);

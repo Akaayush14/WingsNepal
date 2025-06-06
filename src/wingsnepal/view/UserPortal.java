@@ -168,7 +168,7 @@ public class UserPortal extends javax.swing.JFrame{
 
         BookFlightIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Book.png"))); // NOI18N
         BookFlightIcon.setText("jLabel5");
-        jPanel1.add(BookFlightIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 40, 40));
+        jPanel1.add(BookFlightIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 40, 40));
 
         CheckInIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/CheckIn.png"))); // NOI18N
         jPanel1.add(CheckInIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 30, 30));
@@ -183,72 +183,67 @@ public class UserPortal extends javax.swing.JFrame{
         jButton1.setText("User Dashboard");
         jButton1.setAutoscrolls(true);
         jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
         jButton1.setVerifyInputWhenFocusTarget(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 230, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 230, 40));
 
         jButton2.setBackground(new java.awt.Color(46, 62, 79));
         jButton2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Search Flights");
         jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 230, 35));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 230, 40));
 
         jButton3.setBackground(new java.awt.Color(46, 62, 79));
         jButton3.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Book Flights");
         jButton3.setBorderPainted(false);
-        jButton3.setContentAreaFilled(false);
         jButton3.setVerifyInputWhenFocusTarget(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 230, 35));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 315, 230, 40));
 
         jButton4.setBackground(new java.awt.Color(46, 62, 79));
         jButton4.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Check in");
         jButton4.setBorderPainted(false);
-        jButton4.setContentAreaFilled(false);
         jButton4.setVerifyInputWhenFocusTarget(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 230, 35));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 230, 40));
 
         jButton5.setBackground(new java.awt.Color(46, 62, 79));
         jButton5.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Log out");
         jButton5.setBorderPainted(false);
-        jButton5.setContentAreaFilled(false);
         jButton5.setVerifyInputWhenFocusTarget(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 230, 35));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 475, 230, 40));
 
         WingsNepalLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/WingsNepalLogo.jpg"))); // NOI18N
-        jPanel1.add(WingsNepalLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -40, 280, 240));
+        jPanel1.add(WingsNepalLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -60, 300, 270));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 230, 640));
 
