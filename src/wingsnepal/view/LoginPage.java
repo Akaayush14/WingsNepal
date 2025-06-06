@@ -18,13 +18,14 @@ public class LoginPage extends javax.swing.JFrame {
      */
     public LoginPage() {
         initComponents();
+        setTitle("Login");
         scaleImage();
         setResizable(false);         //Disable maximize button
         setLocationRelativeTo(null); //Center window
         
     }
     public void scaleImage(){
-        ImageIcon icon = new ImageIcon("C:\\Users\\Aayush Kharel\\Desktop\\Java project\\WingsNepal\\src\\imagepicker\\Aeroplane image 1.jpg");
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagepicker/Aeroplane Image 1.jpg"));
         //scaling image to fit in the hlabel.
         Image img1 = icon.getImage();
         Image imgScale = img1.getScaledInstance(BgLabel.getWidth(), BgLabel.getHeight(), Image.SCALE_SMOOTH);

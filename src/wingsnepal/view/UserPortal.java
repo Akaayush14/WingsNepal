@@ -148,7 +148,7 @@ public class UserPortal extends javax.swing.JFrame{
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -181,6 +181,7 @@ public class UserPortal extends javax.swing.JFrame{
         jButton1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("User Dashboard");
+        jButton1.setAutoscrolls(true);
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setVerifyInputWhenFocusTarget(false);
@@ -287,7 +288,7 @@ public class UserPortal extends javax.swing.JFrame{
                 jDayChooser1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jDayChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 50, 30));
+        jPanel3.add(jDayChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 50, 30));
 
         HeadingPanel.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -346,12 +347,15 @@ public class UserPortal extends javax.swing.JFrame{
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 490, 530));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 510, 530));
 
         jTabbedPane1.addTab("tab2", jPanel3);
 
-        jLabel3.setText("Aayush3");
-        jPanel4.add(jLabel3);
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
+        jLabel1.setText("Book Your Flights");
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
 
         jTabbedPane1.addTab("tab3", jPanel4);
 
@@ -393,7 +397,12 @@ public class UserPortal extends javax.swing.JFrame{
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(4);//Log out
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Log Out", javax.swing.JOptionPane.YES_NO_OPTION);
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+        this.dispose(); // Close the current window
+        new LoginPage().setVisible(true); // Open the login window
+    }
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void FromTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FromTextFieldActionPerformed
@@ -460,7 +469,7 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JTextField jDayChooser1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private com.toedter.calendar.JMonthChooser jMonthChooser1;

@@ -23,7 +23,7 @@ public class ResetPassword extends javax.swing.JFrame {
         setLocationRelativeTo(null); //Center window
     }
         public void scaleImage(){
-        ImageIcon icon = new ImageIcon("C:\\Users\\Aayush Kharel\\Desktop\\Java project\\WingsNepal\\src\\imagepicker\\Aeroplane Image 2.jpg");
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagepicker/Aeroplane Image 2.jpg"));
         //scaling image to fit in the hlabel.
         Image img1 = icon.getImage();
         Image imgScale = img1.getScaledInstance(BgLabel.getWidth(), BgLabel.getHeight(), Image.SCALE_SMOOTH);
