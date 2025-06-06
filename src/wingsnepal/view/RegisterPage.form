@@ -303,7 +303,7 @@
     <Component class="javax.swing.JLabel" name="BgImageLabel">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/imagepicker/Aeroplane Image 2.jpg"/>
+          <Image iconType="3" name="/imagepicker/Aeroplane image 1.jpg"/>
         </Property>
         <Property name="text" type="java.lang.String" value="BgLabel"/>
       </Properties>
