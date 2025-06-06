@@ -19,6 +19,8 @@ public class RegisterPage extends javax.swing.JFrame {
     public RegisterPage() {
         initComponents();
         scaleImage();
+        setResizable(false);         //Disable maximize button
+        setLocationRelativeTo(null); //Center window
     }
         public void scaleImage(){
             // Avoid scaling if label is not yet visible or sized
@@ -30,7 +32,7 @@ public class RegisterPage extends javax.swing.JFrame {
             BgImageLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
             
             // Load image from path into ImageIcon.
-            ImageIcon icon = new ImageIcon("C:\\Users\\Aayush Kharel\\Desktop\\Java project\\WingsNepal\\src\\imagepicker\\Aeroplane Image 2.jpg");
+            ImageIcon icon = new ImageIcon(getClass().getResource("/imagepicker/Aeroplane Image 1.jpg"));
             
             //Get Image from the icon.
             Image img1 = icon.getImage();
@@ -236,7 +238,7 @@ public class RegisterPage extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 460, -1));
 
-        BgImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Aeroplane Image 2.jpg"))); // NOI18N
+        BgImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Aeroplane image 1.jpg"))); // NOI18N
         BgImageLabel.setText("BgLabel");
         getContentPane().add(BgImageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
