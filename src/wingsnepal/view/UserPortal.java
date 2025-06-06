@@ -4,7 +4,11 @@
  */
 package wingsnepal.view;
 import java.awt.Image;
+import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
+import wingsnepal.dao.SearchFlightDao;
+import wingsnepal.model.SearchFlight;
 
 
 
@@ -78,6 +82,33 @@ public class UserPortal extends javax.swing.JFrame{
         ImageIcon scaledIcon6 = new ImageIcon(imgScale6);
         WingsNepalLogo.setIcon(scaledIcon6);
     }
+        
+        //It calls Dao, fetches flights and fills the jTable. 
+        private void SearchFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {
+            String from = FromTextField.getText();
+            String to = ToTextField.getText();
+            int year = jYearChooser1.getYear();
+            int month = jMonthChooser1.getMonth() + 1; // months are 0-indexed
+            String day = jDayChooser1.getText();
+
+            String date = year + "-" + String.format("%02d", month) + "-" + day;
+
+            SearchFlightDao dao = new SearchFlightDao();
+            List<SearchFlight> flights = dao.searchFlights(from, to, date);
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0); // Clear old data
+
+            for (SearchFlight f : flights) {
+                model.addRow(new Object[]{
+                    f.getFlightName(),
+                    f.getTime(),
+                    f.getPrice(),
+                    f.getDuration()
+                });
+            }
+        }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
