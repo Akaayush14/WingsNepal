@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package wingsnepal.view;
+
 import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -11,8 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import wingsnepal.dao.SearchFlightDao;
 import wingsnepal.model.SearchFlight;
-
-
 
 
 /**
@@ -34,75 +33,84 @@ public class UserPortal extends javax.swing.JFrame{
             styleFlatHoverButton(CheckInButton);
             styleFlatHoverButton(LogOutButton);
             
-            // Adding scrolling feature:
+            // Adding scrolling feature.
             jScrollPane1.setViewportView(jTable1);
-
-        setResizable(false);         //Disable maximize button
-        setLocationRelativeTo(null); //Center window
-        scaleImage1();  
-        scaleImage2();
-        scaleImage3();
-        scaleImage4();
-        scaleImage5();
-        scaleImage6();
-        
-        //Adding codfe to automatically remove in- built text from textfield while entering input.
-        // --------- FROM TEXT FIELD PLACEHOLDER ----------
-    FromTextField.setForeground(java.awt.Color.GRAY);
-    FromTextField.setText("Enter departure city or airport");
-    FromTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-        public void focusGained(java.awt.event.FocusEvent evt) {
-            if (FromTextField.getText().equals("Enter departure city or airport")) {
-                FromTextField.setText("");
-                FromTextField.setForeground(java.awt.Color.BLACK);
-            }
-        }
-        public void focusLost(java.awt.event.FocusEvent evt) {
-            if (FromTextField.getText().isEmpty()) {
-                FromTextField.setForeground(java.awt.Color.GRAY);
-                FromTextField.setText("Enter departure city or airport");
-            }
-        }
-    });
-
-        // --------- TO TEXT FIELD PLACEHOLDER ----------
-        ToTextField.setForeground(java.awt.Color.GRAY);
-        ToTextField.setText("Enter destination city or airport");
-        ToTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-            if (ToTextField.getText().equals("Enter destination city or airport")) {
-                ToTextField.setText("");
-                ToTextField.setForeground(java.awt.Color.BLACK);
-            }
-        }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                if (ToTextField.getText().isEmpty()) {
-                    ToTextField.setForeground(java.awt.Color.GRAY);
-                    ToTextField.setText("Enter destination city or airport");
-                }
-            }
-        });
-
-        // --------- DAY TEXT FIELD PLACEHOLDER ----------
-        jDayChooser1.setForeground(java.awt.Color.GRAY);
-        jDayChooser1.setText("Day");
-        jDayChooser1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                if (jDayChooser1.getText().equals("Day")) {
-                    jDayChooser1.setText("");
-                    jDayChooser1.setForeground(java.awt.Color.BLACK);
-                }
-            }
             
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                if (jDayChooser1.getText().isEmpty()) {
-                    jDayChooser1.setForeground(java.awt.Color.GRAY);
-                    jDayChooser1.setText("Day");
+            //ActionListener for showall button.
+            ShowAllButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShowAllButtonActionPerformed(evt);
                 }
-            }
-        });
- 
-    }
+            });
+
+
+            setResizable(false);         //Disable maximize button
+            setLocationRelativeTo(null); //Center window
+            scaleImage1();  
+            scaleImage2();
+            scaleImage3();
+            scaleImage4();
+            scaleImage5();
+            scaleImage6();
+        
+            //Adding codfe to automatically remove in- built text from textfield while entering input.
+            // --------- FROM TEXT FIELD PLACEHOLDER ----------
+            FromTextField.setForeground(java.awt.Color.GRAY);
+            FromTextField.setText("Enter departure city or airport");
+            FromTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+                public void focusGained(java.awt.event.FocusEvent evt) {
+                    if (FromTextField.getText().equals("Enter departure city or airport")) {
+                        FromTextField.setText("");
+                        FromTextField.setForeground(java.awt.Color.BLACK);
+                    }
+                }
+                public void focusLost(java.awt.event.FocusEvent evt) {
+                    if (FromTextField.getText().isEmpty()) {
+                        FromTextField.setForeground(java.awt.Color.GRAY);
+                        FromTextField.setText("Enter departure city or airport");
+                    }
+                }
+            });
+
+            // --------- TO TEXT FIELD PLACEHOLDER ----------
+            ToTextField.setForeground(java.awt.Color.GRAY);
+            ToTextField.setText("Enter destination city or airport");
+            ToTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+                public void focusGained(java.awt.event.FocusEvent evt) {
+                    if (ToTextField.getText().equals("Enter destination city or airport")) {
+                        ToTextField.setText("");
+                        ToTextField.setForeground(java.awt.Color.BLACK);
+                    }
+                }
+                public void focusLost(java.awt.event.FocusEvent evt) {
+                    if (ToTextField.getText().isEmpty()) {
+                        ToTextField.setForeground(java.awt.Color.GRAY);
+                        ToTextField.setText("Enter destination city or airport");
+                    }
+                }
+            });
+
+            // --------- DAY TEXT FIELD PLACEHOLDER ----------
+            jDayChooser1.setForeground(java.awt.Color.GRAY);
+            jDayChooser1.setText("Day");
+            jDayChooser1.addFocusListener(new java.awt.event.FocusAdapter() {
+                public void focusGained(java.awt.event.FocusEvent evt) {
+                    if (jDayChooser1.getText().equals("Day")) {
+                        jDayChooser1.setText("");
+                        jDayChooser1.setForeground(java.awt.Color.BLACK);
+                    }
+                }
+            
+                public void focusLost(java.awt.event.FocusEvent evt) {
+                    if (jDayChooser1.getText().isEmpty()) {
+                        jDayChooser1.setForeground(java.awt.Color.GRAY);
+                        jDayChooser1.setText("Day");
+                    }
+                }
+            });
+         
+        //closing of initcomponent:
+        }
     // Code to scale images:
         public void scaleImage1(){
         ImageIcon icon1 = new ImageIcon(getClass().getResource("/imagepicker/Dashboard.png"));
@@ -152,8 +160,9 @@ public class UserPortal extends javax.swing.JFrame{
         ImageIcon scaledIcon6 = new ImageIcon(imgScale6);
         WingsNepalLogo.setIcon(scaledIcon6);
     }
-        //This method styles buttons to look flat and modern, and adds hover effects for better user experience.
-        //It is called after in it components to give for which button it is applicable.
+        
+    //This method styles buttons to look flat and modern, and adds hover effects for better user experience.
+    //It is called after in it components to give for which button it is applicable.
         private void styleFlatHoverButton(javax.swing.JButton button) {
             button.setFocusPainted(false);
             button.setContentAreaFilled(false);
@@ -177,7 +186,7 @@ public class UserPortal extends javax.swing.JFrame{
         });
     }
 
-        //It calls Dao, fetches flights and fills the jTable. 
+    //It calls Dao, fetches flights and fills the jTable. 
         private void SearchFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {
             String from = FromTextField.getText();
             String to = ToTextField.getText();
@@ -203,11 +212,6 @@ public class UserPortal extends javax.swing.JFrame{
                 });
             }
             
-            // After adding all rows
-            TableColumn bookColumn = jTable1.getColumn("Action");
-            bookColumn.setCellRenderer(new ButtonRenderer());
-            bookColumn.setCellEditor(new ButtonEditor(new JCheckBox()));
-
         }
             
     /**
@@ -248,7 +252,7 @@ public class UserPortal extends javax.swing.JFrame{
         jScrollBar1 = new javax.swing.JScrollBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        ShowAllButton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -461,16 +465,16 @@ public class UserPortal extends javax.swing.JFrame{
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 510, 530));
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 153));
-        jButton1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Show all");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ShowAllButton.setBackground(new java.awt.Color(0, 102, 153));
+        ShowAllButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        ShowAllButton.setForeground(new java.awt.Color(255, 255, 255));
+        ShowAllButton.setText("Show all");
+        ShowAllButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ShowAllButtonActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 260, 40));
+        jPanel3.add(ShowAllButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 260, 40));
 
         jTabbedPane1.addTab("tab2", jPanel3);
 
@@ -556,9 +560,29 @@ public class UserPortal extends javax.swing.JFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_jDayChooser1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ShowAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowAllButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        SearchFlightDao dao = new SearchFlightDao();
+        List<SearchFlight> flights = dao.getAllFlights();  
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);  // Clear existing rows
+
+        for (SearchFlight f : flights) {
+            model.addRow(new Object[]{
+                f.getFlightName(),
+                f.getTime(),
+                f.getPrice(),
+                f.getDuration(),
+                "Book"
+            });
+        }
+
+        //Using button renderer and button editor to place book flight button in every jTable1.
+        TableColumn bookColumn = jTable1.getColumn("Action");
+        bookColumn.setCellRenderer(new ButtonRenderer());
+        bookColumn.setCellEditor(new ButtonEditor(new JCheckBox()));
+    }//GEN-LAST:event_ShowAllButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -612,10 +636,10 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JButton SearchFlightButton;
     private javax.swing.JLabel SearchFlightIcon;
     private javax.swing.JLabel SearchFlightLabel;
+    private javax.swing.JButton ShowAllButton;
     private javax.swing.JLabel ToLabel;
     private javax.swing.JTextField ToTextField;
     private javax.swing.JLabel WingsNepalLogo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JTextField jDayChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;

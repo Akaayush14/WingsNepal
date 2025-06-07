@@ -50,4 +50,33 @@ public class SearchFlightDao {
         
         return flightList;
     }
+
+
+public List<SearchFlight> getAllFlights() {
+    List<SearchFlight> flightList = new ArrayList<>();
+    String query = "SELECT flight_name, time, price, duration FROM flights";
+    Connection conn = db.openConnection();
+
+    try {
+        PreparedStatement stmt = conn.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            SearchFlight flight = new SearchFlight(
+                rs.getString("flight_name"),
+                rs.getString("time"),
+                rs.getInt("price"),
+                rs.getString("duration")
+            );
+            flightList.add(flight);
+        }
+    } catch (SQLException e) {
+        System.out.println("Error fetching all flights: " + e.getMessage());
+    } finally {
+        db.closeConnection(conn);
+    }
+
+    return flightList;
+    
+}
 }

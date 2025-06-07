@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package wingsnepal.model;
+
+import com.sun.jdi.connect.spi.Connection;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Aayush Kharel
