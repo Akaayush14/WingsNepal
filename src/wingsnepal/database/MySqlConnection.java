@@ -73,5 +73,6 @@ public class MySqlConnection implements DbConnection{
             System.out.println(e);
             return -1;
         }
-    }    
+    } 
+    
 }
