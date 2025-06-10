@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package wingsnepal.model;
+
 /**
  *
  * @author Aayush Kharel
@@ -10,14 +11,16 @@ package wingsnepal.model;
 // This class is for storing flight searching data such as:
 // flight name, departure time, ticket price, flight duration
 public class SearchFlight {
-    public String flightName;
-    public String time;
+    private int flightId;
+    private String flightName;
+    private String time;
     private int price;
     private String duration;
     
     // Constructor: Special method that runs automatically when we create an object of the class.
     // In WingsNepal: It allows to fill all flight details when making a SearchFlight object.
-    public SearchFlight(String flightName, String time, int price, String duration) {
+    public SearchFlight(int flightId, String flightName, String time, int price, String duration) {
+        this.flightId = flightId;
         this.flightName = flightName;
         this.time = time;
         this.price = price;
@@ -25,6 +28,7 @@ public class SearchFlight {
     }
     
     // Getters: This helps to safely access data in the objcet.
+    public int getFlightId() { return flightId; } 
     public String getFlightName() { return flightName; }
     public String getTime() { return time; }
     public int getPrice() { return price; }
