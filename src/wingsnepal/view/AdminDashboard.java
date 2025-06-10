@@ -4,10 +4,13 @@
  */
 package wingsnepal.view;
 
+import javax.swing.JLabel;
 import wingsnepal.model.Login;
 
 public class AdminDashboard extends javax.swing.JFrame {
     private Login loggedInUser;
+    private JLabel welcomeLabel;
+
     
     public AdminDashboard(Login user) {
         this.loggedInUser = user;
@@ -260,6 +263,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+ 
+    public JLabel getWelcomeLabel() {
+        return welcomeLabel;
+    }
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -269,7 +276,6 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
     }
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -293,7 +299,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 
-    public Object getWelcomeLabel() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }
+    

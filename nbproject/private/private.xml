@@ -3,6 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+HEAD
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/dao/LoginDao.java</file>
+
  aayush
  HEAD
  aayush
@@ -26,9 +29,12 @@
  main
 
             <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/EmployeePortal.java</file>
+f0f260191cede89f5c59675fc6eaabf8aaab95ad
             <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/LoginPage.java</file>
-            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/ResetPassword.java</file>
             <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/UserPortal.java</file>
+HEAD
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/EmployeeDashboard.java</file>
+
             <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/AdminDashboard.java</file>
 
             <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepal/view/LoginPage.java</file>
@@ -44,6 +50,7 @@
             <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepalController/AdminDashboardController.java</file>
             <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepal/view/AdminDashboard.java</file>
  main
+ f0f260191cede89f5c59675fc6eaabf8aaab95ad
         </group>
     </open-files>
 </project-private>
