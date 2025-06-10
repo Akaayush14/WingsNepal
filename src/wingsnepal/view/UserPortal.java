@@ -263,6 +263,8 @@ public class UserPortal extends javax.swing.JFrame{
         jTabbedPane1 = new javax.swing.JTabbedPane();
         DashboardPanel = new javax.swing.JPanel();
         SearchFlightPanel = new javax.swing.JPanel();
+        HeadingPanel = new javax.swing.JPanel();
+        SearchFlightLabel = new javax.swing.JLabel();
         FromLabel = new javax.swing.JLabel();
         ToLabel = new javax.swing.JLabel();
         DateLabel = new javax.swing.JLabel();
@@ -271,8 +273,6 @@ public class UserPortal extends javax.swing.JFrame{
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
         jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
         jDayChooser1 = new javax.swing.JTextField();
-        HeadingPanel = new javax.swing.JPanel();
-        SearchFlightLabel = new javax.swing.JLabel();
         SearchFlightButton = new javax.swing.JButton();
         jScrollBar1 = new javax.swing.JScrollBar();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -280,7 +280,7 @@ public class UserPortal extends javax.swing.JFrame{
         ShowAllButton = new javax.swing.JButton();
         BookFlightPanel = new javax.swing.JPanel();
         BookFlightHeadingPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        BookFlightLabel = new javax.swing.JLabel();
         FlightIdLabel = new javax.swing.JLabel();
         FullNameLabel = new javax.swing.JLabel();
         EmailLabel = new javax.swing.JLabel();
@@ -422,6 +422,17 @@ public class UserPortal extends javax.swing.JFrame{
         SearchFlightPanel.setBackground(new java.awt.Color(255, 255, 255));
         SearchFlightPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        HeadingPanel.setBackground(new java.awt.Color(153, 153, 153));
+        HeadingPanel.setLayout(null);
+
+        SearchFlightLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
+        SearchFlightLabel.setForeground(new java.awt.Color(255, 255, 255));
+        SearchFlightLabel.setText("Search Flights");
+        HeadingPanel.add(SearchFlightLabel);
+        SearchFlightLabel.setBounds(310, 20, 158, 27);
+
+        SearchFlightPanel.add(HeadingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 50));
+
         FromLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         FromLabel.setText("From");
         SearchFlightPanel.add(FromLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
@@ -459,31 +470,6 @@ public class UserPortal extends javax.swing.JFrame{
             }
         });
         SearchFlightPanel.add(jDayChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 50, 30));
-
-        HeadingPanel.setBackground(new java.awt.Color(153, 153, 153));
-
-        SearchFlightLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
-        SearchFlightLabel.setForeground(new java.awt.Color(255, 255, 255));
-        SearchFlightLabel.setText("Search Flights");
-
-        javax.swing.GroupLayout HeadingPanelLayout = new javax.swing.GroupLayout(HeadingPanel);
-        HeadingPanel.setLayout(HeadingPanelLayout);
-        HeadingPanelLayout.setHorizontalGroup(
-            HeadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HeadingPanelLayout.createSequentialGroup()
-                .addGap(302, 302, 302)
-                .addComponent(SearchFlightLabel)
-                .addContainerGap(332, Short.MAX_VALUE))
-        );
-        HeadingPanelLayout.setVerticalGroup(
-            HeadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeadingPanelLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(SearchFlightLabel)
-                .addContainerGap())
-        );
-
-        SearchFlightPanel.add(HeadingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 50));
 
         SearchFlightButton.setBackground(new java.awt.Color(0, 102, 153));
         SearchFlightButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -538,26 +524,13 @@ public class UserPortal extends javax.swing.JFrame{
         BookFlightPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         BookFlightHeadingPanel.setBackground(new java.awt.Color(153, 153, 153));
+        BookFlightHeadingPanel.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Book Flight");
-
-        javax.swing.GroupLayout BookFlightHeadingPanelLayout = new javax.swing.GroupLayout(BookFlightHeadingPanel);
-        BookFlightHeadingPanel.setLayout(BookFlightHeadingPanelLayout);
-        BookFlightHeadingPanelLayout.setHorizontalGroup(
-            BookFlightHeadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BookFlightHeadingPanelLayout.createSequentialGroup()
-                .addGap(309, 309, 309)
-                .addComponent(jLabel1)
-                .addContainerGap(353, Short.MAX_VALUE))
-        );
-        BookFlightHeadingPanelLayout.setVerticalGroup(
-            BookFlightHeadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BookFlightHeadingPanelLayout.createSequentialGroup()
-                .addGap(0, 10, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        BookFlightLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
+        BookFlightLabel.setForeground(new java.awt.Color(255, 255, 255));
+        BookFlightLabel.setText("Book Flight");
+        BookFlightHeadingPanel.add(BookFlightLabel);
+        BookFlightLabel.setBounds(320, 20, 129, 27);
 
         BookFlightPanel.add(BookFlightHeadingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 50));
 
@@ -734,6 +707,7 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JButton BookFlightButton;
     private javax.swing.JPanel BookFlightHeadingPanel;
     private javax.swing.JLabel BookFlightIcon;
+    private javax.swing.JLabel BookFlightLabel;
     private javax.swing.JPanel BookFlightPanel;
     private javax.swing.JButton BookNowButton;
     private javax.swing.JPanel ButtonPanel;
@@ -775,7 +749,6 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JTextField ToTextField;
     private javax.swing.JLabel WingsNepalLogo;
     private javax.swing.JTextField jDayChooser1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
     private com.toedter.calendar.JMonthChooser jMonthChooser1;

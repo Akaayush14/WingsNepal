@@ -232,7 +232,7 @@ public class LoginPage extends javax.swing.JFrame {
             if ("User".equalsIgnoreCase(user.getRole())) {
                 new UserPortal(user).setVisible(true);  // Make sure UserPortal has a constructor that accepts User
             } else if ("Employee".equalsIgnoreCase(user.getRole())) {
-                new EmployeePortal(user).setVisible(true); 
+                new EmployeeDashboard(user).setVisible(true); 
             } else if("Admin".equalsIgnoreCase(user.getRole())) {
                 new AdminDashboard(user).setVisible(true);
             }
