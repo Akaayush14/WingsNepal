@@ -301,6 +301,8 @@ public class UserPortal extends javax.swing.JFrame{
         PaymentComboBox = new javax.swing.JComboBox<>();
         TicketsLAbel = new javax.swing.JLabel();
         EmailTextField = new javax.swing.JTextField();
+        FlightNameLabel = new javax.swing.JLabel();
+        FlightNameTextField = new javax.swing.JTextField();
         CancelFlightPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         LogOutPanel = new javax.swing.JPanel();
@@ -493,7 +495,7 @@ public class UserPortal extends javax.swing.JFrame{
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Flight ID", "Flight name", "Time", "Price", "Duration ", "Action"
+                "Flight id", "Flight name", "Time", "Price", "Duration ", "Action"
             }
         ) {
             Class[] types = new Class [] {
@@ -540,33 +542,39 @@ public class UserPortal extends javax.swing.JFrame{
 
         FullNameLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         FullNameLabel.setText("Full Name");
-        BookFlightPanel.add(FullNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+        BookFlightPanel.add(FullNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
         EmailLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         EmailLabel.setText("Email");
-        BookFlightPanel.add(EmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+        BookFlightPanel.add(EmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
         SeatClassLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         SeatClassLabel.setText("Seat Class");
-        BookFlightPanel.add(SeatClassLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+        BookFlightPanel.add(SeatClassLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
 
         PriceLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         PriceLabel.setText("Price");
-        BookFlightPanel.add(PriceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
+        BookFlightPanel.add(PriceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
 
         TicketsDateLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         TicketsDateLabel.setText("Travel Date");
-        BookFlightPanel.add(TicketsDateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
+        BookFlightPanel.add(TicketsDateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, -1, -1));
 
         PaymentLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         PaymentLabel.setText("Payment");
-        BookFlightPanel.add(PaymentLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, -1, -1));
+        BookFlightPanel.add(PaymentLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, -1, -1));
 
+        BookNowButton.setBackground(new java.awt.Color(0, 102, 153));
+        BookNowButton.setFont(new java.awt.Font("Segoe UI Emoji", 0, 16)); // NOI18N
+        BookNowButton.setForeground(new java.awt.Color(255, 255, 255));
         BookNowButton.setText("Book now");
-        BookFlightPanel.add(BookNowButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 140, 30));
+        BookFlightPanel.add(BookNowButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 600, 140, 30));
 
+        ClearButton.setBackground(new java.awt.Color(0, 102, 153));
+        ClearButton.setFont(new java.awt.Font("Segoe UI Emoji", 0, 16)); // NOI18N
+        ClearButton.setForeground(new java.awt.Color(255, 255, 255));
         ClearButton.setText("Clear");
-        BookFlightPanel.add(ClearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 550, 130, 30));
+        BookFlightPanel.add(ClearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 600, 130, 30));
 
         FlightIdTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -580,15 +588,20 @@ public class UserPortal extends javax.swing.JFrame{
                 FullNameTextFieldActionPerformed(evt);
             }
         });
-        BookFlightPanel.add(FullNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 280, 30));
-        BookFlightPanel.add(PriceTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 280, 30));
+        BookFlightPanel.add(FullNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 280, 30));
+        BookFlightPanel.add(PriceTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 280, 30));
 
         SeatComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Economy", "First Class", "Business" }));
-        BookFlightPanel.add(SeatComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 280, 30));
-        BookFlightPanel.add(jSpinField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 110, 30));
-        BookFlightPanel.add(jYearChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 80, 30));
-        BookFlightPanel.add(jMonthChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 430, 140, 30));
-        BookFlightPanel.add(jSpinField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 430, 70, 30));
+        SeatComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeatComboBoxActionPerformed(evt);
+            }
+        });
+        BookFlightPanel.add(SeatComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 280, 30));
+        BookFlightPanel.add(jSpinField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 110, 30));
+        BookFlightPanel.add(jYearChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 80, 30));
+        BookFlightPanel.add(jMonthChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 490, 140, 30));
+        BookFlightPanel.add(jSpinField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, 70, 30));
 
         PaymentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Card", "Cash" }));
         PaymentComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -596,12 +609,23 @@ public class UserPortal extends javax.swing.JFrame{
                 PaymentComboBoxActionPerformed(evt);
             }
         });
-        BookFlightPanel.add(PaymentComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 280, 30));
+        BookFlightPanel.add(PaymentComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 280, 30));
 
         TicketsLAbel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         TicketsLAbel.setText("Tickets");
-        BookFlightPanel.add(TicketsLAbel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
-        BookFlightPanel.add(EmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 280, 30));
+        BookFlightPanel.add(TicketsLAbel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
+        BookFlightPanel.add(EmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 280, 30));
+
+        FlightNameLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        FlightNameLabel.setText("Flight Name");
+        BookFlightPanel.add(FlightNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+
+        FlightNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FlightNameTextFieldActionPerformed(evt);
+            }
+        });
+        BookFlightPanel.add(FlightNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 280, 30));
 
         jTabbedPane1.addTab("tab3", BookFlightPanel);
 
@@ -695,6 +719,14 @@ public class UserPortal extends javax.swing.JFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_FullNameTextFieldActionPerformed
 
+    private void SeatComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeatComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SeatComboBoxActionPerformed
+
+    private void FlightNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FlightNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FlightNameTextFieldActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             Login dummy = new Login(1, "User", "user@wingsnepal.com", "user123", "User");
@@ -724,6 +756,8 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JButton FlightButton;
     private javax.swing.JLabel FlightIdLabel;
     private javax.swing.JTextField FlightIdTextField;
+    private javax.swing.JLabel FlightNameLabel;
+    private javax.swing.JTextField FlightNameTextField;
     private javax.swing.JLabel FromLabel;
     private javax.swing.JTextField FromTextField;
     private javax.swing.JLabel FullNameLabel;
