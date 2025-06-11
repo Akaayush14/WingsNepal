@@ -29,29 +29,38 @@ public class LoginPage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         // Eye icon setup
-        EyeLabel.setOpaque(false);
-        EyeLabel.setBackground(new Color(0, 0, 0, 0));
-        EyeLabel.setToolTipText("Show Password");
-        EyeLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        EyeLabel.setIcon(new ImageIcon(getClass().getResource("/imagepicker/view.png")));
+     // Initial EyeLabel Setup
+EyeLabel.setOpaque(false);
+EyeLabel.setBackground(new Color(0, 0, 0, 0));
+EyeLabel.setToolTipText("Show Password");
+EyeLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+EyeLabel.setText("");
 
-        EyeLabel.setIcon(new ImageIcon(getClass().getResource("/imagepicker/view.png")));
-        
-        
-        EyeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                passwordVisible = !passwordVisible;
-                if (passwordVisible) {
-                    PasswordTextField.setEchoChar((char) 0);
-                    EyeLabel.setIcon(new ImageIcon(getClass().getResource("/imagepicker/hide.png")));
-                    EyeLabel.setToolTipText("Hide Password");
-                } else {
-                    PasswordTextField.setEchoChar('•');
-                    EyeLabel.setIcon(new ImageIcon(getClass().getResource("/imagepicker/view.png")));
-                    EyeLabel.setToolTipText("Show Password");
-                }
-            }
-        });
+// Optional: Use scaled image with transparency preserved
+ImageIcon viewIcon = new ImageIcon(getClass().getResource("/imagepicker/view.png"));
+EyeLabel.setIcon(viewIcon);
+
+// Mouse click to toggle password visibility
+EyeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+    public void mouseClicked(java.awt.event.MouseEvent evt) {
+        passwordVisible = !passwordVisible;
+        if (passwordVisible) {
+            EyeLabel.setOpaque(false);
+            EyeLabel.setBackground(new Color(0, 0, 0, 0));
+            EyeLabel.setText("");
+            PasswordTextField.setEchoChar((char) 0);
+            EyeLabel.setToolTipText("Hide Password");
+            EyeLabel.setIcon(new ImageIcon(getClass().getResource("/imagepicker/hide.png")));
+        } else {
+            EyeLabel.setOpaque(false);
+            EyeLabel.setBackground(new Color(0, 0, 0, 0));
+            EyeLabel.setText("");
+            PasswordTextField.setEchoChar('•');
+            EyeLabel.setToolTipText("Show Password");
+            EyeLabel.setIcon(new ImageIcon(getClass().getResource("/imagepicker/view.png")));
+        }
+    }
+});
     }
 
     // Login logic refactored into a method
