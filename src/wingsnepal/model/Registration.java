@@ -8,18 +8,18 @@ package wingsnepal.model;
  *
  * @author ACER
  */
-public class UserData {
+public class Registration {
     private String name;
     private String email;
     private String password;
     private String id;
 //    public constructor
-    public UserData(String name, String email, String password){
+    public Registration(String name, String email, String password){
         this.name=name;
         this.email=email;
         this.password=password;
     }
-    public UserData(String id,String name, String email, String password){
+    public Registration(String id,String name, String email, String password){
         this.id=id;
         this.name=name;
         this.email=email;

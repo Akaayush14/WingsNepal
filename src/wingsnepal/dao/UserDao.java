@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package wingsnepal.dao;
-import wingsnepal.model.UserData;
+import wingsnepal.model.Registration;
 import java.sql.*;
 import wingsnepal.model.LoginRequest;
 import wingsnepal.model.ResetRequest;
@@ -14,7 +14,7 @@ import wingsnepal.database.MySqlConnection;
  */
 public class UserDao {
      MySqlConnection mySql = new MySqlConnection();
-    public boolean register(UserData user){
+    public boolean register(Registration user){
       String query="INSERT INTO users(name,email,password) VALUES(?,?,?)";  
       Connection conn = mySql.openConnection();
       try{
@@ -32,7 +32,7 @@ public class UserDao {
       }
     }
     
-    public UserData login(LoginRequest loginData){
+    public Registration login(LoginRequest loginData){
         String query= "SELECT * FROM users WHERE email=? and password=?";
         Connection conn= mySql.openConnection();
         try{
@@ -50,7 +50,7 @@ public class UserDao {
                 String email = result.getString("email");
                 String password = result.getString("password");
 //                wrapping the data in model
-                UserData user = new UserData(id,name,email,password);
+                Registration user = new Registration(id,name,email,password);
                 return user;
             } else{
                 return null;
@@ -64,7 +64,7 @@ public class UserDao {
         
     }
     
-    public UserData checkEmail(String email){
+    public Registration checkEmail(String email){
         String query = "SELECT * from users where email=?";
         Connection conn= mySql.openConnection();
         try{
@@ -75,7 +75,7 @@ public class UserDao {
                 String name = result.getString("name"); // use the name of column in database
                 String id = result.getString("id");
                 String password = result.getString("password");
-                UserData user = new UserData(id,name,email,password);
+                Registration user = new Registration(id,name,email,password);
                 return user;
             } else {
                 return null;
