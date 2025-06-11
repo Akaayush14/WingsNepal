@@ -11,14 +11,13 @@ import javax.swing.*;
 import wingsnepal.dao.LoginDao;
 import wingsnepal.model.Login;
 
+
 /**
  *
  * @author Aayush Kharel
  */
 
 public class LoginPage extends javax.swing.JFrame {
-    
-    private javax.swing.JCheckBox showPasswordCheckBox;
 
     public LoginPage() {
         initComponents();
@@ -28,22 +27,25 @@ public class LoginPage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         // In your constructor, replace the JCheckBox initialization with:
-        showPasswordCheckBox = new javax.swing.JCheckBox("Show");
-        showPasswordCheckBox.setForeground(Color.WHITE);
-        showPasswordCheckBox.setOpaque(false);
-        showPasswordCheckBox.setContentAreaFilled(false);
-        showPasswordCheckBox.setBorderPainted(false);
-        showPasswordCheckBox.setFocusPainted(false);
-        showPasswordCheckBox.setForeground(Color.WHITE); // to make text visible on dark panels
-        
-        PasswordTextField.setEchoChar('•'); // Hide by default
-        showPasswordCheckBox.addItemListener(e -> {
-        if (showPasswordCheckBox.isSelected()) {
-            PasswordTextField.setEchoChar((char) 0);
+        JCheckBox.setText("Show");
+        JCheckBox.setOpaque(false);
+        JCheckBox.setContentAreaFilled(false);
+        JCheckBox.setBorderPainted(false);
+        JCheckBox.setFocusPainted(false);
+        JCheckBox.setForeground(Color.BLACK);
+        JCheckBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        PasswordTextField.setEchoChar('\u2022'); // default hidden
+
+        JCheckBox.addItemListener(e -> {
+        if (JCheckBox.isSelected()) {
+            PasswordTextField.setEchoChar((char) 0); // Show
         } else {
-            PasswordTextField.setEchoChar('•');
-        }
+            PasswordTextField.setEchoChar('\u2022'); // Hide
+            }
         });
+
+
         
     // Navigate to SignUp Page
     SignUpLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -356,6 +358,27 @@ public class LoginPage extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new LoginPage().setVisible(true));
     }
+    
+    public javax.swing.JButton getLoginButton() {
+        return LoginButton;
+    }
+
+    public javax.swing.JLabel getForgotPasswordLabel() {
+        return ForgotPasswordLabel;
+    }
+
+    public javax.swing.JTextField getEmailTextField() {
+        return EmailTextField;
+    }
+
+    public javax.swing.JPasswordField getPasswordField() {
+        return PasswordTextField;
+    }
+
+    public javax.swing.JComboBox<String> getRoleComboBox() {
+        return RoleComboBox;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BgLabel;
