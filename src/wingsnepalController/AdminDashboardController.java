@@ -4,7 +4,7 @@
  */
 package wingsnepalController;
 
-import wingsnepal.model.UserData;
+import wingsnepal.model.Registration;
 import wingsnepal.view.AdminDashboard;
 
 /**
@@ -12,10 +12,10 @@ import wingsnepal.view.AdminDashboard;
  * @author ACER
  */
 public class AdminDashboardController {
-     private UserData user;
+     private Registration user;
     AdminDashboard view ;
 
-    public AdminDashboardController(AdminDashboard view,UserData user){
+    public AdminDashboardController(AdminDashboard view,Registration user){
         this.view= view;
         this.user = user;
         String name = user.getName();

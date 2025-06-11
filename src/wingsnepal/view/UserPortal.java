@@ -14,6 +14,7 @@ import javax.swing.table.TableColumn;
 import wingsnepal.dao.SearchFlightDao;
 import wingsnepal.model.Login;
 import wingsnepal.model.SearchFlight;
+import wingsnepal.dao.SeatClassDao;
 
 
 /**
@@ -234,7 +235,8 @@ public class UserPortal extends javax.swing.JFrame{
         }
         TableColumn bookColumn = jTable1.getColumn("Action");
         bookColumn.setCellRenderer(new ButtonRenderer());
-        bookColumn.setCellEditor(new ButtonEditor(new JCheckBox()));    
+        bookColumn.setCellEditor(new ButtonEditor(new JCheckBox(), this, jTable1));
+  
     }
             
     /**
@@ -335,7 +337,7 @@ public class UserPortal extends javax.swing.JFrame{
 
         LogOutIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Logout.png"))); // NOI18N
         LogOutIcon.setText("jLabel1");
-        ButtonPanel.add(LogOutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 30, 30));
+        ButtonPanel.add(LogOutIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 30, 30));
 
         DashboardButton.setBackground(new java.awt.Color(46, 62, 79));
         DashboardButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -411,7 +413,7 @@ public class UserPortal extends javax.swing.JFrame{
                 LogOutButtonActionPerformed(evt);
             }
         });
-        ButtonPanel.add(LogOutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 475, 230, 40));
+        ButtonPanel.add(LogOutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 230, 40));
 
         WingsNepalLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/WingsNepalLogo.jpg"))); // NOI18N
         ButtonPanel.add(WingsNepalLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -70, 270, 270));
@@ -700,7 +702,8 @@ public class UserPortal extends javax.swing.JFrame{
         //Using button renderer and button editor to place book flight button in every jTable1.
         TableColumn bookColumn = jTable1.getColumn("Action");
         bookColumn.setCellRenderer(new ButtonRenderer());
-        bookColumn.setCellEditor(new ButtonEditor(new JCheckBox()));
+        bookColumn.setCellEditor(new ButtonEditor(new JCheckBox(), this, jTable1));
+
     }//GEN-LAST:event_ShowAllButtonActionPerformed
 
     private void ToTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToTextFieldActionPerformed
@@ -720,13 +723,108 @@ public class UserPortal extends javax.swing.JFrame{
     }//GEN-LAST:event_FullNameTextFieldActionPerformed
 
     private void SeatComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeatComboBoxActionPerformed
-        // TODO add your handling code here:
+        String seatClass = (String) SeatComboBox.getSelectedItem();
+        String flightIdText = FlightIdTextField.getText();
+
+        if (!flightIdText.isEmpty()) {
+            try {
+                int flightId = Integer.parseInt(flightIdText);
+                SeatClassDao dao = new SeatClassDao();
+                int price = dao.getPriceByFlightAndClass(flightId, seatClass);
+
+                if (price != -1) {
+                    PriceTextField.setText(String.valueOf(price));
+                } else {
+                    PriceTextField.setText("N/A");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid flight ID format.");
+            }
+        }
     }//GEN-LAST:event_SeatComboBoxActionPerformed
 
     private void FlightNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FlightNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FlightNameTextFieldActionPerformed
 
+    class ButtonEditor extends javax.swing.DefaultCellEditor {
+    private javax.swing.JButton button;
+    private String label;
+    private boolean isPushed;
+    private UserPortal userPortal;
+    private javax.swing.JTable table;
+
+    public ButtonEditor(JCheckBox checkBox, UserPortal userPortal, javax.swing.JTable table) {
+        super(checkBox);
+        this.userPortal = userPortal;
+        this.table = table;
+        button = new javax.swing.JButton();
+        button.setOpaque(true);
+        button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                fireEditingStopped();
+            }
+        });
+    }
+
+    @Override
+    public java.awt.Component getTableCellEditorComponent(javax.swing.JTable table, Object value,
+            boolean isSelected, int row, int column) {
+        label = (value == null) ? "Book" : value.toString();
+        button.setText(label);
+        isPushed = true;
+        return button;
+    }
+
+    @Override
+    public Object getCellEditorValue() {
+        if (isPushed) {
+            int row = table.getSelectedRow();
+
+            Object flightId = table.getValueAt(row, 0);
+            Object flightName = table.getValueAt(row, 1);
+
+            userPortal.FlightIdTextField.setText(flightId.toString());
+            userPortal.FlightNameTextField.setText(flightName.toString());
+            userPortal.SeatComboBox.setSelectedItem("Economy");
+
+            // Fetch economy class price
+            int economyPrice = new SeatClassDao().getPriceByFlightAndClass(Integer.parseInt(flightId.toString()), "Economy");
+            userPortal.PriceTextField.setText(String.valueOf(economyPrice));
+
+            userPortal.FullNameTextField.setText(userPortal.loggedInUser.getFullName());
+            userPortal.EmailTextField.setText(userPortal.loggedInUser.getEmail());
+
+            userPortal.jYearChooser2.setYear(userPortal.jYearChooser1.getYear());
+            userPortal.jMonthChooser2.setMonth(userPortal.jMonthChooser1.getMonth());
+            String dayText = userPortal.jDayChooser1.getText().trim();
+            if (dayText.equals("Day") || !dayText.matches("\\d{1,2}")) {
+                JOptionPane.showMessageDialog(userPortal, "Please select a valid day before booking.");
+                return label;
+            }
+            userPortal.jSpinField2.setValue(Integer.parseInt(dayText));
+
+
+            userPortal.jTabbedPane1.setSelectedIndex(2); // Go to Book Flight tab
+
+        }
+        isPushed = false;
+        return label;
+    }
+
+    @Override
+    public boolean stopCellEditing() {
+        isPushed = false;
+        return super.stopCellEditing();
+    }
+
+    @Override
+    protected void fireEditingStopped() {
+        super.fireEditingStopped();
+    }
+}
+
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             Login dummy = new Login(1, "User", "user@wingsnepal.com", "user123", "User");

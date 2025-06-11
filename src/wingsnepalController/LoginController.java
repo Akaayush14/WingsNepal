@@ -1,132 +1,80 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package wingsnepalController;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
-import wingsnepal.controller.mail.SMTPSMailSender;
-import wingsnepal.dao.UserDao;
-import wingsnepal.model.LoginRequest;
-import wingsnepal.model.ResetRequest;
-import wingsnepal.model.UserData;
-import wingsnepal.view.AdminDashboard;
+import wingsnepal.dao.LoginDao;
+import wingsnepal.model.Login;
 import wingsnepal.view.LoginPage;
+import wingsnepal.view.UserPortal;
+import wingsnepal.view.EmployeeDashboard;
+import wingsnepal.view.AdminDashboard;
 
-/**
- *
- * @author ACER
- */
 public class LoginController {
-    LoginPage view = new LoginPage();
-    public LoginController(LoginPage view){
+    private final LoginPage view;
+
+    public LoginController(LoginPage view) {
         this.view = view;
-        this.view.loginUser(new LoginUser());
-        this.view.forgotPassword(new ForgotPassword());
+        this.view.getLoginButton().addActionListener(new LoginUser());
+        this.view.getForgotPasswordLabel().addMouseListener(new ForgotPassword());
     }
-    public void open(){
+
+    public void open() {
         this.view.setVisible(true);
     }
-    public void close(){
+
+    public void close() {
         this.view.dispose();
     }
-    
-    class LoginUser implements ActionListener{
 
+    class LoginUser implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String email = view.getEmailTextField().getText();            
-            String password = String.valueOf(view.getPasswordField().getPassword());
-            if (email.isEmpty()||password.isEmpty()){
+            String email = view.getEmailTextField().getText();
+            String password = new String(view.getPasswordField().getPassword());
+            String selectedRole = (String) view.getRoleComboBox().getSelectedItem();
+
+            if (email.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(view, "Fill in all the fields");
-            } else {
-                UserDao userDao = new UserDao();
-                LoginRequest loginRequest = new LoginRequest(email,password);
-                UserData user= (UserData) userDao.login(loginRequest);
-                if (user==null){
-                    JOptionPane.showMessageDialog(view, "Login failed");
-                } else {
-                    JOptionPane.showMessageDialog(view, "Logged in successfully");
-                    AdminDashboard dashboardView = new AdminDashboard();
-                    AdminDashboardController controller = new AdminDashboardController(dashboardView,user);
-                    controller.open();
-                    close();
-                }
+                return;
             }
 
-             }
-        
+            LoginDao loginDao = new LoginDao();
+            Login user = loginDao.login(email, password);
+
+            if (user == null || !user.getRole().equalsIgnoreCase(selectedRole)) {
+                JOptionPane.showMessageDialog(view, "Invalid email, password, or role.");
+                return;
+            }
+
+            JOptionPane.showMessageDialog(view, "Login successful! Welcome, " + user.getFullName());
+
+            switch (user.getRole()) {
+                case "User":
+                    new UserPortal(user).setVisible(true);
+                    break;
+                case "Employee":
+                    new EmployeeDashboard(user).setVisible(true);
+                    break;
+                case "Admin":
+                    new AdminDashboard(user).setVisible(true);
+                    break;
+            }
+            close();
+        }
     }
 
-    class ForgotPassword implements MouseListener{
-
+    class ForgotPassword implements MouseListener {
         @Override
         public void mouseClicked(MouseEvent e) {
-            String email = JOptionPane.showInputDialog(view,"Enter your email address");
-            if (email==null||email.trim().isEmpty()){
-                JOptionPane.showMessageDialog(view,"Field cannot be empty");
-            } else {
-                UserDao userDao = new UserDao();
-                UserData user = (UserData) userDao.checkEmail(email);
-                if (user==null){
-                  JOptionPane.showMessageDialog(view,"Email does not exist");
-                } else {
-                  String otp =( ""+Math.random()).substring(2);
-                    // Prepare email content
-            String subject = "Your Password Reset OTP";
-            String body = "Hello " + user.getName() + ",\n\nYour OTP for password reset is: " + otp 
-                          + "\n\nUse this to reset your password.";
-            
-            // Send email using your SMTPSMailSender class
-            boolean mailSent = SMTPSMailSender.sendMail(email, subject, body);
-            if (!mailSent){
-                JOptionPane.showMessageDialog(view,"Failed to send email. Try again later.");
-            } else {
-                   String responseOtp = JOptionPane.showInputDialog(view,"Enter the otp");
-                  if (!otp.equals(responseOtp)){
-                      JOptionPane.showMessageDialog(view, "Otp did not match");
-                  } else {
-                      String newPassword = JOptionPane.showInputDialog(view,"Enter the new password");
-                      ResetRequest reset = new ResetRequest(email,newPassword);
-                      boolean res=userDao.updatePassword(reset);
-                      if (res){
-                          JOptionPane.showMessageDialog(view, "Password changed");
-                      } else {
-                          JOptionPane.showMessageDialog(view, "Failed to reset password");
-                      }
-                  }
-            }
-                    
-               
-                  
-
-
-                }
-                
-            }
-            
+            JOptionPane.showMessageDialog(view, "Forgot password feature not implemented yet.");
         }
 
-        @Override
-        public void mousePressed(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-        }
-        
+        public void mousePressed(MouseEvent e) {}
+        public void mouseReleased(MouseEvent e) {}
+        public void mouseEntered(MouseEvent e) {}
+        public void mouseExited(MouseEvent e) {}
     }
 }
-
-
