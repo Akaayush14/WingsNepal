@@ -278,8 +278,6 @@ public class UserPortal extends javax.swing.JFrame{
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         ShowAllButton = new javax.swing.JButton();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
-        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
         BookFlightPanel = new javax.swing.JPanel();
         BookFlightHeadingPanel = new javax.swing.JPanel();
         BookFlightLabel = new javax.swing.JLabel();
@@ -301,10 +299,6 @@ public class UserPortal extends javax.swing.JFrame{
         EmailTextField = new javax.swing.JTextField();
         FlightNameLabel = new javax.swing.JLabel();
         FlightNameTextField = new javax.swing.JTextField();
-        TicketSpinField = new com.toedter.components.JSpinField();
-        TravelYearChooser = new com.toedter.calendar.JYearChooser();
-        TravelMonthChooser = new com.toedter.calendar.JMonthChooser();
-        TravelDaySpinnerField = new com.toedter.components.JSpinField();
         CancelFlightPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         LogOutPanel = new javax.swing.JPanel();
@@ -520,8 +514,6 @@ public class UserPortal extends javax.swing.JFrame{
             }
         });
         SearchFlightPanel.add(ShowAllButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 190, 40));
-        SearchFlightPanel.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 130, 30));
-        SearchFlightPanel.add(jMonthChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 352, 130, 30));
 
         jTabbedPane1.addTab("tab2", SearchFlightPanel);
 
@@ -624,10 +616,6 @@ public class UserPortal extends javax.swing.JFrame{
             }
         });
         BookFlightPanel.add(FlightNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 280, 30));
-        BookFlightPanel.add(TicketSpinField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 432, 130, 30));
-        BookFlightPanel.add(TravelYearChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 80, 30));
-        BookFlightPanel.add(TravelMonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 490, 140, 30));
-        BookFlightPanel.add(TravelDaySpinnerField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 492, -1, 30));
 
         jTabbedPane1.addTab("tab3", BookFlightPanel);
 
@@ -875,25 +863,19 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JLabel SeatClassLabel;
     private javax.swing.JComboBox<String> SeatComboBox;
     private javax.swing.JButton ShowAllButton;
-    private com.toedter.components.JSpinField TicketSpinField;
     private javax.swing.JLabel TicketsDateLabel;
     private javax.swing.JLabel TicketsLAbel;
     private javax.swing.JLabel ToLabel;
     private javax.swing.JTextField ToTextField;
-    private com.toedter.components.JSpinField TravelDaySpinnerField;
-    private com.toedter.calendar.JMonthChooser TravelMonthChooser;
-    private com.toedter.calendar.JYearChooser TravelYearChooser;
     private javax.swing.JLabel WingsNepalLogo;
     private javax.swing.JTextField jDayChooser1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
-    private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
     // End of variables declaration//GEN-END:variables
 
 }
