@@ -3,12 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+=======
+HEAD
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/dao/LoginDao.java</file>
+
+ aayush
+ HEAD
+ aayush
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/UserPortal.java</file>
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/model/SearchFlight.java</file>
+
+
+            <file>file:/Users/ronanchettri/Desktop/hamro%20project%20/WingsNepal/src/wingsnepal/view/Employee.java</file>
+>>>>>>> 032b7342e911499354777bf2c6fae5a43ddf6e00
             <file>file:/Users/ronanchettri/Desktop/hamro%20project%20/WingsNepal/src/wingsnepal/view/LoginPage.java</file>
             <file>file:/Users/ronanchettri/Desktop/hamro%20project%20/WingsNepal/src/wingsnepal/view/RegisterPage.java</file>
             <file>file:/Users/ronanchettri/Desktop/hamro%20project%20/WingsNepal/src/wingsnepal/view/ForgotPassword.java</file>
             <file>file:/Users/ronanchettri/Desktop/hamro%20project%20/WingsNepal/src/wingsnepal/view/AdminDashboard.java</file>
             <file>file:/Users/ronanchettri/Desktop/hamro%20project%20/WingsNepal/src/wingsnepal/image/aeroplane.jpg</file>
             <file>file:/Users/ronanchettri/Desktop/hamro%20project%20/WingsNepal/src/wingsnepal/WingsNepal.java</file>
+<<<<<<< HEAD
             <file>file:/Users/ronanchettri/Desktop/hamro%20project%20/WingsNepal/src/wingsnepal/view/EmployeeDashbord.java</file>
             <file>file:/Users/ronanchettri/Desktop/hamro%20project%20/WingsNepal/src/wingsnepal/view/ResetPassword.java</file>
             <file>file:/Users/ronanchettri/Desktop/hamro%20project%20/WingsNepal/src/imagepicker/Dashboard.png</file>
@@ -18,6 +33,39 @@
             <file>file:/Users/ronanchettri/Desktop/hamro%20project%20/WingsNepal/src/imagepicker/aeroplane.jpg</file>
             <file>file:/Users/ronanchettri/Desktop/hamro%20project%20/WingsNepal/src/wingsnepal/view/UserPortal.java</file>
             <file>file:/Users/ronanchettri/Desktop/hamro%20project%20/WingsNepal/src/wingsnepal/view/AdminDashbord.java</file>
+=======
+
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/database/DbConnection.java</file>
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/database/MySqlConnection.java</file>
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/dao/SearchFlightDao.java</file>
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/UserPortal.java</file>
+ main
+ main
+
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/EmployeePortal.java</file>
+f0f260191cede89f5c59675fc6eaabf8aaab95ad
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/LoginPage.java</file>
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/UserPortal.java</file>
+HEAD
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/EmployeeDashboard.java</file>
+
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/AdminDashboard.java</file>
+
+            <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepal/view/LoginPage.java</file>
+            <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepal/database/DbConnection.java</file>
+            <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepal/database/MySqlConnection.java</file>
+            <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepalController/LoginController.java</file>
+            <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepal/controller/mail/SMTPSMailSender.java</file>
+            <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepal/view/RegisterPage.java</file>
+            <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepal/dao/UserDao.java</file>
+            <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepal/model/UserData.java</file>
+            <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepal/model/ResetRequest.java</file>
+            <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepal/model/LoginRequest.java</file>
+            <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepalController/AdminDashboardController.java</file>
+            <file>file:/C:/java/Wings%20nepal%20new/WingsNepal/src/wingsnepal/view/AdminDashboard.java</file>
+ main
+ f0f260191cede89f5c59675fc6eaabf8aaab95ad
+>>>>>>> 032b7342e911499354777bf2c6fae5a43ddf6e00
         </group>
     </open-files>
 </project-private>
