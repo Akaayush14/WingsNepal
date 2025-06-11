@@ -207,8 +207,8 @@ public class UserPortal extends javax.swing.JFrame{
     private void SearchFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {
         String from = FromTextField.getText();
         String to = ToTextField.getText();
-        int year = jYearChooser1.getYear();
-        int month = jMonthChooser1.getMonth() + 1; 
+        int year = TravelYearChooser.getYear();
+        int month = TravelMonthChooser.getMonth() + 1; 
         String day = jDayChooser1.getText().trim();
         if (!day.matches("\\d{1,2}")) {
             JOptionPane.showMessageDialog(this, "Please enter a valid day (1–31)");
@@ -272,14 +272,14 @@ public class UserPortal extends javax.swing.JFrame{
         DateLabel = new javax.swing.JLabel();
         FromTextField = new javax.swing.JTextField();
         ToTextField = new javax.swing.JTextField();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
-        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
         jDayChooser1 = new javax.swing.JTextField();
         SearchFlightButton = new javax.swing.JButton();
         jScrollBar1 = new javax.swing.JScrollBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         ShowAllButton = new javax.swing.JButton();
+        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
         BookFlightPanel = new javax.swing.JPanel();
         BookFlightHeadingPanel = new javax.swing.JPanel();
         BookFlightLabel = new javax.swing.JLabel();
@@ -296,15 +296,15 @@ public class UserPortal extends javax.swing.JFrame{
         FullNameTextField = new javax.swing.JTextField();
         PriceTextField = new javax.swing.JTextField();
         SeatComboBox = new javax.swing.JComboBox<>();
-        jSpinField1 = new com.toedter.components.JSpinField();
-        jYearChooser2 = new com.toedter.calendar.JYearChooser();
-        jMonthChooser2 = new com.toedter.calendar.JMonthChooser();
-        jSpinField2 = new com.toedter.components.JSpinField();
         PaymentComboBox = new javax.swing.JComboBox<>();
         TicketsLAbel = new javax.swing.JLabel();
         EmailTextField = new javax.swing.JTextField();
         FlightNameLabel = new javax.swing.JLabel();
         FlightNameTextField = new javax.swing.JTextField();
+        TicketSpinField = new com.toedter.components.JSpinField();
+        TravelYearChooser = new com.toedter.calendar.JYearChooser();
+        TravelMonthChooser = new com.toedter.calendar.JMonthChooser();
+        TravelDaySpinnerField = new com.toedter.components.JSpinField();
         CancelFlightPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         LogOutPanel = new javax.swing.JPanel();
@@ -464,8 +464,6 @@ public class UserPortal extends javax.swing.JFrame{
             }
         });
         SearchFlightPanel.add(ToTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 190, 30));
-        SearchFlightPanel.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 120, 30));
-        SearchFlightPanel.add(jMonthChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 120, 30));
 
         jDayChooser1.setText("Day");
         jDayChooser1.addActionListener(new java.awt.event.ActionListener() {
@@ -522,6 +520,8 @@ public class UserPortal extends javax.swing.JFrame{
             }
         });
         SearchFlightPanel.add(ShowAllButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 190, 40));
+        SearchFlightPanel.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 130, 30));
+        SearchFlightPanel.add(jMonthChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 352, 130, 30));
 
         jTabbedPane1.addTab("tab2", SearchFlightPanel);
 
@@ -600,10 +600,6 @@ public class UserPortal extends javax.swing.JFrame{
             }
         });
         BookFlightPanel.add(SeatComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 280, 30));
-        BookFlightPanel.add(jSpinField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 110, 30));
-        BookFlightPanel.add(jYearChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 80, 30));
-        BookFlightPanel.add(jMonthChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 490, 140, 30));
-        BookFlightPanel.add(jSpinField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, 70, 30));
 
         PaymentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Card", "Cash" }));
         PaymentComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -628,6 +624,10 @@ public class UserPortal extends javax.swing.JFrame{
             }
         });
         BookFlightPanel.add(FlightNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 280, 30));
+        BookFlightPanel.add(TicketSpinField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 432, 130, 30));
+        BookFlightPanel.add(TravelYearChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 80, 30));
+        BookFlightPanel.add(TravelMonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 490, 140, 30));
+        BookFlightPanel.add(TravelDaySpinnerField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 492, -1, 30));
 
         jTabbedPane1.addTab("tab3", BookFlightPanel);
 
@@ -675,10 +675,6 @@ public class UserPortal extends javax.swing.JFrame{
     private void FromTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FromTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FromTextFieldActionPerformed
-
-    private void jDayChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDayChooser1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jDayChooser1ActionPerformed
 
     private void ShowAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowAllButtonActionPerformed
         // TODO add your handling code here:
@@ -747,6 +743,10 @@ public class UserPortal extends javax.swing.JFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_FlightNameTextFieldActionPerformed
 
+    private void jDayChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDayChooser1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDayChooser1ActionPerformed
+
     class ButtonEditor extends javax.swing.DefaultCellEditor {
     private javax.swing.JButton button;
     private String label;
@@ -795,14 +795,14 @@ public class UserPortal extends javax.swing.JFrame{
             userPortal.FullNameTextField.setText(userPortal.loggedInUser.getFullName());
             userPortal.EmailTextField.setText(userPortal.loggedInUser.getEmail());
 
-            userPortal.jYearChooser2.setYear(userPortal.jYearChooser1.getYear());
-            userPortal.jMonthChooser2.setMonth(userPortal.jMonthChooser1.getMonth());
+            userPortal.TravelYearChooser.setYear(userPortal.TravelYearChooser.getYear());
+            userPortal.TravelMonthChooser.setMonth(userPortal.TravelMonthChooser.getMonth());
             String dayText = userPortal.jDayChooser1.getText().trim();
             if (dayText.equals("Day") || !dayText.matches("\\d{1,2}")) {
                 JOptionPane.showMessageDialog(userPortal, "Please select a valid day before booking.");
                 return label;
             }
-            userPortal.jSpinField2.setValue(Integer.parseInt(dayText));
+            userPortal.TravelDaySpinnerField.setValue(Integer.parseInt(dayText));
 
 
             userPortal.jTabbedPane1.setSelectedIndex(2); // Go to Book Flight tab
@@ -875,25 +875,25 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JLabel SeatClassLabel;
     private javax.swing.JComboBox<String> SeatComboBox;
     private javax.swing.JButton ShowAllButton;
+    private com.toedter.components.JSpinField TicketSpinField;
     private javax.swing.JLabel TicketsDateLabel;
     private javax.swing.JLabel TicketsLAbel;
     private javax.swing.JLabel ToLabel;
     private javax.swing.JTextField ToTextField;
+    private com.toedter.components.JSpinField TravelDaySpinnerField;
+    private com.toedter.calendar.JMonthChooser TravelMonthChooser;
+    private com.toedter.calendar.JYearChooser TravelYearChooser;
     private javax.swing.JLabel WingsNepalLogo;
     private javax.swing.JTextField jDayChooser1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
     private com.toedter.calendar.JMonthChooser jMonthChooser1;
-    private com.toedter.calendar.JMonthChooser jMonthChooser2;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private com.toedter.components.JSpinField jSpinField1;
-    private com.toedter.components.JSpinField jSpinField2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private com.toedter.calendar.JYearChooser jYearChooser1;
-    private com.toedter.calendar.JYearChooser jYearChooser2;
     // End of variables declaration//GEN-END:variables
 
 }

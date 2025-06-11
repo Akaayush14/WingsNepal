@@ -4,6 +4,8 @@
  */
 package wingsnepal;
 
+import wingsnepal.view.RegisterPage;
+
 /**
  *
  * @author Aayush Kharel
@@ -15,6 +17,8 @@ public class WingsNepal {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        RegisterPage view = new RegisterPage();
+        view.setVisible(false);
     }
     
 }

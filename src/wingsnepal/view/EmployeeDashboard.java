@@ -530,17 +530,11 @@ public class EmployeeDashboard extends javax.swing.JFrame {
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD:src/wingsnepal/view/EmployeeDashbord.java
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-=======
-        
-        
-    }//GEN-LAST:event_jButton6ActionPerformed
->>>>>>> 032b7342e911499354777bf2c6fae5a43ddf6e00:src/wingsnepal/view/EmployeeDashboard.java
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             Login dummy = new Login(1, "Employee", "employee@wingsnepal.com", "employee123", "Employee");
