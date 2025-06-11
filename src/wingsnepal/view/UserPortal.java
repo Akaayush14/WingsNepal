@@ -15,6 +15,8 @@ import wingsnepal.dao.SearchFlightDao;
 import wingsnepal.model.Login;
 import wingsnepal.model.SearchFlight;
 import wingsnepal.dao.SeatClassDao;
+import java.awt.Font;
+
 
 
 /**
@@ -63,6 +65,21 @@ public class UserPortal extends javax.swing.JFrame{
         
         // calling setupPlaceholder();
         setupPlaceholders();
+        
+        //Font for textfields
+        Font textFieldFont = new Font("Segoe UI", Font.PLAIN, 16); // Choose a clean, modern font
+
+        FromTextField.setFont(textFieldFont);
+        ToTextField.setFont(textFieldFont);
+        jDayChooser1.setFont(textFieldFont); // your day input field
+
+        FlightIdTextField.setFont(textFieldFont);
+        FlightNameTextField.setFont(textFieldFont);
+        FullNameTextField.setFont(textFieldFont);
+        EmailTextField.setFont(textFieldFont);
+        PriceTextField.setFont(textFieldFont);
+
+        
     }
 
     
@@ -481,19 +498,20 @@ public class UserPortal extends javax.swing.JFrame{
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Flight id", "Flight name", "Time", "Price", "Duration ", "Action"
+                "Flight id", "Flight name", "Time", "Price", "Duration ", "Date", "Action"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -671,17 +689,18 @@ public class UserPortal extends javax.swing.JFrame{
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);  // Clear existing rows
-
         for (SearchFlight f : flights) {
             model.addRow(new Object[]{
-                f.getFlightId(),
-                f.getFlightName(),
-                f.getTime(),
-                f.getPrice(),
-                f.getDuration(),
-                "Book"
-            });
-        }
+            f.getFlightId(),
+            f.getFlightName(),
+            f.getTime(),
+            f.getPrice(),
+            f.getDuration(),   
+            f.getDate(),       
+            "Book"
+        });
+    }
+
 
         //Using button renderer and button editor to place book flight button in every jTable1.
         TableColumn bookColumn = jTable1.getColumn("Action");
@@ -771,6 +790,7 @@ public class UserPortal extends javax.swing.JFrame{
 
             Object flightId = table.getValueAt(row, 0);
             Object flightName = table.getValueAt(row, 1);
+            Object dateValue = table.getValueAt(row, 5); // column index 5 = Date
 
             userPortal.FlightIdTextField.setText(flightId.toString());
             userPortal.FlightNameTextField.setText(flightName.toString());
@@ -780,18 +800,19 @@ public class UserPortal extends javax.swing.JFrame{
             int economyPrice = new SeatClassDao().getPriceByFlightAndClass(Integer.parseInt(flightId.toString()), "Economy");
             userPortal.PriceTextField.setText(String.valueOf(economyPrice));
 
+            // Auto-fill FullName and Email from logged-in user
             userPortal.FullNameTextField.setText(userPortal.loggedInUser.getFullName());
             userPortal.EmailTextField.setText(userPortal.loggedInUser.getEmail());
-
-            userPortal.TravelYearChooser.setYear(userPortal.TravelYearChooser.getYear());
-            userPortal.TravelMonthChooser.setMonth(userPortal.TravelMonthChooser.getMonth());
-            String dayText = userPortal.jDayChooser1.getText().trim();
-            if (dayText.equals("Day") || !dayText.matches("\\d{1,2}")) {
-                JOptionPane.showMessageDialog(userPortal, "Please select a valid day before booking.");
-                return label;
+            
+            // Fill the travel data    
+            if (dateValue != null) {
+                java.sql.Date sqlDate = java.sql.Date.valueOf(dateValue.toString());
+                java.util.Calendar cal = java.util.Calendar.getInstance();
+                cal.setTime(sqlDate);
+                userPortal.TravelYearChooser.setYear(cal.get(java.util.Calendar.YEAR));
+                userPortal.TravelMonthChooser.setMonth(cal.get(java.util.Calendar.MONTH));
+                userPortal.TravelDaySpinnerField.setValue(cal.get(java.util.Calendar.DAY_OF_MONTH));
             }
-            userPortal.TravelDaySpinnerField.setValue(Integer.parseInt(dayText));
-
 
             userPortal.jTabbedPane1.setSelectedIndex(2); // Go to Book Flight tab
 
