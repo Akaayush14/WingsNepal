@@ -84,39 +84,41 @@ public class UserPortal extends javax.swing.JFrame{
 
     
     private void setupPlaceholders() {
-        FromTextField.setForeground(java.awt.Color.GRAY);
-        FromTextField.setText("Enter departure city or airport");
-        FromTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                if (FromTextField.getText().equals("Enter departure city or airport")) {
-                    FromTextField.setText("");
-                    FromTextField.setForeground(java.awt.Color.BLACK);
-                }
+    String placeholderFrom = "Departure city/airport";
+    FromTextField.setForeground(java.awt.Color.GRAY);
+    FromTextField.setText(placeholderFrom);
+    FromTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            if (FromTextField.getText().equals(placeholderFrom)) {
+                FromTextField.setText("");
+                FromTextField.setForeground(java.awt.Color.BLACK);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                if (FromTextField.getText().isEmpty()) {
-                    FromTextField.setForeground(java.awt.Color.GRAY);
-                    FromTextField.setText("Enter departure city or airport");
-                }
+        }
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            if (FromTextField.getText().isEmpty()) {
+                FromTextField.setForeground(java.awt.Color.GRAY);
+                FromTextField.setText(placeholderFrom);
             }
-        });
+        }
+    });
+
 
         ToTextField.setForeground(java.awt.Color.GRAY);
-        ToTextField.setText("Enter destination city or airport");
+        ToTextField.setText("Destination city/airport"); // Match this text
         ToTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                if (ToTextField.getText().equals("Enter destination city or airport")) {
+                if (ToTextField.getText().equals("Destination city/airport")) {
                     ToTextField.setText("");
                     ToTextField.setForeground(java.awt.Color.BLACK);
                 }
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                if (ToTextField.getText().isEmpty()) {
-                    ToTextField.setForeground(java.awt.Color.GRAY);
-                    ToTextField.setText("Enter destination city or airport");
-                }
+            if (ToTextField.getText().isEmpty()) {
+                ToTextField.setForeground(java.awt.Color.GRAY);
+                ToTextField.setText("Destination city/airport");
             }
-        });
+        }
+    });
 
         jDayChooser1.setForeground(java.awt.Color.GRAY);
         jDayChooser1.setText("Day");
@@ -594,6 +596,11 @@ public class UserPortal extends javax.swing.JFrame{
         ClearButton.setFont(new java.awt.Font("Segoe UI Emoji", 0, 16)); // NOI18N
         ClearButton.setForeground(new java.awt.Color(255, 255, 255));
         ClearButton.setText("Clear");
+        ClearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearButtonActionPerformed(evt);
+            }
+        });
         BookFlightPanel.add(ClearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 600, 130, 30));
 
         FlightIdTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -765,6 +772,25 @@ public class UserPortal extends javax.swing.JFrame{
     private void jDayChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDayChooser1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jDayChooser1ActionPerformed
+
+    private void ClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButtonActionPerformed
+        // Clear all text fields
+    FlightIdTextField.setText("");
+    FlightNameTextField.setText("");
+    FullNameTextField.setText("");
+    EmailTextField.setText("");
+    PriceTextField.setText("");
+
+    // Reset combo boxes
+    SeatComboBox.setSelectedIndex(0);
+    PaymentComboBox.setSelectedIndex(0);
+
+    // Reset spin fields
+    TicketSpinField.setValue(1);
+    TravelDaySpinnerField.setValue(1);
+    TravelMonthChooser.setMonth(0); // January
+    TravelYearChooser.setYear(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR));
+    }//GEN-LAST:event_ClearButtonActionPerformed
 
     class ButtonEditor extends javax.swing.DefaultCellEditor {
     private javax.swing.JButton button;
