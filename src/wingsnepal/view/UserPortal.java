@@ -228,8 +228,8 @@ public class UserPortal extends javax.swing.JFrame{
     private void SearchFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {
         String from = FromTextField.getText();
         String to = ToTextField.getText();
-        int year = TravelYearChooser.getYear();
-        int month = TravelMonthChooser.getMonth() + 1; 
+        int year = jYearChooser1.getYear();
+        int month = jMonthChooser1.getMonth() + 1; 
         String day = jDayChooser1.getText().trim();
         if (!day.matches("\\d{1,2}")) {
             JOptionPane.showMessageDialog(this, "Please enter a valid day (1–31)");
@@ -293,6 +293,8 @@ public class UserPortal extends javax.swing.JFrame{
         DateLabel = new javax.swing.JLabel();
         FromTextField = new javax.swing.JTextField();
         ToTextField = new javax.swing.JTextField();
+        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
         jDayChooser1 = new javax.swing.JTextField();
         SearchFlightButton = new javax.swing.JButton();
         jScrollBar1 = new javax.swing.JScrollBar();
@@ -315,6 +317,10 @@ public class UserPortal extends javax.swing.JFrame{
         FullNameTextField = new javax.swing.JTextField();
         PriceTextField = new javax.swing.JTextField();
         SeatComboBox = new javax.swing.JComboBox<>();
+        jSpinField1 = new com.toedter.components.JSpinField();
+        jYearChooser2 = new com.toedter.calendar.JYearChooser();
+        jMonthChooser2 = new com.toedter.calendar.JMonthChooser();
+        jSpinField2 = new com.toedter.components.JSpinField();
         PaymentComboBox = new javax.swing.JComboBox<>();
         TicketsLAbel = new javax.swing.JLabel();
         EmailTextField = new javax.swing.JTextField();
@@ -485,6 +491,8 @@ public class UserPortal extends javax.swing.JFrame{
             }
         });
         SearchFlightPanel.add(ToTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 190, 30));
+        SearchFlightPanel.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 120, 30));
+        SearchFlightPanel.add(jMonthChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 120, 30));
 
         jDayChooser1.setText("Day");
         jDayChooser1.addActionListener(new java.awt.event.ActionListener() {
@@ -629,7 +637,15 @@ public class UserPortal extends javax.swing.JFrame{
                 SeatComboBoxActionPerformed(evt);
             }
         });
+arbaz
+        BookFlightPanel.add(SeatComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 280, 30));
+        BookFlightPanel.add(jSpinField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 110, 30));
+        BookFlightPanel.add(jYearChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 80, 30));
+        BookFlightPanel.add(jMonthChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 490, 140, 30));
+        BookFlightPanel.add(jSpinField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, 70, 30));
+
         BookFlightPanel.add(SeatComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 100, 30));
+ main
 
         PaymentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Card", "Cash" }));
         PaymentComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -717,6 +733,10 @@ public class UserPortal extends javax.swing.JFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_FromTextFieldActionPerformed
 
+    private void jDayChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDayChooser1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDayChooser1ActionPerformed
+
     private void ShowAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowAllButtonActionPerformed
         // TODO add your handling code here:
         SearchFlightDao dao = new SearchFlightDao();
@@ -784,6 +804,8 @@ public class UserPortal extends javax.swing.JFrame{
     private void FlightNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FlightNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FlightNameTextFieldActionPerformed
+
+arbaz
 
     private void jDayChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDayChooser1ActionPerformed
         // TODO add your handling code here:
@@ -859,6 +881,7 @@ public class UserPortal extends javax.swing.JFrame{
         }
     }//GEN-LAST:event_BookNowButtonActionPerformed
 
+main
     class ButtonEditor extends javax.swing.DefaultCellEditor {
     private javax.swing.JButton button;
     private String label;
@@ -908,6 +931,17 @@ public class UserPortal extends javax.swing.JFrame{
             // Auto-fill FullName and Email from logged-in user
             userPortal.FullNameTextField.setText(userPortal.loggedInUser.getFullName());
             userPortal.EmailTextField.setText(userPortal.loggedInUser.getEmail());
+arbaz
+            userPortal.jYearChooser2.setYear(userPortal.jYearChooser1.getYear());
+            userPortal.jMonthChooser2.setMonth(userPortal.jMonthChooser1.getMonth());
+            String dayText = userPortal.jDayChooser1.getText().trim();
+            if (dayText.equals("Day") || !dayText.matches("\\d{1,2}")) {
+                JOptionPane.showMessageDialog(userPortal, "Please select a valid day before booking.");
+                return label;
+            }
+            userPortal.jSpinField2.setValue(Integer.parseInt(dayText));
+
+
 
             // Fix: Handle various date formats robustly
             if (dateValue != null) {
@@ -945,6 +979,7 @@ public class UserPortal extends javax.swing.JFrame{
                     e.printStackTrace();
                 }
             }
+main
             userPortal.jTabbedPane1.setSelectedIndex(2); // Go to Book Flight tab
         }
         isPushed = false;
@@ -1025,11 +1060,17 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JTextField jDayChooser1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
+    private com.toedter.calendar.JMonthChooser jMonthChooser1;
+    private com.toedter.calendar.JMonthChooser jMonthChooser2;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private com.toedter.components.JSpinField jSpinField1;
+    private com.toedter.components.JSpinField jSpinField2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private com.toedter.calendar.JYearChooser jYearChooser1;
+    private com.toedter.calendar.JYearChooser jYearChooser2;
     // End of variables declaration//GEN-END:variables
 
 }
