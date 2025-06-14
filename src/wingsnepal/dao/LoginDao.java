@@ -7,7 +7,7 @@ package wingsnepal.dao;
 import java.sql.*;
 import wingsnepal.database.DbConnection;
 import wingsnepal.database.MySqlConnection;
-import wingsnepal.model.Login;
+import wingsnepal.model.UserData;
 
 /**
  *
@@ -16,10 +16,10 @@ import wingsnepal.model.Login;
 public class LoginDao {
     DbConnection db = new MySqlConnection();
 
-    public Login login(String email, String password) {
+    public UserData login(String email, String password) {
         String query = "SELECT * FROM users WHERE email = ? AND fpassword = ?";
         Connection conn = db.openConnection();
-        Login user = null;
+        UserData user = null;
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -28,7 +28,7 @@ public class LoginDao {
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                user = new Login(
+                user = new UserData(
                     rs.getInt("user_id"),
                     rs.getString("full_name"),
                     rs.getString("email"),

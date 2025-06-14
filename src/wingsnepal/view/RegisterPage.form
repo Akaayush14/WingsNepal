@@ -42,49 +42,43 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="ConfirmPasswordLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="NameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="PasswordLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="ConfirmPasswordField" alignment="0" max="32767" attributes="0"/>
+                              <Component id="SignUpButton" alignment="0" max="32767" attributes="0"/>
+                              <Component id="PasswordField" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="ConfirmPasswordLabel" min="-2" max="-2" attributes="0"/>
-                                      <Component id="UserLabel" min="-2" pref="44" max="-2" attributes="0"/>
-                                      <Component id="NameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="PasswordLabel" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="ConfirmPasswordField" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="UserComboBox" max="32767" attributes="0"/>
-                                      <Component id="SignUpButton" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="PasswordField" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="NameTextField" min="-2" pref="217" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="GenderLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="PhoneLabel" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
-                                      <Component id="EmailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="PhoneTextField" max="32767" attributes="0"/>
-                                      <Component id="GenderComboBox" max="32767" attributes="0"/>
-                                      <Component id="EmailTextField" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="NameTextField" min="-2" pref="217" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="GenderLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="PhoneLabel" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                              <Component id="EmailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="PhoneTextField" max="32767" attributes="0"/>
+                              <Component id="GenderComboBox" max="32767" attributes="0"/>
+                              <Component id="EmailTextField" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -123,13 +117,9 @@
                       <Component id="ConfirmPasswordField" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="ConfirmPasswordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="UserComboBox" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="UserLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="SignUpButton" min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace pref="51" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -232,36 +222,6 @@
             <Property name="text" type="java.lang.String" value="Confirm Password"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="UserLabel">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI Emoji" size="18" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="User"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="UserComboBox">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI Emoji" size="14" style="0"/>
-            </Property>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="User"/>
-                <StringItem index="1" value="Employee"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UserComboBoxActionPerformed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JButton" name="SignUpButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -287,7 +247,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Enter your details to register your account"/>
+            <Property name="text" type="java.lang.String" value="Enter your details to register as an user "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="PasswordField">
