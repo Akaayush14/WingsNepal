@@ -4,17 +4,17 @@
  */
 package wingsnepal.view;
 
-import wingsnepal.model.Login;
+import wingsnepal.model.UserData;
 
 /**
  *
  * @author ronanchettri
  */
 public class EmployeeDashboard extends javax.swing.JFrame {
-    private Login loggedInUser; // store the user info
+    private UserData loggedInUser; // store the user info
     
     //New constructor accepting Login object
-    public EmployeeDashboard(Login user) {
+    public EmployeeDashboard(UserData user) {
         initComponents();
         setTitle("Employee Dashboard - Welcome" + user.getFullName());
         setLocationRelativeTo(null);
@@ -537,7 +537,7 @@ public class EmployeeDashboard extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            Login dummy = new Login(1, "Employee", "employee@wingsnepal.com", "employee123", "Employee");
+            UserData dummy = new UserData(1, "Employee", "employee@wingsnepal.com", "employee123", "Employee");
             new EmployeeDashboard(dummy).setVisible(true);
         });
     }

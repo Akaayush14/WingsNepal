@@ -22,7 +22,8 @@ public class SearchFlightDao {
 
     public List<SearchFlight> searchFlights(String from, String to, String date) {
         List<SearchFlight> flightList = new ArrayList<>();
-        String query = "SELECT flight_id, flight_name, from_city, to_city, date, time, price, duration FROM flights";
+        String query = "SELECT flight_id, flight_name, from_city, to_city, date, time, price, duration " + "FROM flights WHERE LOWER(from_city) = LOWER(?) AND LOWER(to_city) = LOWER(?) AND date = ?";
+
         Connection conn = db.openConnection();
         
         try {
@@ -53,35 +54,34 @@ public class SearchFlightDao {
         return flightList;
     }
 
+    public List<SearchFlight> getAllFlights() {
+        List<SearchFlight> flightList = new ArrayList<>();
+        String query = "SELECT flight_id, flight_name, from_city, to_city, date, time, price, duration FROM flights";  
 
-public List<SearchFlight> getAllFlights() {
-    List<SearchFlight> flightList = new ArrayList<>();
-    String query = "SELECT flight_id, flight_name, from_city, to_city, date, time, price, duration FROM flights";
-    Connection conn = db.openConnection();
+        Connection conn = db.openConnection();
 
-    try {
-        PreparedStatement stmt = conn.prepareStatement(query);
-        ResultSet rs = stmt.executeQuery();
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);  // No parameters to set
+            ResultSet rs = stmt.executeQuery();
 
-        while (rs.next()) {
-            SearchFlight flight = new SearchFlight(
-                rs.getInt("flight_id"),
-                rs.getString("flight_name"),
-                rs.getString("time"),
-                rs.getInt("price"),
-                rs.getString("duration"),
-                rs.getString("date")
-                
-            );
-            flightList.add(flight);
+            while (rs.next()) {
+                SearchFlight flight = new SearchFlight(
+                    rs.getInt("flight_id"),
+                    rs.getString("flight_name"),
+                    rs.getString("time"),
+                    rs.getInt("price"),
+                    rs.getString("duration"),
+                    rs.getString("date")
+                );
+                flightList.add(flight);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching all flights: " + e.getMessage());
+        } finally {
+            db.closeConnection(conn);
         }
-    } catch (SQLException e) {
-        System.out.println("Error fetching all flights: " + e.getMessage());
-    } finally {
-        db.closeConnection(conn);
+
+        return flightList;
     }
 
-    return flightList;
-    
-}
 }

@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.Image;
 import javax.swing.*;
 import wingsnepal.dao.LoginDao;
-import wingsnepal.model.Login;
+import wingsnepal.model.UserData;
 
 
 /**
@@ -101,7 +101,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         // Authenticating:
         LoginDao loginDao = new LoginDao();
-        Login user = loginDao.login(email, password);
+        UserData user = loginDao.login(email, password);
 
         if (user == null) {
             JOptionPane.showMessageDialog(this, "Invalid email or password.");
@@ -323,7 +323,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         BgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Aeroplane image 1.jpg"))); // NOI18N
         BgLabel.setText("BgImageLabel");
-        getContentPane().add(BgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
+        getContentPane().add(BgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -20, 1000, 600));
 
         pack();
         setLocationRelativeTo(null);
