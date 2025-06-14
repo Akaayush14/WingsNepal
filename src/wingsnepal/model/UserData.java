@@ -8,14 +8,14 @@ package wingsnepal.model;
  *
  * @author Aayush Kharel
  */
-public class Login {
+public class UserData {
     private int userId;
     private String fullName;
     private String email;
     private String password;
     private String role;
 
-    public Login(int userId, String fullName, String email, String password, String role) {
+    public UserData(int userId, String fullName, String email, String password, String role) {
         this.userId = userId;
         this.fullName = fullName;
         this.email = email;

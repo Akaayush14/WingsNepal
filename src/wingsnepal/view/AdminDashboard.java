@@ -5,14 +5,14 @@
 package wingsnepal.view;
 
 import javax.swing.JLabel;
-import wingsnepal.model.Login;
+import wingsnepal.model.UserData;
 
 public class AdminDashboard extends javax.swing.JFrame {
-    private Login loggedInUser;
+    private UserData loggedInUser;
     private JLabel welcomeLabel;
 
     
-    public AdminDashboard(Login user) {
+    public AdminDashboard(UserData user) {
         this.loggedInUser = user;
         initComponents();
         setTitle("Admin Dashboard - Welcome" + user.getFullName());
@@ -271,7 +271,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            Login dummy= new Login(1, "Admin", "admin@wingsnepal.com", "admin123", "Admin");
+            UserData dummy= new UserData(1, "Admin", "admin@wingsnepal.com", "admin123", "Admin");
             new AdminDashboard(dummy).setVisible(true);
             }
         });
