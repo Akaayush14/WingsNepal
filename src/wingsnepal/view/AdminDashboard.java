@@ -198,7 +198,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DashboardIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Dashboard.png"))); // NOI18N
-        jPanel2.add(DashboardIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 20, 20));
+        jPanel2.add(DashboardIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 20, 20));
 
         DashboardButton.setBackground(new java.awt.Color(46, 62, 79));
         DashboardButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -210,7 +210,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 DashboardButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(DashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 170, 31));
+        jPanel2.add(DashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 170, 31));
 
         FlightButton.setBackground(new java.awt.Color(46, 62, 79));
         FlightButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -222,7 +222,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 FlightButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(FlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 170, 31));
+        jPanel2.add(FlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 170, 31));
 
         PassengerButton.setBackground(new java.awt.Color(46, 62, 79));
         PassengerButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -234,7 +234,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 PassengerButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(PassengerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 170, 33));
+        jPanel2.add(PassengerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 170, 33));
 
         ReservationButton.setBackground(new java.awt.Color(46, 62, 79));
         ReservationButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -246,7 +246,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 ReservationButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(ReservationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 170, 33));
+        jPanel2.add(ReservationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 170, 33));
 
         EmployeeButton.setBackground(new java.awt.Color(46, 62, 79));
         EmployeeButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -258,7 +258,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 EmployeeButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(EmployeeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 170, 33));
+        jPanel2.add(EmployeeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 170, 33));
 
         LogOutbutton.setBackground(new java.awt.Color(46, 62, 79));
         LogOutbutton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -270,7 +270,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 LogOutbuttonActionPerformed(evt);
             }
         });
-        jPanel2.add(LogOutbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 170, 32));
+        jPanel2.add(LogOutbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 170, 32));
 
         WingsNepalLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/WingsNepalLogo.jpg"))); // NOI18N
         jPanel2.add(WingsNepalLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -70, 220, 220));
