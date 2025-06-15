@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 import wingsnepal.dao.LoginDao;
-import wingsnepal.model.Login;
+import wingsnepal.model.UserData;
 import wingsnepal.view.LoginPage;
 import wingsnepal.view.UserPortal;
 import wingsnepal.view.EmployeeDashboard;
@@ -42,7 +42,7 @@ public class LoginController {
             }
 
             LoginDao loginDao = new LoginDao();
-            Login user = loginDao.login(email, password);
+            UserData user = loginDao.login(email, password);
 
             if (user == null || !user.getRole().equalsIgnoreCase(selectedRole)) {
                 JOptionPane.showMessageDialog(view, "Invalid email, password, or role.");

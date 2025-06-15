@@ -40,4 +40,25 @@ public class SeatClassDao {
 
         return price;
     }
+    public int getSeatIdByFlightAndClass(int flightId, String className) {
+        String query = "SELECT seat_id FROM seat_classes WHERE flight_id = ? AND class_name = ?";
+        DbConnection db = new MySqlConnection();
+
+        try (Connection conn = db.openConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, flightId);
+            stmt.setString(2, className);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("seat_id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    return -1;
+    }
+
 }
