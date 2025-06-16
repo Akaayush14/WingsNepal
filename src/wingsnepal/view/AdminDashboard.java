@@ -142,6 +142,13 @@ public class AdminDashboard extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         DasboardPanel = new javax.swing.JPanel();
         FlightPanel = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        AddFlightsjButton = new javax.swing.JButton();
+        SearchFlightjButton = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        SearchFlightsTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         PassengerPanel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         SearchPassengerButton = new javax.swing.JButton();
@@ -155,7 +162,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        NewReservationJButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         EmployeesPanel = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -222,7 +229,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 FlightButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(FlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 170, 31));
+        jPanel2.add(FlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 170, 200, 31));
 
         PassengerButton.setBackground(new java.awt.Color(46, 62, 79));
         PassengerButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -246,7 +253,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 ReservationButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(ReservationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 170, 33));
+        jPanel2.add(ReservationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 180, 33));
 
         EmployeeButton.setBackground(new java.awt.Color(46, 62, 79));
         EmployeeButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -258,7 +265,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 EmployeeButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(EmployeeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 170, 33));
+        jPanel2.add(EmployeeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 290, 180, 33));
 
         LogOutbutton.setBackground(new java.awt.Color(46, 62, 79));
         LogOutbutton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -270,7 +277,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 LogOutbuttonActionPerformed(evt);
             }
         });
-        jPanel2.add(LogOutbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 170, 32));
+        jPanel2.add(LogOutbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 330, 210, 32));
 
         WingsNepalLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/WingsNepalLogo.jpg"))); // NOI18N
         jPanel2.add(WingsNepalLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -70, 220, 220));
@@ -314,15 +321,94 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab1", DasboardPanel);
 
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+
+        AddFlightsjButton.setBackground(new java.awt.Color(0, 153, 102));
+        AddFlightsjButton.setForeground(new java.awt.Color(255, 255, 255));
+        AddFlightsjButton.setText("+  Add Flights");
+        AddFlightsjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddFlightsjButtonActionPerformed(evt);
+            }
+        });
+
+        SearchFlightjButton.setBackground(new java.awt.Color(0, 102, 153));
+        SearchFlightjButton.setForeground(new java.awt.Color(255, 255, 255));
+        SearchFlightjButton.setText("Search");
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Flight", "Route", "Departure", "Arrival", "Aircraft", "Actions"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable4);
+
+        SearchFlightsTextField.setText("Search Flights...");
+        SearchFlightsTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchFlightsTextFieldActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(SearchFlightsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(SearchFlightjButton, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                        .addGap(367, 367, 367)
+                        .addComponent(AddFlightsjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AddFlightsjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchFlightjButton)
+                    .addComponent(SearchFlightsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jLabel2.setText("Flights Management");
+
         javax.swing.GroupLayout FlightPanelLayout = new javax.swing.GroupLayout(FlightPanel);
         FlightPanel.setLayout(FlightPanelLayout);
         FlightPanelLayout.setHorizontalGroup(
             FlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1078, Short.MAX_VALUE)
+            .addGroup(FlightPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(FlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         FlightPanelLayout.setVerticalGroup(
             FlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FlightPanelLayout.createSequentialGroup()
+                .addContainerGap(63, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         jTabbedPane1.addTab("tab2", FlightPanel);
@@ -465,12 +551,12 @@ public class AdminDashboard extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 102));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("+   New Reservation");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        NewReservationJButton.setBackground(new java.awt.Color(0, 153, 102));
+        NewReservationJButton.setForeground(new java.awt.Color(255, 255, 255));
+        NewReservationJButton.setText("+   New Reservation");
+        NewReservationJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                NewReservationJButtonActionPerformed(evt);
             }
         });
 
@@ -481,7 +567,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NewReservationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -489,7 +575,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(NewReservationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(29, Short.MAX_VALUE))
@@ -692,9 +778,9 @@ public class AdminDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void NewReservationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewReservationJButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_NewReservationJButtonActionPerformed
 
     private void SearchPassengerTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchPassengerTextFieldActionPerformed
         // TODO add your handling code here:
@@ -711,6 +797,14 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void SeatClassTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeatClassTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SeatClassTextFieldActionPerformed
+
+    private void AddFlightsjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddFlightsjButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddFlightsjButtonActionPerformed
+
+    private void SearchFlightsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchFlightsTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchFlightsTextFieldActionPerformed
  
     public JLabel getWelcomeLabel() {
         return welcomeLabel;
@@ -727,6 +821,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddFlightsjButton;
     private javax.swing.JPanel DasboardPanel;
     private javax.swing.JButton DashboardButton;
     private javax.swing.JLabel DashboardIcon;
@@ -737,20 +832,23 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JTextField FlightIdLabel;
     private javax.swing.JPanel FlightPanel;
     private javax.swing.JButton LogOutbutton;
+    private javax.swing.JButton NewReservationJButton;
     private javax.swing.JButton PassengerButton;
     private javax.swing.JPanel PassengerPanel;
     private javax.swing.JButton ReservationButton;
     private javax.swing.JPanel ReservationPanel;
     private javax.swing.JButton SearchButton;
+    private javax.swing.JButton SearchFlightjButton;
+    private javax.swing.JTextField SearchFlightsTextField;
     private javax.swing.JButton SearchPassengerButton;
     private javax.swing.JTextField SearchPassengerTextField;
     private javax.swing.JTextField SearchTextField;
     private javax.swing.JComboBox<String> SeatClassTextField;
     private javax.swing.JLabel WelcAdminLabel;
     private javax.swing.JLabel WingsNepalLogo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
@@ -761,13 +859,16 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
     // End of variables declaration//GEN-END:variables
 
     
