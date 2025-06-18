@@ -10,7 +10,8 @@ import java.sql.Date;
  * @author Aayush Kharel
  */
 public class BookingFlight {
-
+    
+    private int userId;
     private int flightId;
     private int seatId;
     private String fullName;
@@ -22,8 +23,9 @@ public class BookingFlight {
     private String paymentMethod;
 
     //Constructor
-    public BookingFlight(int flightId, int seatId, String fullName, String email, String seatClass,
+    public BookingFlight(int userId, int flightId, int seatId, String fullName, String email, String seatClass,
                    String seatNo, int tickets, Date travelDate, String paymentMethod) {
+        this.userId = userId;
         this.flightId = flightId;
         this.seatId = seatId;
         this.fullName = fullName;
@@ -35,7 +37,11 @@ public class BookingFlight {
         this.paymentMethod = paymentMethod;
     }
     // Getters
-    public int getFlightId() {
+    public int getUserId() {
+        return userId;
+    }
+    
+    public int getFlightId(){
         return flightId;
     }
 
