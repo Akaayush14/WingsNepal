@@ -19,28 +19,27 @@ public class BookingFlightDao {
     public boolean saveBooking(BookingFlight booking) {
         boolean success = false;
 
-        String sql = "INSERT INTO bookings (flight_id, seat_id, `date`, full_name, email, seat_class, seat_no, tickets, travel_date, payment_method) "
-                   + "VALUES (?, ?, CURDATE(), ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO bookings (user_Id, flight_id, seat_id, seat_class, seat_no, tickets, travel_date, payment_method) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         DbConnection db = new MySqlConnection();
         try (Connection conn = db.openConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, booking.getFlightId());
-            stmt.setInt(2, booking.getSeatId());
-            stmt.setString(3, booking.getFullName());
-            stmt.setString(4, booking.getEmail());
-            stmt.setString(5, booking.getSeatClass());
-            stmt.setString(6, booking.getSeatNo());
-            stmt.setInt(7, booking.getTickets());
-            stmt.setDate(8, booking.getTravelDate());
-            stmt.setString(9, booking.getPaymentMethod());
-
-            success = stmt.executeUpdate() > 0;
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            
+            stmt.setInt(1, booking.getUserId());
+            stmt.setInt(2, booking.getFlightId());
+            stmt.setInt(3, booking.getSeatId());
+            stmt.setString(4, booking.getSeatClass());
+            stmt.setString(5, booking.getSeatNo());
+            stmt.setInt(6, booking.getTickets());
+            stmt.setDate(7, booking.getTravelDate());
+            stmt.setString(8, booking.getPaymentMethod());
+            
+            return stmt.executeUpdate() > 0;
+            
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-
-        return success;
     }
 }

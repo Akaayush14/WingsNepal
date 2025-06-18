@@ -22,7 +22,7 @@ public class SearchFlightDao {
 
     public List<SearchFlight> searchFlights(String from, String to, String date) {
         List<SearchFlight> flightList = new ArrayList<>();
-        String query = "SELECT flight_id, flight_name, from_city, to_city, date, time, price, duration " + "FROM flights WHERE LOWER(from_city) = LOWER(?) AND LOWER(to_city) = LOWER(?) AND date = ?";
+        String query = "SELECT flight_code, flight_name, from_city, to_city, date, time, price, duration " + "FROM flights WHERE from_city = ? AND to_city = ? AND date = ?";
 
         Connection conn = db.openConnection();
         
@@ -36,7 +36,7 @@ public class SearchFlightDao {
 
             while (rs.next()) {
                 SearchFlight flight = new SearchFlight(
-                    rs.getInt("flight_id"),
+                    rs.getString("flight_code"),
                     rs.getString("flight_name"),
                     rs.getString("time"),
                     rs.getInt("price"),
@@ -56,7 +56,7 @@ public class SearchFlightDao {
 
     public List<SearchFlight> getAllFlights() {
         List<SearchFlight> flightList = new ArrayList<>();
-        String query = "SELECT flight_id, flight_name, from_city, to_city, date, time, price, duration FROM flights";  
+        String query = "SELECT flight_code, flight_name, from_city, to_city, date, time, price, duration FROM flights";  
 
         Connection conn = db.openConnection();
 
@@ -66,7 +66,7 @@ public class SearchFlightDao {
 
             while (rs.next()) {
                 SearchFlight flight = new SearchFlight(
-                    rs.getInt("flight_id"),
+                    rs.getString("flight_code"),
                     rs.getString("flight_name"),
                     rs.getString("time"),
                     rs.getInt("price"),
