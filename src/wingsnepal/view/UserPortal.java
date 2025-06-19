@@ -16,8 +16,11 @@ import wingsnepal.model.UserData;
 import wingsnepal.model.SearchFlight;
 import wingsnepal.dao.SeatClassDao;
 import java.awt.Font;
+import javax.swing.JComponent;
 import wingsnepal.dao.BookingFlightDao;
 import wingsnepal.model.BookingFlight;
+import javax.swing.JSpinner;
+
 
 
 
@@ -33,6 +36,7 @@ public class UserPortal extends javax.swing.JFrame{
     public UserPortal(UserData user) {
         this.loggedInUser = user; // store the user
         initComponents();
+ 
         
         // Optional: Show user's name on screen or use it anywhere you want
         setTitle("User Portal - Welcome, " + loggedInUser.getFullName());
@@ -42,8 +46,9 @@ public class UserPortal extends javax.swing.JFrame{
         styleFlatHoverButton(DashboardButton);
         styleFlatHoverButton(FlightButton);
         styleFlatHoverButton(BookFlightButton);
-        styleFlatHoverButton(CheckInButton);
+        styleFlatHoverButton(eDITButton);
         styleFlatHoverButton(LogOutButton);
+        
             
         // Adding scrolling feature.
         jScrollPane1.setViewportView(jTable1);
@@ -52,9 +57,10 @@ public class UserPortal extends javax.swing.JFrame{
         ShowAllButton.addActionListener(new AddEmployeeDialog.awt.event.ActionListener() {
             public void actionPerformed(AddEmployeeDialog.awt.event.ActionEvent evt) {
                 ShowAllButtonActionPerformed(evt);
+                
+
             }
         });
-
         setResizable(false);         //Disable maximize button
         setLocationRelativeTo(null); //Center window
         
@@ -64,6 +70,7 @@ public class UserPortal extends javax.swing.JFrame{
         scaleImage4();
         scaleImage5();
         scaleImage6();
+        scaleImage7();
         
         // calling setupPlaceholder();
         setupPlaceholders();
@@ -73,9 +80,9 @@ public class UserPortal extends javax.swing.JFrame{
 
         FromTextField.setFont(textFieldFont);
         ToTextField.setFont(textFieldFont);
-        jDayChooser1.setFont(textFieldFont); // your day input field
+        TravelDayChooser.setFont(textFieldFont); // your day input field
 
-        FlightIdTextField.setFont(textFieldFont);
+        FlightCodeTextField.setFont(textFieldFont);
         FlightNameTextField.setFont(textFieldFont);
         FullNameTextField.setFont(textFieldFont);
         EmailTextField.setFont(textFieldFont);
@@ -136,10 +143,26 @@ public class UserPortal extends javax.swing.JFrame{
                 if (jDayChooser1.getText().isEmpty()) {
                     jDayChooser1.setForeground(AddEmployeeDialog.awt.Color.GRAY);
                     jDayChooser1.setText("Day");
+        TravelDayChooser.setForeground(java.awt.Color.GRAY);
+        TravelDayChooser.setValue(0); // Default placeholder value (e.g. 0 = "not selected")
+
+        TravelDayChooser.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+                public void focusGained(java.awt.event.FocusEvent evt) {
+                if (TravelDayChooser.getValue() == 0) {
+                    TravelDayChooser.setForeground(java.awt.Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (TravelDayChooser.getValue() == 0) {
+                    TravelDayChooser.setForeground(java.awt.Color.GRAY);
                 }
             }
         });
     }
+
     
     //This method styles buttons to look flat and modern, and adds hover effects for better user experience.
     //It is called after init components to give for which button it is applicable.
@@ -216,6 +239,14 @@ public class UserPortal extends javax.swing.JFrame{
         ImageIcon scaledIcon6 = new ImageIcon(imgScale6);
         WingsNepalLogo.setIcon(scaledIcon6);
     }
+    private void scaleImage7(){
+        ImageIcon icon7 = new ImageIcon(getClass().getResource("/imagepicker/Dashboard_bg.png"));
+        //scaling image to fit in the label.
+        Image img7 = icon7.getImage();
+        Image imgScale7 = img7.getScaledInstance(DashboardBgLabel.getWidth(), DashboardBgLabel.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon7 = new ImageIcon(imgScale7);
+        DashboardBgLabel.setIcon(scaledIcon7);
+    }
         
     private void scaleToLabel(javax.swing.JLabel label, String resourcePath) {
         ImageIcon icon = new ImageIcon(getClass().getResource(resourcePath));
@@ -228,15 +259,15 @@ public class UserPortal extends javax.swing.JFrame{
     private void SearchFlightButtonActionPerformed(AddEmployeeDialog.awt.event.ActionEvent evt) {
         String from = FromTextField.getText();
         String to = ToTextField.getText();
-        int year = jYearChooser1.getYear();
-        int month = jMonthChooser1.getMonth() + 1; 
-        String day = jDayChooser1.getText().trim();
-        if (!day.matches("\\d{1,2}")) {
+        int year = TravelDateChooser.getYear();
+        int month = TicektMonthFiled.getMonth() + 1; 
+        int day = TravelDayChooser.getValue();
+        if (day < 1 || day > 31) {
             JOptionPane.showMessageDialog(this, "Please enter a valid day (1–31)");
             return;
         }
 
-        String date = year + "-" + String.format("%02d", month) + "-" + String.format("%02d", Integer.parseInt(day));
+        String date = String.format("%04d-%02d-%02d", year, month, day);
 
         SearchFlightDao dao = new SearchFlightDao();
         List<SearchFlight> flights = dao.searchFlights(from, to, date);
@@ -246,7 +277,7 @@ public class UserPortal extends javax.swing.JFrame{
 
         for (SearchFlight f : flights) {
             model.addRow(new Object[]{
-                f.getFlightId(),
+                f.getFlightCode(),
                 f.getFlightName(),
                 f.getTime(),
                 f.getPrice(),
@@ -280,11 +311,12 @@ public class UserPortal extends javax.swing.JFrame{
         DashboardButton = new javax.swing.JButton();
         FlightButton = new javax.swing.JButton();
         BookFlightButton = new javax.swing.JButton();
-        CheckInButton = new javax.swing.JButton();
+        eDITButton = new javax.swing.JButton();
         LogOutButton = new javax.swing.JButton();
         WingsNepalLogo = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         DashboardPanel = new javax.swing.JPanel();
+        DashboardBgLabel = new javax.swing.JLabel();
         SearchFlightPanel = new javax.swing.JPanel();
         HeadingPanel = new javax.swing.JPanel();
         SearchFlightLabel = new javax.swing.JLabel();
@@ -293,18 +325,18 @@ public class UserPortal extends javax.swing.JFrame{
         DateLabel = new javax.swing.JLabel();
         FromTextField = new javax.swing.JTextField();
         ToTextField = new javax.swing.JTextField();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
-        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
-        jDayChooser1 = new javax.swing.JTextField();
         SearchFlightButton = new javax.swing.JButton();
         jScrollBar1 = new javax.swing.JScrollBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         ShowAllButton = new javax.swing.JButton();
+        TravelDateChooser = new com.toedter.calendar.JYearChooser();
+        TravelMonthChooser = new com.toedter.calendar.JMonthChooser();
+        TravelDayChooser = new com.toedter.components.JSpinField();
         BookFlightPanel = new javax.swing.JPanel();
         BookFlightHeadingPanel = new javax.swing.JPanel();
         BookFlightLabel = new javax.swing.JLabel();
-        FlightIdLabel = new javax.swing.JLabel();
+        FlightCodeLabel = new javax.swing.JLabel();
         FullNameLabel = new javax.swing.JLabel();
         EmailLabel = new javax.swing.JLabel();
         SeatClassLabel = new javax.swing.JLabel();
@@ -313,25 +345,21 @@ public class UserPortal extends javax.swing.JFrame{
         PaymentLabel = new javax.swing.JLabel();
         BookNowButton = new javax.swing.JButton();
         ClearButton = new javax.swing.JButton();
-        FlightIdTextField = new javax.swing.JTextField();
+        FlightCodeTextField = new javax.swing.JTextField();
         FullNameTextField = new javax.swing.JTextField();
         PriceTextField = new javax.swing.JTextField();
         SeatComboBox = new javax.swing.JComboBox<>();
-        jSpinField1 = new com.toedter.components.JSpinField();
-        jYearChooser2 = new com.toedter.calendar.JYearChooser();
-        jMonthChooser2 = new com.toedter.calendar.JMonthChooser();
-        jSpinField2 = new com.toedter.components.JSpinField();
         PaymentComboBox = new javax.swing.JComboBox<>();
         TicketsLAbel = new javax.swing.JLabel();
         EmailTextField = new javax.swing.JTextField();
         FlightNameLabel = new javax.swing.JLabel();
         FlightNameTextField = new javax.swing.JTextField();
+        SeatNumberLabel = new javax.swing.JLabel();
+        TicektMonthFiled = new com.toedter.calendar.JMonthChooser();
         TicketSpinField = new com.toedter.components.JSpinField();
         TravelYearChooser = new com.toedter.calendar.JYearChooser();
-        TravelMonthChooser = new com.toedter.calendar.JMonthChooser();
         TravelDaySpinnerField = new com.toedter.components.JSpinField();
-        SeatNumberTextField = new javax.swing.JTextField();
-        SeatNumberLabel = new javax.swing.JLabel();
+        SeatNoComboBox = new javax.swing.JComboBox<>();
         ManageBookingPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         LogOutPanel = new javax.swing.JPanel();
@@ -412,20 +440,20 @@ public class UserPortal extends javax.swing.JFrame{
         });
         ButtonPanel.add(BookFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 315, 230, 40));
 
-        CheckInButton.setBackground(new java.awt.Color(46, 62, 79));
-        CheckInButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
-        CheckInButton.setForeground(new java.awt.Color(255, 255, 255));
-        CheckInButton.setText("Cancel Flight");
-        CheckInButton.setBorderPainted(false);
-        CheckInButton.setContentAreaFilled(false);
-        CheckInButton.setFocusPainted(false);
-        CheckInButton.setVerifyInputWhenFocusTarget(false);
-        CheckInButton.addActionListener(new java.awt.event.ActionListener() {
+        eDITButton.setBackground(new java.awt.Color(46, 62, 79));
+        eDITButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        eDITButton.setForeground(new java.awt.Color(255, 255, 255));
+        eDITButton.setText("Edit Flight");
+        eDITButton.setBorderPainted(false);
+        eDITButton.setContentAreaFilled(false);
+        eDITButton.setFocusPainted(false);
+        eDITButton.setVerifyInputWhenFocusTarget(false);
+        eDITButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CheckInButtonActionPerformed(evt);
+                eDITButtonActionPerformed(evt);
             }
         });
-        ButtonPanel.add(CheckInButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 230, 40));
+        ButtonPanel.add(eDITButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 230, 40));
 
         LogOutButton.setBackground(new java.awt.Color(46, 62, 79));
         LogOutButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -448,6 +476,10 @@ public class UserPortal extends javax.swing.JFrame{
         getContentPane().add(ButtonPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 230, 640));
 
         DashboardPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        DashboardBgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Dashboard_bg.png"))); // NOI18N
+        DashboardPanel.add(DashboardBgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 640));
+
         jTabbedPane1.addTab("tab1", DashboardPanel);
 
         SearchFlightPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -491,16 +523,6 @@ public class UserPortal extends javax.swing.JFrame{
             }
         });
         SearchFlightPanel.add(ToTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 190, 30));
-        SearchFlightPanel.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 120, 30));
-        SearchFlightPanel.add(jMonthChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 120, 30));
-
-        jDayChooser1.setText("Day");
-        jDayChooser1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jDayChooser1ActionPerformed(evt);
-            }
-        });
-        SearchFlightPanel.add(jDayChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 50, 30));
 
         SearchFlightButton.setBackground(new java.awt.Color(0, 102, 153));
         SearchFlightButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -525,11 +547,11 @@ public class UserPortal extends javax.swing.JFrame{
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Flight id", "Flight name", "Time", "Price", "Duration ", "Date", "Action"
+                "Flight code", "Flight name", "Time", "Price", "Duration ", "Date", "Action"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -550,6 +572,9 @@ public class UserPortal extends javax.swing.JFrame{
             }
         });
         SearchFlightPanel.add(ShowAllButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 190, 40));
+        SearchFlightPanel.add(TravelDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 190, 30));
+        SearchFlightPanel.add(TravelMonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 190, 30));
+        SearchFlightPanel.add(TravelDayChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 70, 30));
 
         jTabbedPane1.addTab("tab2", SearchFlightPanel);
 
@@ -566,9 +591,9 @@ public class UserPortal extends javax.swing.JFrame{
 
         BookFlightPanel.add(BookFlightHeadingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 50));
 
-        FlightIdLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
-        FlightIdLabel.setText("Flight ID");
-        BookFlightPanel.add(FlightIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        FlightCodeLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        FlightCodeLabel.setText("Flight Code");
+        BookFlightPanel.add(FlightCodeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         FullNameLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         FullNameLabel.setText("Full Name");
@@ -603,7 +628,7 @@ public class UserPortal extends javax.swing.JFrame{
                 BookNowButtonActionPerformed(evt);
             }
         });
-        BookFlightPanel.add(BookNowButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 600, 140, 30));
+        BookFlightPanel.add(BookNowButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 600, 190, 30));
 
         ClearButton.setBackground(new java.awt.Color(0, 102, 153));
         ClearButton.setFont(new java.awt.Font("Segoe UI Emoji", 0, 16)); // NOI18N
@@ -614,22 +639,22 @@ public class UserPortal extends javax.swing.JFrame{
                 ClearButtonActionPerformed(evt);
             }
         });
-        BookFlightPanel.add(ClearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 600, 130, 30));
+        BookFlightPanel.add(ClearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 600, 180, 30));
 
-        FlightIdTextField.addActionListener(new java.awt.event.ActionListener() {
+        FlightCodeTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FlightIdTextFieldActionPerformed(evt);
+                FlightCodeTextFieldActionPerformed(evt);
             }
         });
-        BookFlightPanel.add(FlightIdTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 280, 30));
+        BookFlightPanel.add(FlightCodeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 380, 30));
 
         FullNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FullNameTextFieldActionPerformed(evt);
             }
         });
-        BookFlightPanel.add(FullNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 280, 30));
-        BookFlightPanel.add(PriceTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 280, 30));
+        BookFlightPanel.add(FullNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 380, 30));
+        BookFlightPanel.add(PriceTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 380, 30));
 
         SeatComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Economy", "First Class", "Business" }));
         SeatComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -637,15 +662,7 @@ public class UserPortal extends javax.swing.JFrame{
                 SeatComboBoxActionPerformed(evt);
             }
         });
-arbaz
-        BookFlightPanel.add(SeatComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 280, 30));
-        BookFlightPanel.add(jSpinField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 110, 30));
-        BookFlightPanel.add(jYearChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 80, 30));
-        BookFlightPanel.add(jMonthChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 490, 140, 30));
-        BookFlightPanel.add(jSpinField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, 70, 30));
-
-        BookFlightPanel.add(SeatComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 100, 30));
- main
+        BookFlightPanel.add(SeatComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 140, 30));
 
         PaymentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Card", "Cash" }));
         PaymentComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -653,12 +670,12 @@ arbaz
                 PaymentComboBoxActionPerformed(evt);
             }
         });
-        BookFlightPanel.add(PaymentComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 280, 30));
+        BookFlightPanel.add(PaymentComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 380, 30));
 
         TicketsLAbel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         TicketsLAbel.setText("Tickets");
         BookFlightPanel.add(TicketsLAbel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
-        BookFlightPanel.add(EmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 280, 30));
+        BookFlightPanel.add(EmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 380, 30));
 
         FlightNameLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         FlightNameLabel.setText("Flight Name");
@@ -669,22 +686,22 @@ arbaz
                 FlightNameTextFieldActionPerformed(evt);
             }
         });
-        BookFlightPanel.add(FlightNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 280, 30));
-        BookFlightPanel.add(TicketSpinField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 432, 130, 30));
-        BookFlightPanel.add(TravelYearChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 80, 30));
-        BookFlightPanel.add(TravelMonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 490, 140, 30));
-        BookFlightPanel.add(TravelDaySpinnerField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 492, 70, 30));
-
-        SeatNumberTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SeatNumberTextFieldActionPerformed(evt);
-            }
-        });
-        BookFlightPanel.add(SeatNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, 70, 30));
+        BookFlightPanel.add(FlightNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 380, 30));
 
         SeatNumberLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         SeatNumberLabel.setText("Seat No");
-        BookFlightPanel.add(SeatNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
+        BookFlightPanel.add(SeatNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, -1, -1));
+        BookFlightPanel.add(TicektMonthFiled, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 490, 160, 30));
+        BookFlightPanel.add(TicketSpinField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 380, 30));
+        BookFlightPanel.add(TravelYearChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 170, 30));
+        BookFlightPanel.add(TravelDaySpinnerField, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 490, 80, 30));
+
+        SeatNoComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeatNoComboBoxActionPerformed(evt);
+            }
+        });
+        BookFlightPanel.add(SeatNoComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 150, 30));
 
         jTabbedPane1.addTab("tab3", BookFlightPanel);
 
@@ -714,10 +731,10 @@ arbaz
         jTabbedPane1.setSelectedIndex(2); //Book Flights tab
     }//GEN-LAST:event_BookFlightButtonActionPerformed
 
-    private void CheckInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckInButtonActionPerformed
+    private void eDITButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eDITButtonActionPerformed
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(3); //Check in
-    }//GEN-LAST:event_CheckInButtonActionPerformed
+    }//GEN-LAST:event_eDITButtonActionPerformed
 
     private void LogOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutButtonActionPerformed
         // TODO add your handling code here:
@@ -746,7 +763,7 @@ arbaz
         model.setRowCount(0);  // Clear existing rows
         for (SearchFlight f : flights) {
             model.addRow(new Object[]{
-            f.getFlightId(),
+            f.getFlightCode(),
             f.getFlightName(),
             f.getTime(),
             f.getPrice(),
@@ -772,73 +789,74 @@ arbaz
         // TODO add your handling code here:
     }//GEN-LAST:event_PaymentComboBoxActionPerformed
 
-    private void FlightIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FlightIdTextFieldActionPerformed
+    private void FlightCodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FlightCodeTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_FlightIdTextFieldActionPerformed
+    }//GEN-LAST:event_FlightCodeTextFieldActionPerformed
 
     private void FullNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FullNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FullNameTextFieldActionPerformed
 
     private void SeatComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeatComboBoxActionPerformed
-        String seatClass = (String) SeatComboBox.getSelectedItem();
-        String flightIdText = FlightIdTextField.getText();
+        String selectedSeatClass = (String) SeatComboBox.getSelectedItem();
+        String flightCode = FlightCodeTextField.getText();
+        
+        if (!flightCode.isEmpty()) {
+        SeatClassDao dao = new SeatClassDao();
+        int flightId = dao.getFlightIdByCode(flightCode);
 
-        if (!flightIdText.isEmpty()) {
-            try {
-                int flightId = Integer.parseInt(flightIdText);
-                SeatClassDao dao = new SeatClassDao();
-                int price = dao.getPriceByFlightAndClass(flightId, seatClass);
-
-                if (price != -1) {
-                    PriceTextField.setText(String.valueOf(price));
-                } else {
-                    PriceTextField.setText("N/A");
-                }
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Invalid flight ID format.");
+        // Populate available seat numbers
+        List<String> seatNumbers = dao.getAvailableSeats(flightId, selectedSeatClass);
+        SeatNoComboBox.removeAllItems(); // clear existing items
+        
+        if (seatNumbers.isEmpty()) {
+            SeatNoComboBox.addItem("No seats available");
+        } else {
+            for (String seat : seatNumbers) {
+                SeatNoComboBox.addItem(seat);
             }
         }
+            updateSeatClassPrice();
+        } else {
+            // If flight code is empty, just update price to blank
+            PriceTextField.setText("");
+        }
+
     }//GEN-LAST:event_SeatComboBoxActionPerformed
 
     private void FlightNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FlightNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FlightNameTextFieldActionPerformed
 
-arbaz
 
-    private void jDayChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDayChooser1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jDayChooser1ActionPerformed
 
     private void ClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButtonActionPerformed
-        // Clear all text fields
-    FlightIdTextField.setText("");
-    FlightNameTextField.setText("");
-    FullNameTextField.setText("");
-    EmailTextField.setText("");
-    PriceTextField.setText("");
+        FlightCodeTextField.setText("");
+        FlightNameTextField.setText("");
+        FullNameTextField.setText("");
+        EmailTextField.setText("");
+        PriceTextField.setText("");
 
-    // Reset combo boxes
-    SeatComboBox.setSelectedIndex(0);
-    PaymentComboBox.setSelectedIndex(0);
+        restoreEditableField(FlightCodeTextField);
+        restoreEditableField(FlightNameTextField);
+        restoreEditableField(FullNameTextField);
+        restoreEditableField(EmailTextField);
 
-    // Reset spin fields
-    TicketSpinField.setValue(1);
-    TravelDaySpinnerField.setValue(1);
-    TravelMonthChooser.setMonth(0); // January
-    TravelYearChooser.setYear(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR));
+        SeatComboBox.setSelectedIndex(0);
+        PaymentComboBox.setSelectedIndex(0);
+        TicketSpinField.setValue(1);
+        TravelDaySpinnerField.setValue(1);
+
+        unlockTravelDateFields();
     }//GEN-LAST:event_ClearButtonActionPerformed
 
-    private void SeatNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeatNumberTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SeatNumberTextFieldActionPerformed
-
     private void BookNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookNowButtonActionPerformed
+        System.out.println("BookNow button clicked");
         try {
-            int flightId = Integer.parseInt(FlightIdTextField.getText());
+            int userId = loggedInUser.getUserId();
+            String flightCode = FlightCodeTextField.getText();
             String seatClass = SeatComboBox.getSelectedItem().toString();
-            String seatNo = SeatNumberTextField.getText(); 
+            String seatNo = SeatNoComboBox.getSelectedItem().toString();
             String fullName = FullNameTextField.getText();
             String email = EmailTextField.getText();
             int tickets = TicketSpinField.getValue();
@@ -854,21 +872,42 @@ arbaz
 
             // Get seat_id using SeatClassDao
             SeatClassDao seatDao = new SeatClassDao();
+            int flightId = seatDao.getFlightIdByCode(flightCode);
             int seatId = seatDao.getSeatIdByFlightAndClass(flightId, seatClass);
+
 
             if (seatId == -1) {
                 JOptionPane.showMessageDialog(this, "Invalid seat class or flight ID.");
                 return;
             }
+            // 🔽 ADD THIS BLOCK HERE
+            if (paymentMethod.equals("Card")) {
+                String cardNumber = JOptionPane.showInputDialog(this, "Enter Card Number:");
+                String cvv = JOptionPane.showInputDialog(this, "Enter CVV:");
 
+                if (cardNumber == null || cardNumber.trim().isEmpty() ||
+                    cvv == null || cvv.trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Payment failed: Card details required.");
+                    return;
+                }
+
+                // Optional: You can also check if card number and CVV are numeric
+                if (!cardNumber.matches("\\d{12,16}") || !cvv.matches("\\d{3,4}")) {
+                    JOptionPane.showMessageDialog(this, "Invalid card details format.");
+                    return;
+                }
+            }
             // Create BookingFlight model object
             BookingFlight booking = new BookingFlight(
-                flightId, seatId, fullName, email, seatClass, seatNo, tickets, travelDate, paymentMethod
+                userId, flightId, seatId, fullName, email, seatClass, seatNo, tickets, travelDate, paymentMethod
             );
 
             // Save booking
             BookingFlightDao dao = new BookingFlightDao();
             if (dao.saveBooking(booking)) {
+                // Mark the seat as booked in database
+                seatDao.markSeatAsBooked(flightId, seatClass, seatNo); 
+                
                 JOptionPane.showMessageDialog(this, "Flight booked successfully!");
                 ClearButtonActionPerformed(null); // clear the form
             } else {
@@ -880,8 +919,53 @@ arbaz
             ex.printStackTrace();
         }
     }//GEN-LAST:event_BookNowButtonActionPerformed
+    private void updateSeatClassPrice() {
+        try {
+            String flightCode = FlightCodeTextField.getText().trim();
+            String selectedClass = (String) SeatComboBox.getSelectedItem();
 
-main
+            if (!flightCode.isEmpty() && selectedClass != null && !selectedClass.isEmpty()) {
+                SeatClassDao dao = new SeatClassDao();
+                int flightId = dao.getFlightIdByCode(flightCode);
+
+                int price = dao.getPriceByFlightAndClass(flightId, selectedClass);
+
+                if (price != -1) {
+                    PriceTextField.setText(String.valueOf(price));
+                } else {
+                    PriceTextField.setText("N/A");
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            PriceTextField.setText("Error");
+        }
+    }
+
+
+    
+    private void SeatNoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeatNoComboBoxActionPerformed
+    String selectedSeatClass = (String) SeatComboBox.getSelectedItem();
+    String flightCode = FlightCodeTextField.getText();
+
+    if (!flightCode.isEmpty()) {
+        SeatClassDao dao = new SeatClassDao();
+        int flightId = dao.getFlightIdByCode(flightCode);  // make sure this works
+
+        List<String> availableSeats = dao.getAvailableSeats(flightId, selectedSeatClass);
+        SeatNoComboBox.removeAllItems();
+
+        if (availableSeats.isEmpty()) {
+            SeatNoComboBox.addItem("No seats available");
+        } else {
+            for (String seat : availableSeats) {
+                SeatNoComboBox.addItem(seat);
+            }
+        }
+    }
+    }//GEN-LAST:event_SeatNoComboBoxActionPerformed
+    
+
     class ButtonEditor extends javax.swing.DefaultCellEditor {
     private javax.swing.JButton button;
     private String label;
@@ -918,73 +1002,62 @@ main
 
             Object flightId = table.getValueAt(row, 0);
             Object flightName = table.getValueAt(row, 1);
-            Object dateValue = table.getValueAt(row, 5); // column index 5 = Date
+            Object dateValue = table.getValueAt(row, 5);
 
-            userPortal.FlightIdTextField.setText(flightId.toString());
+            userPortal.FlightCodeTextField.setText(flightId.toString());
             userPortal.FlightNameTextField.setText(flightName.toString());
             userPortal.SeatComboBox.setSelectedItem("Economy");
-
-            // Fetch economy class price
-            int economyPrice = new SeatClassDao().getPriceByFlightAndClass(Integer.parseInt(flightId.toString()), "Economy");
+            
+            String flightCode = flightId.toString();
+            SeatClassDao seatDao = new SeatClassDao();
+            int flightIdInt = seatDao.getFlightIdByCode(flightCode);
+            
+            // Now flightIdInt is defined, so this works:
+            List<String> seatNumbers = seatDao.getAvailableSeats(flightIdInt, "Economy");
+            userPortal.SeatNoComboBox.removeAllItems();
+            for (String seat : seatNumbers) {
+                userPortal.SeatNoComboBox.addItem(seat);
+            }
+            
+            userPortal.SeatComboBox.setSelectedItem("Economy");
+            int economyPrice = seatDao.getPriceByFlightAndClass(flightIdInt, "Economy");
             userPortal.PriceTextField.setText(String.valueOf(economyPrice));
 
-            // Auto-fill FullName and Email from logged-in user
+            // Autofill user data
             userPortal.FullNameTextField.setText(userPortal.loggedInUser.getFullName());
             userPortal.EmailTextField.setText(userPortal.loggedInUser.getEmail());
-arbaz
-            userPortal.jYearChooser2.setYear(userPortal.jYearChooser1.getYear());
-            userPortal.jMonthChooser2.setMonth(userPortal.jMonthChooser1.getMonth());
-            String dayText = userPortal.jDayChooser1.getText().trim();
-            if (dayText.equals("Day") || !dayText.matches("\\d{1,2}")) {
-                JOptionPane.showMessageDialog(userPortal, "Please select a valid day before booking.");
-                return label;
-            }
-            userPortal.jSpinField2.setValue(Integer.parseInt(dayText));
 
+            // Lock fields visually (clean gray with border)
+            makeFieldReadOnly(userPortal.FlightCodeTextField);
+            makeFieldReadOnly(userPortal.FlightNameTextField);
+            makeFieldReadOnly(userPortal.FullNameTextField);
+            makeFieldReadOnly(userPortal.EmailTextField);
 
+            // Lock travel date but keep visible
+            userPortal.lockTravelDateFields();
 
-            // Fix: Handle various date formats robustly
+            // Set travel date from table column
             if (dateValue != null) {
                 try {
-                    java.sql.Date sqlDate;
-
-                    // Case 1: If dateValue is already a Date object
-                    if (dateValue instanceof java.sql.Date) {
-                        sqlDate = (java.sql.Date) dateValue;
-
-                    // Case 2: If it's a string in "yyyy-MM-dd" format
-                    } else if (dateValue instanceof String) {
-                        String rawDate = ((String) dateValue).trim();
-                    if (rawDate.contains(" ")) {
-                        rawDate = rawDate.split(" ")[0]; // Take only the "yyyy-MM-dd" part
-                    }
-                    sqlDate = java.sql.Date.valueOf(rawDate);
-
-                    // Case 3: Try parsing a java.util.Date
-                    } else if (dateValue instanceof java.util.Date) {
-                        sqlDate = new java.sql.Date(((java.util.Date) dateValue).getTime());
-
-                    } else {
-                        throw new IllegalArgumentException("Unsupported date format: " + dateValue);
-                    }
-                    // Now extract year/month/day
+                    String formattedDate = dateValue.toString().trim().substring(0, 10);
+                    java.sql.Date sqlDate = java.sql.Date.valueOf(formattedDate);
                     java.util.Calendar cal = java.util.Calendar.getInstance();
                     cal.setTime(sqlDate);
                     userPortal.TravelYearChooser.setYear(cal.get(java.util.Calendar.YEAR));
                     userPortal.TravelMonthChooser.setMonth(cal.get(java.util.Calendar.MONTH));
                     userPortal.TravelDaySpinnerField.setValue(cal.get(java.util.Calendar.DAY_OF_MONTH));
-
                 } catch (IllegalArgumentException e) {
-                    JOptionPane.showMessageDialog(null, "Invalid date format in table: " + dateValue.toString());
+                    JOptionPane.showMessageDialog(null, "Invalid date format: " + dateValue.toString());
                     e.printStackTrace();
                 }
             }
-main
+
             userPortal.jTabbedPane1.setSelectedIndex(2); // Go to Book Flight tab
         }
         isPushed = false;
         return label;
     }
+
 
 
     @Override
@@ -998,8 +1071,67 @@ main
         super.fireEditingStopped();
     }
 }
-
+    //Processt to make text inside non-changeable fields gray and preventing its border from changing its color.
+    private void disableField(javax.swing.JTextField field) {
+        field.setEditable(false);
+        field.setBackground(new java.awt.Color(238, 238, 238)); // Light gray
+        field.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    }
     
+    // Lock Travel Date fields (look normal but are uneditable)
+    private void lockTravelDateFields() {
+        TravelDaySpinnerField.getSpinner().setEnabled(false);
+        TravelDaySpinnerField.getSpinner().setBackground(java.awt.Color.WHITE);
+
+        // Lock Month
+        TravelMonthChooser.getComboBox().setEnabled(false);
+        TravelMonthChooser.getComboBox().setBackground(java.awt.Color.WHITE);
+
+        // Lock Year (safely cast)
+        java.awt.Component yearComponent = TravelYearChooser.getSpinner();
+        if (yearComponent instanceof javax.swing.JSpinner) {
+            javax.swing.JSpinner spinner = (javax.swing.JSpinner) yearComponent;
+            spinner.setEnabled(false);
+            JComponent editor = spinner.getEditor();
+            if (editor instanceof javax.swing.JSpinner.DefaultEditor) {
+                javax.swing.JSpinner.DefaultEditor defaultEditor = (javax.swing.JSpinner.DefaultEditor) editor;
+                defaultEditor.getTextField().setBackground(java.awt.Color.WHITE);
+            }
+        }   
+    }
+    
+    private void unlockTravelDateFields() {
+        TravelDaySpinnerField.getSpinner().setEnabled(true);
+        TravelDaySpinnerField.getSpinner().setBackground(java.awt.Color.WHITE);
+
+        TravelMonthChooser.getComboBox().setEnabled(true);
+        TravelMonthChooser.getComboBox().setBackground(java.awt.Color.WHITE);
+
+        java.awt.Component yearComponent = TravelYearChooser.getSpinner();
+        if (yearComponent instanceof javax.swing.JSpinner) {
+            javax.swing.JSpinner spinner = (javax.swing.JSpinner) yearComponent;
+            spinner.setEnabled(true);
+            JComponent editor = spinner.getEditor();
+            if (editor instanceof javax.swing.JSpinner.DefaultEditor) {
+                javax.swing.JSpinner.DefaultEditor defaultEditor = (javax.swing.JSpinner.DefaultEditor) editor;
+                defaultEditor.getTextField().setBackground(java.awt.Color.WHITE);
+            }
+        }
+    }
+    //Making fields unchangeable, swing remove border and in order to prevent it:
+    private void makeFieldReadOnly(javax.swing.JTextField field) {
+        field.setEditable(false);
+        field.setBackground(new java.awt.Color(245, 245, 245)); // very light gray
+        field.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 200, 200)));
+    }
+    
+    //Restore default styling in ClearButtonActionPerformed():
+    private void restoreEditableField(javax.swing.JTextField field) {
+        field.setEditable(true);
+        field.setBackground(java.awt.Color.WHITE);
+        field.setBorder(javax.swing.UIManager.getBorder("TextField.border"));
+    }
+   
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             UserData dummy = new UserData(1, "User", "user@wingsnepal.com", "user123", "User");
@@ -1017,8 +1149,8 @@ main
     private javax.swing.JButton BookNowButton;
     private javax.swing.JPanel ButtonPanel;
     private javax.swing.JLabel CancelFlightIcon;
-    private javax.swing.JButton CheckInButton;
     private javax.swing.JButton ClearButton;
+    private javax.swing.JLabel DashboardBgLabel;
     private javax.swing.JButton DashboardButton;
     private javax.swing.JLabel DashboardIcon;
     private javax.swing.JPanel DashboardPanel;
@@ -1026,8 +1158,8 @@ main
     private javax.swing.JLabel EmailLabel;
     private javax.swing.JTextField EmailTextField;
     private javax.swing.JButton FlightButton;
-    private javax.swing.JLabel FlightIdLabel;
-    private javax.swing.JTextField FlightIdTextField;
+    private javax.swing.JLabel FlightCodeLabel;
+    private javax.swing.JTextField FlightCodeTextField;
     private javax.swing.JLabel FlightNameLabel;
     private javax.swing.JTextField FlightNameTextField;
     private javax.swing.JLabel FromLabel;
@@ -1049,28 +1181,29 @@ main
     private javax.swing.JPanel SearchFlightPanel;
     private javax.swing.JLabel SeatClassLabel;
     private javax.swing.JComboBox<String> SeatComboBox;
+    private javax.swing.JComboBox<String> SeatNoComboBox;
     private javax.swing.JLabel SeatNumberLabel;
-    private javax.swing.JTextField SeatNumberTextField;
     private javax.swing.JButton ShowAllButton;
+    private com.toedter.calendar.JMonthChooser TicektMonthFiled;
+    private com.toedter.components.JSpinField TicketSpinField;
     private javax.swing.JLabel TicketsDateLabel;
     private javax.swing.JLabel TicketsLAbel;
     private javax.swing.JLabel ToLabel;
     private javax.swing.JTextField ToTextField;
+    private com.toedter.calendar.JYearChooser TravelDateChooser;
+    private com.toedter.components.JSpinField TravelDayChooser;
+    private com.toedter.components.JSpinField TravelDaySpinnerField;
+    private com.toedter.calendar.JMonthChooser TravelMonthChooser;
+    private com.toedter.calendar.JYearChooser TravelYearChooser;
     private javax.swing.JLabel WingsNepalLogo;
-    private javax.swing.JTextField jDayChooser1;
+    private javax.swing.JButton eDITButton;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
-    private com.toedter.calendar.JMonthChooser jMonthChooser1;
-    private com.toedter.calendar.JMonthChooser jMonthChooser2;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private com.toedter.components.JSpinField jSpinField1;
-    private com.toedter.components.JSpinField jSpinField2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
-    private com.toedter.calendar.JYearChooser jYearChooser2;
     // End of variables declaration//GEN-END:variables
 
 }
