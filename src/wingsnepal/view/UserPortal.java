@@ -4,6 +4,7 @@
  */
 package wingsnepal.view;
 
+import java.awt.Desktop;
 import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -16,10 +17,15 @@ import wingsnepal.model.UserData;
 import wingsnepal.model.SearchFlight;
 import wingsnepal.dao.SeatClassDao;
 import java.awt.Font;
+import java.awt.GridLayout;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import wingsnepal.dao.BookingFlightDao;
 import wingsnepal.model.BookingFlight;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import wingsnepal.model.StripePayment;
 
 
 
@@ -46,7 +52,7 @@ public class UserPortal extends javax.swing.JFrame{
         styleFlatHoverButton(DashboardButton);
         styleFlatHoverButton(FlightButton);
         styleFlatHoverButton(BookFlightButton);
-        styleFlatHoverButton(eDITButton);
+        styleFlatHoverButton(EditButton);
         styleFlatHoverButton(LogOutButton);
         
             
@@ -57,10 +63,14 @@ public class UserPortal extends javax.swing.JFrame{
         ShowAllButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ShowAllButtonActionPerformed(evt);
-                
-
             }
         });
+        
+        PaymentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {
+            "Cash", "Stripe", "eSewa", "Khalti"
+        }));
+
+        
         setResizable(false);         //Disable maximize button
         setLocationRelativeTo(null); //Center window
         
@@ -297,7 +307,7 @@ public class UserPortal extends javax.swing.JFrame{
         DashboardButton = new javax.swing.JButton();
         FlightButton = new javax.swing.JButton();
         BookFlightButton = new javax.swing.JButton();
-        eDITButton = new javax.swing.JButton();
+        EditButton = new javax.swing.JButton();
         LogOutButton = new javax.swing.JButton();
         WingsNepalLogo = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -347,7 +357,9 @@ public class UserPortal extends javax.swing.JFrame{
         TravelDaySpinnerField = new com.toedter.components.JSpinField();
         SeatNoComboBox = new javax.swing.JComboBox<>();
         ManageBookingPanel = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        jScrollBar2 = new javax.swing.JScrollBar();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         LogOutPanel = new javax.swing.JPanel();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
@@ -426,20 +438,20 @@ public class UserPortal extends javax.swing.JFrame{
         });
         ButtonPanel.add(BookFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 315, 230, 40));
 
-        eDITButton.setBackground(new java.awt.Color(46, 62, 79));
-        eDITButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
-        eDITButton.setForeground(new java.awt.Color(255, 255, 255));
-        eDITButton.setText("Edit Flight");
-        eDITButton.setBorderPainted(false);
-        eDITButton.setContentAreaFilled(false);
-        eDITButton.setFocusPainted(false);
-        eDITButton.setVerifyInputWhenFocusTarget(false);
-        eDITButton.addActionListener(new java.awt.event.ActionListener() {
+        EditButton.setBackground(new java.awt.Color(46, 62, 79));
+        EditButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        EditButton.setForeground(new java.awt.Color(255, 255, 255));
+        EditButton.setText("Edit Flight");
+        EditButton.setBorderPainted(false);
+        EditButton.setContentAreaFilled(false);
+        EditButton.setFocusPainted(false);
+        EditButton.setVerifyInputWhenFocusTarget(false);
+        EditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eDITButtonActionPerformed(evt);
+                EditButtonActionPerformed(evt);
             }
         });
-        ButtonPanel.add(eDITButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 230, 40));
+        ButtonPanel.add(EditButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 230, 40));
 
         LogOutButton.setBackground(new java.awt.Color(46, 62, 79));
         LogOutButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -650,7 +662,7 @@ public class UserPortal extends javax.swing.JFrame{
         });
         BookFlightPanel.add(SeatComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 140, 30));
 
-        PaymentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Card", "Cash" }));
+        PaymentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Esewa", "Khalti", " " }));
         PaymentComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PaymentComboBoxActionPerformed(evt);
@@ -691,7 +703,26 @@ public class UserPortal extends javax.swing.JFrame{
 
         jTabbedPane1.addTab("tab3", BookFlightPanel);
 
-        ManageBookingPanel.add(jLabel4);
+        ManageBookingPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        ManageBookingPanel.add(jScrollBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 0, -1, 640));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Booking Flight", "Flight Name", "SeaT No", "Seart Class", "Tickets", "Date", "Action"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable2);
+
+        ManageBookingPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 640));
 
         jTabbedPane1.addTab("tab4", ManageBookingPanel);
         jTabbedPane1.addTab("tab5", LogOutPanel);
@@ -717,10 +748,10 @@ public class UserPortal extends javax.swing.JFrame{
         jTabbedPane1.setSelectedIndex(2); //Book Flights tab
     }//GEN-LAST:event_BookFlightButtonActionPerformed
 
-    private void eDITButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eDITButtonActionPerformed
+    private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(3); //Check in
-    }//GEN-LAST:event_eDITButtonActionPerformed
+    }//GEN-LAST:event_EditButtonActionPerformed
 
     private void LogOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutButtonActionPerformed
         // TODO add your handling code here:
@@ -795,6 +826,7 @@ public class UserPortal extends javax.swing.JFrame{
         if (seatNumbers.isEmpty()) {
             SeatNoComboBox.addItem("No seats available");
         } else {
+            SeatNoComboBox.removeAllItems();
             for (String seat : seatNumbers) {
                 SeatNoComboBox.addItem(seat);
             }
@@ -835,6 +867,7 @@ public class UserPortal extends javax.swing.JFrame{
 
     private void BookNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookNowButtonActionPerformed
         System.out.println("BookNow button clicked");
+
         try {
             int userId = loggedInUser.getUserId();
             String flightCode = FlightCodeTextField.getText();
@@ -850,7 +883,7 @@ public class UserPortal extends javax.swing.JFrame{
 
             // Parse travel date
             java.sql.Date travelDate = java.sql.Date.valueOf(
-            String.format("%04d-%02d-%02d", year, month, day)
+                String.format("%04d-%02d-%02d", year, month, day)
             );
 
             // Get seat_id using SeatClassDao
@@ -858,41 +891,47 @@ public class UserPortal extends javax.swing.JFrame{
             int flightId = seatDao.getFlightIdByCode(flightCode);
             int seatId = seatDao.getSeatIdByFlightAndClass(flightId, seatClass);
 
-
             if (seatId == -1) {
                 JOptionPane.showMessageDialog(this, "Invalid seat class or flight ID.");
                 return;
             }
-            // 🔽 ADD THIS BLOCK HERE
-            if (paymentMethod.equals("Card")) {
-                String cardNumber = JOptionPane.showInputDialog(this, "Enter Card Number:");
-                String cvv = JOptionPane.showInputDialog(this, "Enter CVV:");
 
-                if (cardNumber == null || cardNumber.trim().isEmpty() ||
-                    cvv == null || cvv.trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Payment failed: Card details required.");
-                    return;
-                }
-
-                // Optional: You can also check if card number and CVV are numeric
-                if (!cardNumber.matches("\\d{12,16}") || !cvv.matches("\\d{3,4}")) {
-                    JOptionPane.showMessageDialog(this, "Invalid card details format.");
+            // 🔽 Handle Wallet Payments (eSewa / Khalti)
+            if (paymentMethod.equals("eSewa") || paymentMethod.equals("Khalti")) {
+                boolean paid = showWalletPaymentDialog(paymentMethod); // Simulate
+                if (!paid) {
+                    JOptionPane.showMessageDialog(this, "Payment failed or cancelled.");
                     return;
                 }
             }
-            // Create BookingFlight model object
+
+            // 🔽 Handle Stripe Payment
+            else if (paymentMethod.equals("Stripe")) {
+                StripePayment stripe = new StripePayment();
+                String sessionUrl = stripe.createCheckoutSession();
+                if (sessionUrl != null) {
+                    java.awt.Desktop.getDesktop().browse(new java.net.URI(sessionUrl));
+                    boolean success = stripe.checkPaymentStatus(sessionUrl);
+                    if (!success) {
+                        JOptionPane.showMessageDialog(this, "Stripe payment was not successful.");
+                        return;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Stripe session creation failed.");
+                    return;
+                }
+            }
+
+            // ✅ Continue with Booking Creation
             BookingFlight booking = new BookingFlight(
                 userId, flightId, seatId, fullName, email, seatClass, seatNo, tickets, travelDate, paymentMethod
             );
 
-            // Save booking
             BookingFlightDao dao = new BookingFlightDao();
             if (dao.saveBooking(booking)) {
-                // Mark the seat as booked in database
-                seatDao.markSeatAsBooked(flightId, seatClass, seatNo); 
-                
+                seatDao.markSeatAsBooked(flightId, seatClass, seatNo);
                 JOptionPane.showMessageDialog(this, "Flight booked successfully!");
-                ClearButtonActionPerformed(null); // clear the form
+                ClearButtonActionPerformed(null);
             } else {
                 JOptionPane.showMessageDialog(this, "Failed to book flight.");
             }
@@ -928,24 +967,23 @@ public class UserPortal extends javax.swing.JFrame{
 
     
     private void SeatNoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeatNoComboBoxActionPerformed
-    String selectedSeatClass = (String) SeatComboBox.getSelectedItem();
-    String flightCode = FlightCodeTextField.getText();
-
-    if (!flightCode.isEmpty()) {
-        SeatClassDao dao = new SeatClassDao();
-        int flightId = dao.getFlightIdByCode(flightCode);  // make sure this works
-
-        List<String> availableSeats = dao.getAvailableSeats(flightId, selectedSeatClass);
-        SeatNoComboBox.removeAllItems();
-
-        if (availableSeats.isEmpty()) {
-            SeatNoComboBox.addItem("No seats available");
-        } else {
-            for (String seat : availableSeats) {
-                SeatNoComboBox.addItem(seat);
-            }
-        }
-    }
+//        String selectedSeatClass = (String) SeatComboBox.getSelectedItem();
+//        String flightCode = FlightCodeTextField.getText();
+//
+//        if (!flightCode.isEmpty()) {
+//            SeatClassDao dao = new SeatClassDao();
+//            int flightId = dao.getFlightIdByCode(flightCode);  // make sure this works
+//
+//            List<String> availableSeats = dao.getAvailableSeats(flightId, selectedSeatClass);
+//            SeatNoComboBox.removeAllItems();
+//
+//            if (availableSeats.isEmpty()) {
+//                SeatNoComboBox.addItem("No seats available");
+//            } else {
+//                for (String seat : availableSeats) {
+//                }
+//            }
+//        }
     }//GEN-LAST:event_SeatNoComboBoxActionPerformed
     
 
@@ -1054,6 +1092,36 @@ public class UserPortal extends javax.swing.JFrame{
         super.fireEditingStopped();
     }
 }
+    
+    private boolean showWalletPaymentDialog(String walletName) {
+        JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10));
+        JTextField phoneField = new JTextField();
+        JTextField otpField = new JTextField();
+
+        panel.add(new JLabel(walletName + " Mobile Number:"));
+        panel.add(phoneField);
+        panel.add(new JLabel("OTP Code:"));
+        panel.add(otpField);
+
+        int result = JOptionPane.showConfirmDialog(
+            this, panel, "Pay with " + walletName,
+            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (result == JOptionPane.OK_OPTION) {
+            String phone = phoneField.getText().trim();
+            String otp = otpField.getText().trim();
+            if (!phone.matches("\\d{10}") || !otp.matches("\\d{4,6}")) {
+                JOptionPane.showMessageDialog(this, "Invalid phone or OTP");
+                return false;
+            }
+            return true; // Simulate success
+        }
+
+        return false; // Cancelled
+    }
+
+    
     //Processt to make text inside non-changeable fields gray and preventing its border from changing its color.
     private void disableField(javax.swing.JTextField field) {
         field.setEditable(false);
@@ -1138,6 +1206,7 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JLabel DashboardIcon;
     private javax.swing.JPanel DashboardPanel;
     private javax.swing.JLabel DateLabel;
+    private javax.swing.JButton EditButton;
     private javax.swing.JLabel EmailLabel;
     private javax.swing.JTextField EmailTextField;
     private javax.swing.JButton FlightButton;
@@ -1179,14 +1248,15 @@ public class UserPortal extends javax.swing.JFrame{
     private com.toedter.calendar.JMonthChooser TravelMonthChooser;
     private com.toedter.calendar.JYearChooser TravelYearChooser;
     private javax.swing.JLabel WingsNepalLogo;
-    private javax.swing.JButton eDITButton;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollBar jScrollBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 
 }
