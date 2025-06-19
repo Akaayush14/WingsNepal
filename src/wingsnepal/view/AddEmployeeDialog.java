@@ -36,7 +36,12 @@ public class AddEmployeeDialog extends JDialog {
         empIdField.setEditable(false);
         fullNameField = new JTextField();
         emailField = new JTextField();
-        roleBox = new JComboBox<>(new String[]{"Select Role", "Admin", "Staff", "Support"});
+        // Updated role combo box with new roles
+        roleBox = new JComboBox<>(new String[]{
+            "Select Role", 
+            "Pilot", "Flight Attendant", "IT Support", 
+            "AMEs", "Ground Operation Manager", "HR Manager"
+        });
         genderCombo = new JComboBox<>(new String[]{"Select Gender", "Male", "Female"});
         passwordField = new JPasswordField();
         confirmPasswordField = new JPasswordField();

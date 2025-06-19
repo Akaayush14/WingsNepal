@@ -5,7 +5,6 @@ import java.awt.*;
 import wingsnepal.dao.EmployeeDao;
 import wingsnepal.model.Employee;
 
-
 public class EditEmployeeDialog extends JDialog {
 
     private JTextField fullNameField, emailField;
@@ -38,9 +37,23 @@ public class EditEmployeeDialog extends JDialog {
 
         fullNameField = new JTextField();
         emailField = new JTextField();
-        roleCombo = new JComboBox<>(new String[]{"Admin", "Staff", "Support"});
+        roleCombo = new JComboBox<>(new String[]{"Pilot", "Flight Attendant", "IT Support", "AMEs", "Ground Operation Manager", "HR Manager"});
         genderCombo = new JComboBox<>(new String[]{"Male", "Female"});
         passwordField = new JPasswordField();
+
+        // Set preferred sizes for text fields, similar to AddEmployeeDialog
+        fullNameField.setPreferredSize(new Dimension(200, 28));
+        emailField.setPreferredSize(new Dimension(200, 28));
+        passwordField.setPreferredSize(new Dimension(200, 28));
+        roleCombo.setPreferredSize(new Dimension(200, 28));
+        genderCombo.setPreferredSize(new Dimension(200, 28));
+
+        // Set border for all fields, similar to AddEmployeeDialog
+        fullNameField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        emailField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        passwordField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        roleCombo.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        genderCombo.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
         addField(formPanel, gbc, "Full Name", fullNameField);
         addField(formPanel, gbc, "Email", emailField);
