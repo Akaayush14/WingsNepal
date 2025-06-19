@@ -8,6 +8,16 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import wingsnepal.model.UserData;
+import javax.swing.table.DefaultTableModel;
+import wingsnepal.dao.EmployeeDao;
+import wingsnepal.model.Employee;
+import java.util.List;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JCheckBox;
+
+
+
 
 public class AdminDashboard extends javax.swing.JFrame {
     private UserData loggedInUser;
@@ -17,16 +27,36 @@ public class AdminDashboard extends javax.swing.JFrame {
     public AdminDashboard(UserData user) {
         this.loggedInUser = user;
         initComponents();
-        //SCAGEIMAGE CALL
+        
+        // Set combo box options
+        EmployeeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(
+            new String[] { "Employee ID", "Full Name", "Email" }
+        ));
+        
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Emp_ID", "Full Name", "Email", "Emp_Role", "Gender", "Password"}, 0) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        employeeTable.setModel(model);
+        loadEmployeeTable();
+
+        //scaling image calling:
         scaleImage1();
         scaleImage2();
+        
         //calling setupplaceholder:
         setupPlaceholders();
         setupPlaceholders1();
         
+        setupEmployeeLiveSearch();
         
+
+
         setTitle("Admin Dashboard - Welcome" + user.getFullName());
         setLocationRelativeTo(null);
+        
         // Adding hovering effect to buttons to make it look modern.
         styleFlatHoverButton(DashboardButton);
         styleFlatHoverButton(FlightButton);
@@ -35,26 +65,65 @@ public class AdminDashboard extends javax.swing.JFrame {
         styleFlatHoverButton(EmployeeButton);
         styleFlatHoverButton(LogOutbutton);
         
+        btnAddEmployee.addActionListener(e -> {
+            AddEmployeeDialog dialog = new AddEmployeeDialog(this);
+            dialog.setVisible(true);
+            loadEmployeeTable();
+        });
+
+        btnAddReservation.addActionListener(e -> {
+            AddReservationDialog dialog = new AddReservationDialog(this);
+            dialog.setVisible(true);
+        });
+
     }
     
         private void scaleImage1(){
-        ImageIcon icon1 = new ImageIcon(getClass().getResource("/imagepicker/WingsNepalLogo.jpg"));
-        //scaling image to fit in the hlabel.
-        Image img1 = icon1.getImage();
-        Image imgScale1 = img1.getScaledInstance(WingsNepalLogo.getWidth(), WingsNepalLogo.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon1 = new ImageIcon(imgScale1);
-        WingsNepalLogo.setIcon(scaledIcon1);
+            ImageIcon icon1 = new ImageIcon(getClass().getResource("/imagepicker/WingsNepalLogo.jpg"));
+            //scaling image to fit in the hlabel.
+            Image img1 = icon1.getImage();
+            Image imgScale1 = img1.getScaledInstance(WingsNepalLogo.getWidth(), WingsNepalLogo.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon1 = new ImageIcon(imgScale1);
+            WingsNepalLogo.setIcon(scaledIcon1);
         }
         
         private void scaleImage2(){
-        ImageIcon icon2 = new ImageIcon(getClass().getResource("/imagepicker/Dashboard.png"));
-        //scaling image to fit in the hlabel.
-        Image img2 = icon2.getImage();
-        Image imgScale2 = img2.getScaledInstance(DashboardIcon.getWidth(), DashboardIcon.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon2 = new ImageIcon(imgScale2);
-        DashboardIcon.setIcon(scaledIcon2);
+            ImageIcon icon2 = new ImageIcon(getClass().getResource("/imagepicker/Dashboard.png"));
+            //scaling image to fit in the hlabel.
+            Image img2 = icon2.getImage();
+            Image imgScale2 = img2.getScaledInstance(DashboardIcon.getWidth(), DashboardIcon.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon2 = new ImageIcon(imgScale2);
+            DashboardIcon.setIcon(scaledIcon2);
         }
         
+        private void setupEmployeeLiveSearch() {
+            SearchTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+            String keyword = SearchTextField.getText().trim();
+            if (keyword.isEmpty() || keyword.equals("Search Employees")) {
+                loadEmployeeTable();
+            } else {
+                EmployeeDao dao = new EmployeeDao();
+                List<Employee> filteredList = dao.searchEmployeesByName(keyword);
+
+                DefaultTableModel model = (DefaultTableModel) employeeTable.getModel();
+                model.setRowCount(0);
+
+                for (Employee emp : filteredList) {
+                    model.addRow(new Object[]{
+                        emp.getEmpId(),
+                        emp.getFullName(),
+                        emp.getEmpEmail(),
+                        emp.getEmpRole(),
+                        emp.getGender(),
+                        emp.getPassword()
+                    });
+                }
+            }
+        }
+    });
+}
+      
         
     //This method styles buttons to look flat and modern, and adds hover effects for better user experience.
     //It is called after init components to give for which button it is applicable.
@@ -82,7 +151,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
         
         private void setupPlaceholders(){
-        String placeholderFrom = "Departure city/airport";
+        String placeholderFrom = "Search Employees";
         SearchTextField.setForeground(java.awt.Color.GRAY);
         SearchTextField.setText(placeholderFrom);
         SearchTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -118,7 +187,42 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         }
     });
+}
+        public void loadEmployeeTable() {
+            EmployeeDao dao = new EmployeeDao();
+            List<Employee> employees = dao.getAllEmployees();
+
+            DefaultTableModel model = new DefaultTableModel(new Object[]{"ID", "Name", "Email", "Role", "Gender", "Password", "Actions"}, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return column == 6; // Only the "Actions" column is editable
+                }
+            };
+
+            for (Employee emp : employees) {
+                model.addRow(new Object[]{
+                    emp.getEmpId(),
+                    emp.getFullName(),
+                    emp.getEmpEmail(),
+                    emp.getEmpRole(),
+                    emp.getGender(),
+                    emp.getPassword(),
+                    "" // Placeholder for Edit/Delete buttons
+                });
+            }
+
+            employeeTable.setModel(model);
+            employeeTable.getColumn("Actions").setCellRenderer(new ButtonRenderer());
+            employeeTable.getColumn("Actions").setCellEditor(new ButtonEditor(new JCheckBox(), this));
+            
+            employeeTable.getColumnModel().getColumn(6).setPreferredWidth(160);  // Set width of the Actions column
+
         }
+
+
+
+    
+        
         
 
     @SuppressWarnings("unchecked")
@@ -162,15 +266,16 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        NewReservationJButton = new javax.swing.JButton();
+        btnAddReservation = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         EmployeesPanel = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        employeeTable = new javax.swing.JTable();
         SearchTextField = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
+        btnAddEmployee = new javax.swing.JButton();
         SearchButton = new javax.swing.JButton();
+        EmployeeComboBox = new javax.swing.JComboBox<>();
         EmpDirLabel = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
 
@@ -205,7 +310,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DashboardIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Dashboard.png"))); // NOI18N
-        jPanel2.add(DashboardIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 20, 20));
+        jPanel2.add(DashboardIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 20, 20));
 
         DashboardButton.setBackground(new java.awt.Color(46, 62, 79));
         DashboardButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -217,7 +322,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 DashboardButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(DashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 170, 31));
+        jPanel2.add(DashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 170, 31));
 
         FlightButton.setBackground(new java.awt.Color(46, 62, 79));
         FlightButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -229,7 +334,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 FlightButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(FlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 170, 200, 31));
+        jPanel2.add(FlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 120, 200, 31));
 
         PassengerButton.setBackground(new java.awt.Color(46, 62, 79));
         PassengerButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -241,7 +346,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 PassengerButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(PassengerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 170, 33));
+        jPanel2.add(PassengerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 170, 33));
 
         ReservationButton.setBackground(new java.awt.Color(46, 62, 79));
         ReservationButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -253,7 +358,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 ReservationButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(ReservationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 180, 33));
+        jPanel2.add(ReservationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 180, 33));
 
         EmployeeButton.setBackground(new java.awt.Color(46, 62, 79));
         EmployeeButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -265,7 +370,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 EmployeeButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(EmployeeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 290, 180, 33));
+        jPanel2.add(EmployeeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 240, 180, 33));
 
         LogOutbutton.setBackground(new java.awt.Color(46, 62, 79));
         LogOutbutton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -277,7 +382,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 LogOutbuttonActionPerformed(evt);
             }
         });
-        jPanel2.add(LogOutbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 330, 210, 32));
+        jPanel2.add(LogOutbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 280, 200, 32));
 
         WingsNepalLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/WingsNepalLogo.jpg"))); // NOI18N
         jPanel2.add(WingsNepalLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -70, 220, 220));
@@ -335,6 +440,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         SearchFlightjButton.setBackground(new java.awt.Color(0, 102, 153));
         SearchFlightjButton.setForeground(new java.awt.Color(255, 255, 255));
         SearchFlightjButton.setText("Search");
+        SearchFlightjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchFlightjButtonActionPerformed(evt);
+            }
+        });
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -369,8 +479,8 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(SearchFlightsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(SearchFlightjButton, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                        .addGap(367, 367, 367)
+                        .addComponent(SearchFlightjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
                         .addComponent(AddFlightsjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -380,7 +490,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddFlightsjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SearchFlightjButton)
+                    .addComponent(SearchFlightjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SearchFlightsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -399,7 +509,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGroup(FlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
         FlightPanelLayout.setVerticalGroup(
             FlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,7 +601,8 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addComponent(SeatClassTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FlightIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
         );
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -513,10 +624,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         PassengerPanelLayout.setVerticalGroup(
             PassengerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PassengerPanelLayout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58))
         );
 
@@ -551,12 +662,12 @@ public class AdminDashboard extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        NewReservationJButton.setBackground(new java.awt.Color(0, 153, 102));
-        NewReservationJButton.setForeground(new java.awt.Color(255, 255, 255));
-        NewReservationJButton.setText("+   New Reservation");
-        NewReservationJButton.addActionListener(new java.awt.event.ActionListener() {
+        btnAddReservation.setBackground(new java.awt.Color(0, 153, 102));
+        btnAddReservation.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddReservation.setText("+   New Reservation");
+        btnAddReservation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewReservationJButtonActionPerformed(evt);
+                btnAddReservationActionPerformed(evt);
             }
         });
 
@@ -567,7 +678,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(NewReservationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddReservation, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -575,7 +686,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(NewReservationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAddReservation, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(29, Short.MAX_VALUE))
@@ -610,40 +721,42 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        employeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Position", "Department", "Actions"
+                "emp_id", "Full Name", "Email", "emp_role", "gender", "password"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(employeeTable);
 
-        SearchTextField.setText("Search Employee");
+        SearchTextField.setText("Search Employee...");
         SearchTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchTextFieldActionPerformed(evt);
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(0, 153, 102));
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("+   Add Employee");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnAddEmployee.setBackground(new java.awt.Color(0, 153, 102));
+        btnAddEmployee.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddEmployee.setText("+   Add Employee");
+        btnAddEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnAddEmployeeActionPerformed(evt);
             }
         });
 
@@ -656,6 +769,13 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
 
+        EmployeeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee ID", "Full Name", "Email" }));
+        EmployeeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmployeeComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -665,24 +785,28 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(SearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addGap(18, 18, 18)
+                        .addComponent(EmployeeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(EmployeeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(SearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         EmpDirLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -697,7 +821,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGroup(EmployeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(EmpDirLabel))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         EmployeesPanelLayout.setVerticalGroup(
             EmployeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -774,13 +898,13 @@ public class AdminDashboard extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_FlightButtonActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_btnAddEmployeeActionPerformed
 
-    private void NewReservationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewReservationJButtonActionPerformed
+    private void btnAddReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddReservationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NewReservationJButtonActionPerformed
+    }//GEN-LAST:event_btnAddReservationActionPerformed
 
     private void SearchPassengerTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchPassengerTextFieldActionPerformed
         // TODO add your handling code here:
@@ -791,7 +915,46 @@ public class AdminDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchPassengerButtonActionPerformed
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        String keyword = SearchTextField.getText().trim();
+        String selectedField = (String) EmployeeComboBox.getSelectedItem();
+
+        EmployeeDao dao = new EmployeeDao();
+        List<Employee> filteredList = new ArrayList<>();
+
+        if (selectedField.equals("Full Name")) {
+            // Partial match
+            filteredList = dao.searchEmployeesByField("emp_full_name", keyword.toLowerCase(), true);
+        } else if (selectedField.equals("Email")) {
+            // Exact match
+            filteredList = dao.searchEmployeesByField("emp_email", keyword.toLowerCase(), false);
+        } else if (selectedField.equals("Employee ID")) {
+            try {
+                int id = Integer.parseInt(keyword);
+                filteredList = dao.searchEmployeesByField("emp_id", String.valueOf(id), false);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid Employee ID");
+                return;
+            }
+        }
+
+        // Update table
+        DefaultTableModel model = (DefaultTableModel) employeeTable.getModel();
+        model.setRowCount(0);
+
+        for (Employee emp : filteredList) {
+            model.addRow(new Object[]{
+                emp.getEmpId(),
+                emp.getFullName(),
+                emp.getEmpEmail(),
+                emp.getEmpRole(),
+                emp.getGender(),
+                emp.getPassword()
+            });
+        }
+
+
+
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void SeatClassTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeatClassTextFieldActionPerformed
@@ -805,17 +968,19 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void SearchFlightsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchFlightsTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SearchFlightsTextFieldActionPerformed
- 
-    public JLabel getWelcomeLabel() {
-        return welcomeLabel;
-    }
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            UserData dummy= new UserData(1, "Admin", "admin@wingsnepal.com", "admin123", "Admin");
+    private void SearchFlightjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchFlightjButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchFlightjButtonActionPerformed
+
+    private void EmployeeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EmployeeComboBoxActionPerformed
+
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(() -> {
+            UserData dummy = new UserData(1, "Admin", "admin@wingsnepal.com", "admin123", "Admin");
             new AdminDashboard(dummy).setVisible(true);
-            }
         });
     }
 
@@ -827,12 +992,12 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel DashboardIcon;
     private javax.swing.JLabel EmpDirLabel;
     private javax.swing.JButton EmployeeButton;
+    private javax.swing.JComboBox<String> EmployeeComboBox;
     private javax.swing.JPanel EmployeesPanel;
     private javax.swing.JButton FlightButton;
     private javax.swing.JTextField FlightIdLabel;
     private javax.swing.JPanel FlightPanel;
     private javax.swing.JButton LogOutbutton;
-    private javax.swing.JButton NewReservationJButton;
     private javax.swing.JButton PassengerButton;
     private javax.swing.JPanel PassengerPanel;
     private javax.swing.JButton ReservationButton;
@@ -846,7 +1011,9 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> SeatClassTextField;
     private javax.swing.JLabel WelcAdminLabel;
     private javax.swing.JLabel WingsNepalLogo;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton btnAddEmployee;
+    private javax.swing.JButton btnAddReservation;
+    private javax.swing.JTable employeeTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -865,11 +1032,18 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     // End of variables declaration//GEN-END:variables
+
+// other methods above...
+
+
+
+
+
+
 
     
 }

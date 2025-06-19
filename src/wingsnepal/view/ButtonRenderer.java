@@ -1,43 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package wingsnepal.view;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JTable;
+import java.awt.*;
+import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 
-/**
- *
- * @author Aayush Kharel
- */
-public class ButtonRenderer extends JButton implements TableCellRenderer {
-
+public class ButtonRenderer extends JPanel implements TableCellRenderer {
     public ButtonRenderer() {
-        setOpaque(true);
-        setText("Book");
-        
-        // Styling
-        setBackground(new Color(0,102,153));     // Button background color
-        setForeground(Color.WHITE);                // Text color
-        setFont(new Font("Segoe UI Emoji", Font.BOLD, 10));  // Font style
-        setCursor(new Cursor(Cursor.HAND_CURSOR));     // Hand cursor on hover
+        setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0)); // Set the layout for buttons
+
+        // Initialize buttons
+        JButton editButton = new JButton("Edit");
+        JButton deleteButton = new JButton("Delete");
+
+        // Style buttons
+        editButton.setBackground(new Color(0, 123, 255));  // Blue for Edit
+        deleteButton.setBackground(new Color(220, 53, 69));  // Red for Delete
+        editButton.setForeground(Color.WHITE);
+        deleteButton.setForeground(Color.WHITE);
+
+        // Set the preferred size for both buttons
+        editButton.setPreferredSize(new Dimension(70, 25));
+        deleteButton.setPreferredSize(new Dimension(70, 25));
+
+        // Ensure buttons are not focusable and margin for spacing
+        editButton.setFocusable(false);
+        deleteButton.setFocusable(false);
+        editButton.setMargin(new Insets(2, 8, 2, 8));
+        deleteButton.setMargin(new Insets(2, 8, 2, 8));
+
+        // Add buttons to the panel
+        removeAll();  // Remove previous components if any
+        add(editButton);
+        add(deleteButton);
     }
-    
+
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value,
-            boolean isSelected, boolean hasFocus, int row, int column) {
-        return this;
+                                                   boolean isSelected, boolean hasFocus, int row, int column) {
+        return this;  // Return the panel containing buttons
     }
 }
-
-
-
-
-
-
