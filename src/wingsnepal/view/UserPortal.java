@@ -709,21 +709,21 @@ public class UserPortal extends javax.swing.JFrame{
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Booking Flight", "Flight Name", "SeaT No", "Seart Class", "Tickets", "Date", "Action"
+                "Booking Flight", "Flight Name", "Seat No", "Seart Class", "Date", "Action"
             }
         ));
         jScrollPane3.setViewportView(jTable2);
 
-        ManageBookingPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 640));
+        ManageBookingPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 790, 620));
 
         jTabbedPane1.addTab("tab4", ManageBookingPanel);
         jTabbedPane1.addTab("tab5", LogOutPanel);
