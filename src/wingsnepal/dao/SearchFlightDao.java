@@ -83,5 +83,48 @@ public class SearchFlightDao {
 
         return flightList;
     }
+    
+        // Method to get the flight code by flight ID
+        public String getFlightCodeById(int flightId) {
+            String flightCode = null;
+            String query = "SELECT flight_code FROM flights WHERE flight_id = ?";
+            Connection conn = db.openConnection();
+            
+            try (
+                PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, flightId);  // Set flightId parameter
+                ResultSet rs = stmt.executeQuery();
 
-}
+                if (rs.next()) {
+                    flightCode = rs.getString("flight_code");  // Get flight code
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return flightCode;
+        }
+
+        // Method to get the flight name by flight ID
+        public String getFlightNameById(int flightId) {
+            String flightName = null;
+            String query = "SELECT flight_name FROM flights WHERE flight_id = ?";
+            Connection conn = db.openConnection();
+            
+            try (
+                 PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, flightId);  // Set flightId parameter
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    flightName = rs.getString("flight_name");  // Get flight name
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return flightName;
+        }
+    }
+
+

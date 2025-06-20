@@ -26,6 +26,7 @@ import wingsnepal.model.BookingFlight;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import wingsnepal.model.StripePayment;
+import wingsnepalController.TicketGenerator;
 
 
 
@@ -869,6 +870,7 @@ public class UserPortal extends javax.swing.JFrame{
         System.out.println("BookNow button clicked");
 
         try {
+            // Collect booking details
             int userId = loggedInUser.getUserId();
             String flightCode = FlightCodeTextField.getText();
             String seatClass = SeatComboBox.getSelectedItem().toString();
@@ -881,10 +883,8 @@ public class UserPortal extends javax.swing.JFrame{
             int day = TravelDaySpinnerField.getValue();
             String paymentMethod = PaymentComboBox.getSelectedItem().toString();
 
-            // Parse travel date
-            java.sql.Date travelDate = java.sql.Date.valueOf(
-                String.format("%04d-%02d-%02d", year, month, day)
-            );
+            // Parse the travel date
+            java.sql.Date travelDate = java.sql.Date.valueOf(String.format("%04d-%02d-%02d", year, month, day));
 
             // Get seat_id using SeatClassDao
             SeatClassDao seatDao = new SeatClassDao();
@@ -896,44 +896,49 @@ public class UserPortal extends javax.swing.JFrame{
                 return;
             }
 
-            // 🔽 Handle Wallet Payments (eSewa / Khalti)
-            if (paymentMethod.equals("eSewa") || paymentMethod.equals("Khalti")) {
-                boolean paid = showWalletPaymentDialog(paymentMethod); // Simulate
-                if (!paid) {
-                    JOptionPane.showMessageDialog(this, "Payment failed or cancelled.");
-                    return;
-                }
-            }
+            // Handle the payment method
+            if (paymentMethod.equals("Stripe")) {
+                // Handle Stripe Payment in a separate thread to avoid UI freezing
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            // Create a Stripe session in the background
+                            StripePayment stripe = new StripePayment();
+                            String sessionUrl = stripe.createCheckoutSession();
 
-            // 🔽 Handle Stripe Payment
-            else if (paymentMethod.equals("Stripe")) {
-                StripePayment stripe = new StripePayment();
-                String sessionUrl = stripe.createCheckoutSession();
-                if (sessionUrl != null) {
-                    java.awt.Desktop.getDesktop().browse(new java.net.URI(sessionUrl));
-                    boolean success = stripe.checkPaymentStatus(sessionUrl);
-                    if (!success) {
-                        JOptionPane.showMessageDialog(this, "Stripe payment was not successful.");
-                        return;
+                            // Open the Stripe payment page in the browser
+                            if (sessionUrl != null) {
+                                java.awt.Desktop.getDesktop().browse(new java.net.URI(sessionUrl));
+                                JOptionPane.showMessageDialog(null, "Payment page opened in browser.\nPlease complete the payment.");
+
+                                // Wait for payment completion
+                                boolean success = stripe.checkPaymentStatus(sessionUrl);
+                                if (success) {
+                                    processBooking(userId, flightId, seatId, fullName, email, seatClass, seatNo, tickets, travelDate, paymentMethod);
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Payment failed or cancelled.");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Failed to initialize Stripe payment.");
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "An error occurred during the payment process.");
+                        }
                     }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Stripe session creation failed.");
-                    return;
-                }
-            }
-
-            // ✅ Continue with Booking Creation
-            BookingFlight booking = new BookingFlight(
-                userId, flightId, seatId, fullName, email, seatClass, seatNo, tickets, travelDate, paymentMethod
-            );
-
-            BookingFlightDao dao = new BookingFlightDao();
-            if (dao.saveBooking(booking)) {
-                seatDao.markSeatAsBooked(flightId, seatClass, seatNo);
-                JOptionPane.showMessageDialog(this, "Flight booked successfully!");
-                ClearButtonActionPerformed(null);
+                }).start(); // Start the thread
+            } else if (paymentMethod.equals("Cash")) {
+                // Handle Cash payment (e.g., assume payment is successful)
+                processBooking(userId, flightId, seatId, fullName, email, seatClass, seatNo, tickets, travelDate, "Cash");
+            } else if (paymentMethod.equals("eSewa")) {
+                // Handle eSewa payment
+                processWalletPayment("eSewa", userId, flightId, seatId, fullName, email, seatClass, seatNo, tickets, travelDate);
+            } else if (paymentMethod.equals("Khalti")) {
+                // Handle Khalti payment
+                processWalletPayment("Khalti", userId, flightId, seatId, fullName, email, seatClass, seatNo, tickets, travelDate);
             } else {
-                JOptionPane.showMessageDialog(this, "Failed to book flight.");
+                JOptionPane.showMessageDialog(this, "Please select a valid payment method.");
             }
 
         } catch (Exception ex) {
@@ -941,7 +946,81 @@ public class UserPortal extends javax.swing.JFrame{
             ex.printStackTrace();
         }
     }//GEN-LAST:event_BookNowButtonActionPerformed
-    private void updateSeatClassPrice() {
+    
+    private void processWalletPayment(String walletName, int userId, int flightId, int seatId, String fullName, String email, String seatClass, String seatNo, int tickets, java.sql.Date travelDate) {
+        boolean isPaymentSuccess = showWalletPaymentDialog(walletName);
+
+        if (isPaymentSuccess) {
+            // Proceed with booking if payment is successful
+            processBooking(userId, flightId, seatId, fullName, email, seatClass, seatNo, tickets, travelDate, walletName);
+        } else {
+            JOptionPane.showMessageDialog(this, "Payment failed or cancelled.");
+        }
+    }
+
+    private boolean showWalletPaymentDialog(String walletName) {
+        JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10));
+        JTextField phoneField = new JTextField();
+        JTextField otpField = new JTextField();
+
+        panel.add(new JLabel(walletName + " Mobile Number:"));
+        panel.add(phoneField);
+        panel.add(new JLabel("OTP Code:"));
+        panel.add(otpField);
+
+        int result = JOptionPane.showConfirmDialog(
+            this, panel, "Pay with " + walletName,
+            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (result == JOptionPane.OK_OPTION) {
+            String phone = phoneField.getText().trim();
+            String otp = otpField.getText().trim();
+            if (!phone.matches("\\d{10}") || !otp.matches("\\d{4,6}")) {
+                JOptionPane.showMessageDialog(this, "Invalid phone or OTP");
+                return false;
+            }
+            return true; // Simulate success
+        }
+
+        return false; // Cancelled
+    }
+
+    private void processBooking(int userId, int flightId, int seatId, String fullName, String email, String seatClass, 
+                                String seatNo, int tickets, java.sql.Date travelDate, String paymentMethod) {
+        try {
+            // Create the booking (save it to the database or any other storage)
+            BookingFlight booking = new BookingFlight(userId, flightId, seatId, fullName, email, seatClass, seatNo, tickets, travelDate, paymentMethod);
+            BookingFlightDao dao = new BookingFlightDao();
+
+            if (dao.saveBooking(booking)) {
+                // Mark the seat as booked
+                SeatClassDao seatDao = new SeatClassDao();
+                seatDao.markSeatAsBooked(flightId, seatClass, seatNo);
+
+                // Fetch flight name and flight code from your database or model
+                SearchFlightDao flightDao = new SearchFlightDao();
+                String flightCode = flightDao.getFlightCodeById(flightId);
+                String flightName = flightDao.getFlightNameById(flightId);
+
+                // Generate the ticket after successful booking
+                TicketGenerator ticketGenerator = new TicketGenerator();
+                ticketGenerator.generateTicket(userId, flightCode, flightName, seatClass, seatNo, fullName, email, travelDate, paymentMethod);
+
+                JOptionPane.showMessageDialog(this, "Flight booked and ticket generated successfully!");
+                ClearButtonActionPerformed(null); // Clear the form after booking
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to book flight.");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error processing booking: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    
+    
+    private void updateSeatClassPrice() {    
         try {
             String flightCode = FlightCodeTextField.getText().trim();
             String selectedClass = (String) SeatComboBox.getSelectedItem();
@@ -1092,36 +1171,7 @@ public class UserPortal extends javax.swing.JFrame{
         super.fireEditingStopped();
     }
 }
-    
-    private boolean showWalletPaymentDialog(String walletName) {
-        JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10));
-        JTextField phoneField = new JTextField();
-        JTextField otpField = new JTextField();
 
-        panel.add(new JLabel(walletName + " Mobile Number:"));
-        panel.add(phoneField);
-        panel.add(new JLabel("OTP Code:"));
-        panel.add(otpField);
-
-        int result = JOptionPane.showConfirmDialog(
-            this, panel, "Pay with " + walletName,
-            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE
-        );
-
-        if (result == JOptionPane.OK_OPTION) {
-            String phone = phoneField.getText().trim();
-            String otp = otpField.getText().trim();
-            if (!phone.matches("\\d{10}") || !otp.matches("\\d{4,6}")) {
-                JOptionPane.showMessageDialog(this, "Invalid phone or OTP");
-                return false;
-            }
-            return true; // Simulate success
-        }
-
-        return false; // Cancelled
-    }
-
-    
     //Processt to make text inside non-changeable fields gray and preventing its border from changing its color.
     private void disableField(javax.swing.JTextField field) {
         field.setEditable(false);
