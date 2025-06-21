@@ -5,11 +5,101 @@
 package wingsnepal.view;
 
 import wingsnepal.model.UserData;
+import java.util.List;
+import wingsnepal.dao.PassengerDAO;
+import wingsnepal.model.Passenger;
+import javax.swing.table.DefaultTableModel;
+import java.text.SimpleDateFormat;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.table.TableColumn;
+
 
 /**
  *
  * @author ronanchettri
  */
+
+class ButtonRenderer extends JButton implements TableCellRenderer {
+    public ButtonRenderer() {
+        setOpaque(true);
+    }
+
+    public Component getTableCellRendererComponent(JTable table, Object value,
+            boolean isSelected, boolean hasFocus, int row, int column) {
+        setText((value == null) ? "" : value.toString());
+        return this;
+    }
+}
+
+
+class ButtonEditor extends DefaultCellEditor {
+    private JButton button;
+    private String label;
+    private boolean isPushed;
+    private JTable table;
+
+    public ButtonEditor(JCheckBox checkBox, JTable table) {
+        super(checkBox);
+        this.table = table;
+        button = new JButton();
+        button.setOpaque(true);
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                fireEditingStopped();
+            }
+        });
+    }
+    
+    
+
+    public Component getTableCellEditorComponent(JTable table, Object value,
+            boolean isSelected, int row, int column) {
+        label = (value == null) ? "" : value.toString();
+        button.setText(label);
+        isPushed = true;
+        return button;
+    }
+
+    public Object getCellEditorValue() {
+        if (isPushed) {
+            int row = table.getEditingRow();
+            int modelRow = table.convertRowIndexToModel(row);
+            
+            // Handle button click here
+            if ("Edit".equals(label)) {
+                // Edit action
+                JOptionPane.showMessageDialog(button, "Edit button clicked for row: " + modelRow);
+            } else if ("Delete".equals(label)) {
+                // Delete action
+                int confirm = JOptionPane.showConfirmDialog(button, 
+                    "Are you sure you want to delete this flight assignment?", 
+                    "Confirm Delete", JOptionPane.YES_NO_OPTION);
+                
+                if (confirm == JOptionPane.YES_OPTION) {
+                    DefaultTableModel model = (DefaultTableModel) table.getModel();
+                    model.removeRow(modelRow);
+                }
+            }
+        }
+        isPushed = false;
+        return label;
+    }
+
+    public boolean stopCellEditing() {
+        isPushed = false;
+        return super.stopCellEditing();
+    }
+}
+
+
+
+
+
 public class EmployeeDashboard extends javax.swing.JFrame {
     private UserData loggedInUser; // store the user info
     
@@ -18,14 +108,87 @@ public class EmployeeDashboard extends javax.swing.JFrame {
         initComponents();
         setTitle("Employee Dashboard - Welcome" + user.getFullName());
         setLocationRelativeTo(null);
+        // Add change listener in constructor
+        
+        jTabbedPane1.addChangeListener(e -> {
+            if (jTabbedPane1.getSelectedIndex() == 2) {
+                loadPassengerData();
+            }
+        });
+        
     }
     
     public EmployeeDashboard() {
         initComponents();
         setTitle("Employee Portal");
         setLocationRelativeTo(null);
+        
+        
     }
     @SuppressWarnings("unchecked")
+      private void loadPassengerData() {
+        PassengerDAO dao = new PassengerDAO();
+        List<Passenger> passengers = dao.getAllPassengers();
+        
+        DefaultTableModel model = (DefaultTableModel) PassengerListTable.getModel();
+        model.setRowCount(0); // Clear existing data
+        
+        // Create date formatter
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        for (Passenger p : passengers) {
+            model.addRow(new Object[]{
+                p.getFullName(), 
+                p.getPassengerId(),
+                dateFormat.format(p.getTravelDate()), // Format date
+                p.getFlightCode(),
+                p.getSeatNo(),
+                p.getSeatClass(),
+                "Action" // Placeholder for action buttons
+            });
+        }
+    }
+      
+    
+     private void setupAssignedFlightsTable() {
+    // Get the table model
+    DefaultTableModel model = (DefaultTableModel) AssignedFlightsTable.getModel();
+    
+    // Update column names to include Action
+    model.setColumnIdentifiers(new String[] {
+        "Flight Code", "From City", "To City", "Seat Class", 
+        "Payment Method", "Passenger Name", "Action"
+    });
+    
+    // Clear existing data
+    model.setRowCount(0);
+    
+    // Add some sample data (replace with your actual data loading)
+    model.addRow(new Object[]{"F100", "Kathmandu", "Pokhara", "Economy", "Credit Card", "John Doe", "Edit/Delete"});
+    model.addRow(new Object[]{"F200", "Pokhara", "Kathmandu", "Business", "Cash", "Jane Smith", "Edit/Delete"});
+    
+   
+    TableColumn buttonColumn = AssignedFlightsTable.getColumnModel().getColumn(6);
+    buttonColumn.setCellRenderer(new ButtonRenderer());
+    buttonColumn.setCellEditor(new ButtonEditor(new JCheckBox(), AssignedFlightsTable));
+}
+    
+   
+      
+     
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+    
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -46,7 +209,7 @@ public class EmployeeDashboard extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        AssignedFlightsTable = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
@@ -57,10 +220,10 @@ public class EmployeeDashboard extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton14 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        CheckInList = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        PassengerListTable = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -68,9 +231,7 @@ public class EmployeeDashboard extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
         jTextField9 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
         jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
         jSpinField1 = new com.toedter.components.JSpinField();
@@ -130,6 +291,7 @@ public class EmployeeDashboard extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Check In ");
+        jButton4.setBorderPainted(false);
         jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,24 +370,24 @@ public class EmployeeDashboard extends javax.swing.JFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        AssignedFlightsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Flight Code", "From City ", "To City", "Seat Class", "Payment Method", "Passenger Name", "Date", "Action"
+                "Flight Code", "From City ", "To City", "Seat Class", "Payment Method", "Passenger Name", "Date"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(AssignedFlightsTable);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 930, 560));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 920, 560));
 
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel6.setText("Flight Code");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
         jPanel3.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 210, 30));
 
         jButton9.setText("Enter");
@@ -234,10 +396,10 @@ public class EmployeeDashboard extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 80, 30));
+        jPanel3.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, 130, 30));
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Flight ID", "Seat no", "Seat Class", "Passenger Name", "Date", " ", " " }));
-        jPanel3.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 100, 30));
+        jPanel3.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 120, 30));
 
         jTabbedPane1.addTab("Assigned flights ", jPanel3);
 
@@ -265,7 +427,7 @@ public class EmployeeDashboard extends javax.swing.JFrame {
         jButton14.setText("CONFIRM");
         jPanel5.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 210, 30));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        CheckInList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -276,7 +438,7 @@ public class EmployeeDashboard extends javax.swing.JFrame {
                 "Passenger Id", "Passenger Name", "Date", "Flight Code", "Flight Id", "Action"
             }
         ));
-        jScrollPane1.setViewportView(jTable3);
+        jScrollPane1.setViewportView(CheckInList);
 
         jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 930, 550));
 
@@ -284,7 +446,7 @@ public class EmployeeDashboard extends javax.swing.JFrame {
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        PassengerListTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -295,9 +457,9 @@ public class EmployeeDashboard extends javax.swing.JFrame {
                 "Passenger name", "Passenger Id", "Date", "Flight Code", "Seat No", "Seat Class", "Action"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(PassengerListTable);
 
-        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 720, 610));
+        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 720, 630));
 
         jLabel9.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel9.setText("Passenger Id");
@@ -318,14 +480,8 @@ public class EmployeeDashboard extends javax.swing.JFrame {
         jPanel4.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 210, 30));
         jPanel4.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 210, 30));
 
-        jButton6.setText("Update");
-        jPanel4.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 520, 110, 40));
-
         jButton7.setText("Search");
-        jPanel4.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 110, 40));
-
-        jButton10.setText("Delete");
-        jPanel4.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 110, 40));
+        jPanel4.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 170, 40));
         jPanel4.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 60, 20));
         jPanel4.add(jMonthChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 130, 20));
         jPanel4.add(jSpinField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, -1, -1));
@@ -420,17 +576,21 @@ public class EmployeeDashboard extends javax.swing.JFrame {
             new EmployeeDashboard(dummy).setVisible(true);
         });
     }
+    
+    // Add this method in EmployeeDashboard.java
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable AssignedFlightsTable;
+    private javax.swing.JTable CheckInList;
+    private javax.swing.JTable PassengerListTable;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -458,9 +618,6 @@ public class EmployeeDashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private com.toedter.components.JSpinField jSpinField1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField3;
