@@ -25,6 +25,7 @@ import wingsnepal.dao.BookingFlightDao;
 import wingsnepal.model.BookingFlight;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import wingsnepal.controller.ManageBookingController;
 import wingsnepal.model.StripePayment;
 import wingsnepalController.TicketGenerator;
 
@@ -38,6 +39,7 @@ import wingsnepalController.TicketGenerator;
 public class UserPortal extends javax.swing.JFrame{
     
     private UserData loggedInUser;
+    private javax.swing.JTable JTable2;
 
     //Constructor for login-based usage
     public UserPortal(UserData user) {
@@ -45,7 +47,7 @@ public class UserPortal extends javax.swing.JFrame{
         initComponents();
  
         
-        // Optional: Show user's name on screen or use it anywhere you want
+        //Show user's name on screen or use it anywhere you want
         setTitle("User Portal - Welcome, " + loggedInUser.getFullName());
         
         
@@ -67,14 +69,20 @@ public class UserPortal extends javax.swing.JFrame{
             }
         });
         
+        
+        
         PaymentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {
             "Cash", "Stripe", "eSewa", "Khalti"
         }));
 
         
-        setResizable(false);         //Disable maximize button
-        setLocationRelativeTo(null); //Center window
+        //Disable maximize button
+        setResizable(false); 
         
+        //Center window
+        setLocationRelativeTo(null); 
+        
+        //calling sacleimage:
         scaleImage1();  
         scaleImage2();
         scaleImage3();
@@ -83,12 +91,11 @@ public class UserPortal extends javax.swing.JFrame{
         scaleImage6();
         scaleImage7();
         
-        // calling setupPlaceholder();
+        //calling setupPlaceholder();
         setupPlaceholders();
         
-        //Font for textfields
+        //Font for textfields:
         Font textFieldFont = new Font("Segoe UI", Font.PLAIN, 16); // Choose a clean, modern font
-
         FromTextField.setFont(textFieldFont);
         ToTextField.setFont(textFieldFont);
         TravelDayChooser.setFont(textFieldFont); // your day input field
@@ -97,12 +104,20 @@ public class UserPortal extends javax.swing.JFrame{
         FlightNameTextField.setFont(textFieldFont);
         FullNameTextField.setFont(textFieldFont);
         EmailTextField.setFont(textFieldFont);
-        PriceTextField.setFont(textFieldFont);
-
-        
+        PriceTextField.setFont(textFieldFont);    
+    }
+    
+    // Getter method for loggedInUser
+    public UserData getLoggedInUser() {
+        return loggedInUser;
+    }
+    
+    // Getter method for jTable2
+    public javax.swing.JTable getJTable2() {
+        return jTable2;
     }
 
-    
+    //It is for placinf text in a textfield and on clicking to write something wilol disappear the text written there.
     private void setupPlaceholders() {
     String placeholderFrom = "Departure city/airport";
     FromTextField.setForeground(java.awt.Color.GRAY);
@@ -361,6 +376,7 @@ public class UserPortal extends javax.swing.JFrame{
         jScrollBar2 = new javax.swing.JScrollBar();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        ShowMyBookingButton = new javax.swing.JButton();
         LogOutPanel = new javax.swing.JPanel();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
@@ -532,7 +548,7 @@ public class UserPortal extends javax.swing.JFrame{
                 SearchFlightButtonActionPerformed(evt);
             }
         });
-        SearchFlightPanel.add(SearchFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 190, 40));
+        SearchFlightPanel.add(SearchFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 190, 30));
         SearchFlightPanel.add(jScrollBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 90, 10, 560));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -570,7 +586,7 @@ public class UserPortal extends javax.swing.JFrame{
                 ShowAllButtonActionPerformed(evt);
             }
         });
-        SearchFlightPanel.add(ShowAllButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 190, 40));
+        SearchFlightPanel.add(ShowAllButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 190, 30));
         SearchFlightPanel.add(TravelDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 190, 30));
         SearchFlightPanel.add(TravelMonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 190, 30));
         SearchFlightPanel.add(TravelDayChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 70, 30));
@@ -709,21 +725,40 @@ public class UserPortal extends javax.swing.JFrame{
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Booking Flight", "Flight Name", "Seat No", "Seart Class", "Date", "Action"
+                "Booking Id", "Flight Code", "Seat No", "Seat Class", "Travel Date", "Payment Method", "Action"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jTable2);
 
-        ManageBookingPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 790, 620));
+        ManageBookingPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 790, 570));
+
+        ShowMyBookingButton.setBackground(new java.awt.Color(0, 102, 153));
+        ShowMyBookingButton.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        ShowMyBookingButton.setForeground(new java.awt.Color(255, 255, 255));
+        ShowMyBookingButton.setText("My Bookings");
+        ShowMyBookingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShowMyBookingButtonActionPerformed(evt);
+            }
+        });
+        ManageBookingPanel.add(ShowMyBookingButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         jTabbedPane1.addTab("tab4", ManageBookingPanel);
         jTabbedPane1.addTab("tab5", LogOutPanel);
@@ -843,8 +878,6 @@ public class UserPortal extends javax.swing.JFrame{
     private void FlightNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FlightNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FlightNameTextFieldActionPerformed
-
-
 
     private void ClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButtonActionPerformed
         FlightCodeTextField.setText("");
@@ -986,8 +1019,7 @@ public class UserPortal extends javax.swing.JFrame{
         return false; // Cancelled
     }
 
-    private void processBooking(int userId, int flightId, int seatId, String fullName, String email, String seatClass, 
-                                String seatNo, int tickets, java.sql.Date travelDate, String paymentMethod) {
+    private void processBooking(int userId, int flightId, int seatId, String fullName, String email, String seatClass, String seatNo, int tickets, java.sql.Date travelDate, String paymentMethod) {
         try {
             // Create the booking (save it to the database or any other storage)
             BookingFlight booking = new BookingFlight(userId, flightId, seatId, fullName, email, seatClass, seatNo, tickets, travelDate, paymentMethod);
@@ -1064,6 +1096,20 @@ public class UserPortal extends javax.swing.JFrame{
 //            }
 //        }
     }//GEN-LAST:event_SeatNoComboBoxActionPerformed
+    public void showBookings(int userId) {
+        // Assuming you have a ManageBookingController that handles the logic for showing bookings
+        ManageBookingController controller = new ManageBookingController(this);
+        controller.showBookings(userId);  // Fetch and display the user's bookings
+    }
+
+    private void ShowMyBookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowMyBookingButtonActionPerformed
+    // Get the logged-in user's ID
+    int userId = loggedInUser.getUserId();
+    
+    // Call the controller to display the bookings for the logged-in user
+    ManageBookingController controller = new ManageBookingController(this);
+    controller.showBookings(userId);  // Pass the user ID to fetch the bookings
+    }//GEN-LAST:event_ShowMyBookingButtonActionPerformed
     
 
     class ButtonEditor extends javax.swing.DefaultCellEditor {
@@ -1286,6 +1332,7 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> SeatNoComboBox;
     private javax.swing.JLabel SeatNumberLabel;
     private javax.swing.JButton ShowAllButton;
+    private javax.swing.JButton ShowMyBookingButton;
     private com.toedter.calendar.JMonthChooser TicektMonthFiled;
     private com.toedter.components.JSpinField TicketSpinField;
     private javax.swing.JLabel TicketsDateLabel;
