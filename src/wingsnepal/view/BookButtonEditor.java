@@ -1,20 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package wingsnepal.view;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import wingsnepal.dao.SeatClassDao;
 import java.util.List;
-/**
- *
- * @author Aayush Kharel
- */
 
+/**
+ * Button editor for the "Book" action in UserPortal's JTable
+ */
 public class BookButtonEditor extends AbstractCellEditor implements TableCellEditor {
     private final JButton button = new JButton("Book");
     private final UserPortal userPortal;
@@ -39,47 +33,49 @@ public class BookButtonEditor extends AbstractCellEditor implements TableCellEdi
             Object flightName = table.getValueAt(row, 1);
             Object date = table.getValueAt(row, 5);
 
-            userPortal.FlightCodeTextField.setText(flightCode.toString());
-            userPortal.FlightNameTextField.setText(flightName.toString());
-            userPortal.SeatComboBox.setSelectedItem("Economy");
+            userPortal.getFlightCodeTextField().setText(flightCode.toString());
+            userPortal.getFlightNameTextField().setText(flightName.toString());
+            userPortal.getSeatComboBox().setSelectedItem("Economy");
 
             SeatClassDao dao = new SeatClassDao();
             int flightId = dao.getFlightIdByCode(flightCode.toString());
             List<String> seatNumbers = dao.getAvailableSeats(flightId, "Economy");
-            userPortal.SeatNoComboBox.removeAllItems();
+
+            userPortal.getSeatNoComboBox().removeAllItems();
             for (String seat : seatNumbers) {
-                userPortal.SeatNoComboBox.addItem(seat);
+                userPortal.getSeatNoComboBox().addItem(seat);
             }
 
             int price = dao.getPriceByFlightAndClass(flightId, "Economy");
-            userPortal.PriceTextField.setText(String.valueOf(price));
+            userPortal.getPriceTextField().setText(String.valueOf(price));
 
-            userPortal.FullNameTextField.setText(userPortal.getLoggedInUser().getFullName());
-            userPortal.EmailTextField.setText(userPortal.getLoggedInUser().getEmail());
+            userPortal.getFullNameTextField().setText(userPortal.getLoggedInUser().getFullName());
+            userPortal.getEmailTextField().setText(userPortal.getLoggedInUser().getEmail());
 
-            userPortal.lockTravelDateFields();
+            userPortal.lockTravelFields(); // fixed wrapper call
 
             if (date != null) {
                 try {
                     java.sql.Date sqlDate = java.sql.Date.valueOf(date.toString());
                     java.util.Calendar cal = java.util.Calendar.getInstance();
                     cal.setTime(sqlDate);
-                    userPortal.TravelYearChooser.setYear(cal.get(java.util.Calendar.YEAR));
-                    userPortal.TravelMonthChooser.setMonth(cal.get(java.util.Calendar.MONTH));
-                    userPortal.TravelDaySpinnerField.setValue(cal.get(java.util.Calendar.DAY_OF_MONTH));
+
+                    userPortal.getTravelYearChooser().setYear(cal.get(java.util.Calendar.YEAR));
+                    userPortal.getTravelMonthChooser().setMonth(cal.get(java.util.Calendar.MONTH));
+                    userPortal.getTravelDaySpinnerField().setValue(cal.get(java.util.Calendar.DAY_OF_MONTH));
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
 
-            userPortal.jTabbedPane1.setSelectedIndex(2); // Go to Book Flights tab
+            userPortal.getMainTabbedPane().setSelectedIndex(2); // Go to Book Flights tab
         }
         fireEditingStopped();
     }
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value,
-            boolean isSelected, int row, int column) {
+                                                 boolean isSelected, int row, int column) {
         return button;
     }
 
@@ -88,6 +84,3 @@ public class BookButtonEditor extends AbstractCellEditor implements TableCellEdi
         return "Book";
     }
 }
-
-
-
