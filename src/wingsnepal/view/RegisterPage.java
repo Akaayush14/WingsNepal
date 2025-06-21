@@ -6,6 +6,7 @@ package wingsnepal.view;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -239,6 +240,37 @@ public class RegisterPage extends javax.swing.JFrame {
 
     private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed
         // TODO add your handling code here:
+        String name = NameTextField.getText().trim();
+        String email = EmailTextField.getText().trim();
+        String phone = PhoneTextField.getText().trim();
+        String password = new String(PasswordField.getPassword());
+        String confirm = new String(ConfirmPasswordField.getPassword());
+        String gender = GenderComboBox.getSelectedItem().toString();
+
+        if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+            return;
+        }
+
+        if (!password.equals(confirm)) {
+            JOptionPane.showMessageDialog(this, "Passwords do not match.");
+            return;
+        }
+
+        if (!email.matches("^.+@.+\\..+$")) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid email.");
+            return;
+        }
+
+        boolean registered = wingsnepal.dao.RegisterDao.registerUser(name, email, phone, password, gender);
+        if (registered) {
+            JOptionPane.showMessageDialog(this, "Registration successful!");
+            new LoginPage().setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Registration failed! Email may already exist.");
+        }
+
     }//GEN-LAST:event_SignUpButtonActionPerformed
 
     private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
