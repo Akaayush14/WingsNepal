@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/Semester%202/WingsNepal/src/wingsnepal/view/AdminDashboard.java</file>
+            <file>file:/D:/Semester%202/WingsNepal/src/wingsnepalController/LoginController.java</file>
+            <file>file:/D:/Semester%202/WingsNepal/src/wingsnepal/view/ButtonRenderer.java</file>
+            <file>file:/D:/Semester%202/WingsNepal/src/wingsnepal/view/ButtonEditor.java</file>
+            <file>file:/D:/Semester%202/WingsNepal/src/wingsnepal/view/EditEmployeeDialog.java</file>
+            <file>file:/D:/Semester%202/WingsNepal/src/wingsnepal/view/EmployeeDashboard.java</file>
+            <file>file:/D:/Semester%202/WingsNepal/src/wingsnepal/view/UserPortal.java</file>
+            <file>file:/D:/Semester%202/WingsNepal/src/wingsnepal/view/LoginPage.java</file>
+
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
         <file>
             <url>src/wingsnepal/view/UserPortal.java</url>
             <bookmark id="1">
                 <name/>
-                <line>126</line>
+                <line>132</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
 aayush
+        <group>
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/EditButtonEditor.java</file>
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/EditButtonRenderer.java</file>
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/UserPortal.java</file>
+            <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/EditBookDialog.java</file>
+        </group>
+    </open-files>
+
+
         <group/>
 
         <group>
@@ -19,8 +41,10 @@ aayush
             <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/ButtonEditor.java</file>
             <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/ButtonRenderer.java</file>
             <file>file:/C:/Users/Aayush%20Kharel/Desktop/Java%20project/WingsNepal/src/wingsnepal/view/BookButtonEditor.java</file>
+
         </group>
- HEAD
+HEAD
 
 main
+ main
 </project-private>
