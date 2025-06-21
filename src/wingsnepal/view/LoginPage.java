@@ -330,7 +330,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         BgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Aeroplane image 1.jpg"))); // NOI18N
         BgLabel.setText("BgImageLabel");
-        getContentPane().add(BgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -20, 1000, 600));
+        getContentPane().add(BgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();
         setLocationRelativeTo(null);

@@ -13,7 +13,7 @@ import com.stripe.exception.StripeException;
 
 public class StripePayment {
 
-    private static final String STRIPE_API_KEY = "";
+    private static final String STRIPE_API_KEY = "sk_test_51RbWr6Pra3RknifrmZfMOoPl1eSY2u8jcFbgcSutWrilcIL09y3vesrpme1oIJGQeAtS6VDzlaBzk81VqhGYjkQs00KXAUeIVD";
 
     public StripePayment() {
         // Set Stripe API key

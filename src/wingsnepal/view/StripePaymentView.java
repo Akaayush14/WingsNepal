@@ -4,8 +4,13 @@
  */
 package wingsnepal.view;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import java.awt.BorderLayout;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+
 
 public class StripePaymentView extends JFrame {
 
