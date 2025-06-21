@@ -18,12 +18,17 @@ import wingsnepal.model.SearchFlight;
 import wingsnepal.dao.SeatClassDao;
 import java.awt.Font;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import wingsnepal.dao.BookingFlightDao;
 import wingsnepal.model.BookingFlight;
 import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import wingsnepal.controller.ManageBookingController;
 import wingsnepal.model.StripePayment;
@@ -105,6 +110,7 @@ public class UserPortal extends javax.swing.JFrame{
         FullNameTextField.setFont(textFieldFont);
         EmailTextField.setFont(textFieldFont);
         PriceTextField.setFont(textFieldFont);    
+   
     }
     
     // Getter method for loggedInUser
@@ -822,11 +828,9 @@ public class UserPortal extends javax.swing.JFrame{
             "Book"
         });
     }
-
-
         //Using button renderer and button editor to place book flight button in every jTable1.
         TableColumn bookColumn = jTable1.getColumn("Action");
-        bookColumn.setCellRenderer(new ButtonRenderer());
+        bookColumn.setCellRenderer(new BookButtonRenderer());
         bookColumn.setCellEditor(new ButtonEditor(new JCheckBox(), this, jTable1));
 
     }//GEN-LAST:event_ShowAllButtonActionPerformed
@@ -1111,10 +1115,10 @@ public class UserPortal extends javax.swing.JFrame{
     controller.showBookings(userId);  // Pass the user ID to fetch the bookings
     
     TableColumn actionColumn = jTable2.getColumn("Action");
-    actionColumn.setCellRenderer(new EditButtonRenderer());
-    actionColumn.setCellEditor(new EditButtonEditor(this, jTable2));
-
-    
+    jTable2.setRowHeight(35);
+    jTable2.getColumn("Action").setCellRenderer(new EditButtonRenderer());
+    jTable2.getColumn("Action").setCellEditor(new EditButtonEditor(this, jTable2));
+    jTable2.getColumn("Action").setPreferredWidth(180); // Ensure enough space
     }//GEN-LAST:event_ShowMyBookingButtonActionPerformed
     
 
@@ -1210,8 +1214,6 @@ public class UserPortal extends javax.swing.JFrame{
         return label;
     }
 
-
-
     @Override
     public boolean stopCellEditing() {
         isPushed = false;
@@ -1285,10 +1287,12 @@ public class UserPortal extends javax.swing.JFrame{
         field.setBorder(javax.swing.UIManager.getBorder("TextField.border"));
     }
    
-    public static void main(String args[]) {
-
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(() -> {
+            UserData dummy = new UserData(1, "User", "user@wingsnepal.com", "user123", "User");
+            new UserPortal(dummy).setVisible(true);
+        });
     }
-
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BookFlightButton;
@@ -1358,5 +1362,56 @@ public class UserPortal extends javax.swing.JFrame{
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+    
+    // ==== Public getters for BookButtonEditor ====
+    public JTextField getFlightCodeTextField() {
+        return FlightCodeTextField;
+    }
+
+    public JTextField getFlightNameTextField() {
+        return FlightNameTextField;
+    }
+
+    public JComboBox<String> getSeatComboBox() {
+        return SeatComboBox;
+    }
+
+    public JComboBox<String> getSeatNoComboBox() {
+        return SeatNoComboBox;
+    }
+
+    public JTextField getPriceTextField() {
+        return PriceTextField;
+    }
+
+    public JTextField getFullNameTextField() {
+        return FullNameTextField;
+    }
+
+    public JTextField getEmailTextField() {
+        return EmailTextField;
+    }
+
+    public void lockTravelFields() {
+        TravelYearChooser.setEnabled(false);
+        TravelMonthChooser.setEnabled(false);
+        TravelDaySpinnerField.setEnabled(false);
+    }
+
+    public com.toedter.calendar.JYearChooser getTravelYearChooser() {
+        return TravelYearChooser;
+    }
+
+    public com.toedter.calendar.JMonthChooser getTravelMonthChooser() {
+        return TravelMonthChooser;
+    }
+
+    public com.toedter.components.JSpinField getTravelDaySpinnerField() {
+        return TravelDaySpinnerField;
+    }
+
+    public JTabbedPane getMainTabbedPane() {
+        return jTabbedPane1;
+    }
 
 }

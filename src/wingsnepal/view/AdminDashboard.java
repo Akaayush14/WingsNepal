@@ -212,8 +212,8 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
 
             employeeTable.setModel(model);
-            employeeTable.getColumn("Actions").setCellRenderer(new ButtonRenderer());
-            employeeTable.getColumn("Actions").setCellEditor(new ButtonEditor(new JCheckBox(), this));
+            employeeTable.getColumn("Actions").setCellRenderer(new AdminButtonRenderer());
+            employeeTable.getColumn("Actions").setCellEditor(new AdminButtonEditor(new JCheckBox(), this));
             
             employeeTable.getColumnModel().getColumn(6).setPreferredWidth(160);  // Set width of the Actions column
 

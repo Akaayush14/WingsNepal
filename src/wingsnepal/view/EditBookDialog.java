@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package wingsnepal.view;
 
 import wingsnepal.model.ManageBookingModel;
@@ -10,10 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-/**
- *
- * @author Aayush Kharel
- */
 
 public class EditBookDialog extends JDialog {
     private int bookingId;
@@ -32,7 +24,10 @@ public class EditBookDialog extends JDialog {
     }
 
     private void initComponents() {
-        setLayout(new FlowLayout());
+        // Use GridBagLayout for better control over component positioning
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);  // Padding around components
 
         JLabel seatClassLabel = new JLabel("Seat Class:");
         seatClassComboBox = new JComboBox<>(new String[] {"Economy", "Business", "First Class"});
@@ -64,15 +59,34 @@ public class EditBookDialog extends JDialog {
             }
         });
 
-        // Add components to dialog
-        add(seatClassLabel);
-        add(seatClassComboBox);
-        add(seatNoLabel);
-        add(seatNoTextField);
-        add(saveButton);
-        add(cancelButton);
+        // Set grid position for each component using GridBagConstraints
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(seatClassLabel, gbc);
 
-        setSize(300, 200);  // Set the size of the dialog
+        gbc.gridx = 1;
+        add(seatClassComboBox, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        add(seatNoLabel, gbc);
+
+        gbc.gridx = 1;
+        add(seatNoTextField, gbc);
+
+        // Add Save and Cancel buttons in a row at the bottom
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;  // Span across 2 columns
+        gbc.anchor = GridBagConstraints.CENTER;
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));  // Add some spacing between buttons
+        buttonPanel.add(saveButton);
+        buttonPanel.add(cancelButton);
+        add(buttonPanel, gbc);
+
+        setSize(400, 250);  // Adjusted dialog size
+        setResizable(false);  // Prevent resizing of the dialog
     }
 
     // Load the booking details into the dialog fields
@@ -108,6 +122,4 @@ public class EditBookDialog extends JDialog {
             JOptionPane.showMessageDialog(this, "Failed to update booking.");
         }
     }
-    
 }
-
