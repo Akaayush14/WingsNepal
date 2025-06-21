@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package wingsnepal.database;
 
 import java.sql.Connection;
@@ -10,21 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author Aayush Kharel
- */
-public class MySqlConnection implements DbConnection{
-    
+public class MySqlConnection implements DbConnection {
+
     @Override
     public Connection openConnection() {
-        try{
+        try {
             String username = "root";
-            String password = "@Akfalcon401040";
+            String password = "@Akfalcon401040"; // Change if needed
             String database = "wingsnepal";
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection;
-            connection = DriverManager.getConnection(
+            Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/" + database + "?useSSL=false&serverTimezone=UTC",
                 username,
                 password
@@ -38,26 +29,24 @@ public class MySqlConnection implements DbConnection{
         }
     }
 
-
     @Override
     public void closeConnection(Connection conn) {
-        try{
-            if(conn !=null && !conn.isClosed()){
+        try {
+            if (conn != null && !conn.isClosed()) {
                 conn.close();
                 System.out.println("Connection closed");
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
     @Override
     public ResultSet runQuery(Connection conn, String query) {
-        try{
+        try {
             Statement stmt = conn.createStatement();
-            ResultSet result = stmt.executeQuery(query);
-            return result;
-        }catch(SQLException e){
+            return stmt.executeQuery(query);
+        } catch (SQLException e) {
             System.out.println(e);
             return null;
         }
@@ -65,14 +54,17 @@ public class MySqlConnection implements DbConnection{
 
     @Override
     public int executeUpdate(Connection conn, String query) {
-          try{
+        try {
             Statement stmt = conn.createStatement();
-            int result = stmt.executeUpdate(query);
-            return result;
-        }catch(SQLException e){
+            return stmt.executeUpdate(query);
+        } catch (SQLException e) {
             System.out.println(e);
             return -1;
         }
-    } 
-    
+    }
+
+    // ✅ Static method for DAO access
+    public static Connection getConnection() {
+        return new MySqlConnection().openConnection();
+    }
 }
