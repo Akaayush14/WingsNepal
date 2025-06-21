@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.AddEmployeeDialog to edit this template
  */
 package wingsnepal.view;
 
@@ -63,8 +63,8 @@ public class UserPortal extends javax.swing.JFrame{
         jScrollPane1.setViewportView(jTable1);
             
         //ActionListener for showall button.
-        ShowAllButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ShowAllButton.addActionListener(new AddEmployeeDialog.awt.event.ActionListener() {
+            public void actionPerformed(AddEmployeeDialog.awt.event.ActionEvent evt) {
                 ShowAllButtonActionPerformed(evt);
             }
         });
@@ -120,41 +120,55 @@ public class UserPortal extends javax.swing.JFrame{
     //It is for placinf text in a textfield and on clicking to write something wilol disappear the text written there.
     private void setupPlaceholders() {
     String placeholderFrom = "Departure city/airport";
-    FromTextField.setForeground(java.awt.Color.GRAY);
+    FromTextField.setForeground(AddEmployeeDialog.awt.Color.GRAY);
     FromTextField.setText(placeholderFrom);
-    FromTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-        public void focusGained(java.awt.event.FocusEvent evt) {
+    FromTextField.addFocusListener(new AddEmployeeDialog.awt.event.FocusAdapter() {
+        public void focusGained(AddEmployeeDialog.awt.event.FocusEvent evt) {
             if (FromTextField.getText().equals(placeholderFrom)) {
                 FromTextField.setText("");
-                FromTextField.setForeground(java.awt.Color.BLACK);
+                FromTextField.setForeground(AddEmployeeDialog.awt.Color.BLACK);
             }
         }
-        public void focusLost(java.awt.event.FocusEvent evt) {
+        public void focusLost(AddEmployeeDialog.awt.event.FocusEvent evt) {
             if (FromTextField.getText().isEmpty()) {
-                FromTextField.setForeground(java.awt.Color.GRAY);
+                FromTextField.setForeground(AddEmployeeDialog.awt.Color.GRAY);
                 FromTextField.setText(placeholderFrom);
             }
         }
     });
 
 
-        ToTextField.setForeground(java.awt.Color.GRAY);
+        ToTextField.setForeground(AddEmployeeDialog.awt.Color.GRAY);
         ToTextField.setText("Destination city/airport"); // Match this text
-        ToTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        ToTextField.addFocusListener(new AddEmployeeDialog.awt.event.FocusAdapter() {
+            public void focusGained(AddEmployeeDialog.awt.event.FocusEvent evt) {
                 if (ToTextField.getText().equals("Destination city/airport")) {
                     ToTextField.setText("");
-                    ToTextField.setForeground(java.awt.Color.BLACK);
+                    ToTextField.setForeground(AddEmployeeDialog.awt.Color.BLACK);
                 }
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(AddEmployeeDialog.awt.event.FocusEvent evt) {
             if (ToTextField.getText().isEmpty()) {
-                ToTextField.setForeground(java.awt.Color.GRAY);
+                ToTextField.setForeground(AddEmployeeDialog.awt.Color.GRAY);
                 ToTextField.setText("Destination city/airport");
             }
         }
     });
 
+        jDayChooser1.setForeground(AddEmployeeDialog.awt.Color.GRAY);
+        jDayChooser1.setText("Day");
+        jDayChooser1.addFocusListener(new AddEmployeeDialog.awt.event.FocusAdapter() {
+            public void focusGained(AddEmployeeDialog.awt.event.FocusEvent evt) {
+                if (jDayChooser1.getText().equals("Day")) {
+                    jDayChooser1.setText("");
+                    jDayChooser1.setForeground(AddEmployeeDialog.awt.Color.BLACK);
+                }
+            }
+
+            public void focusLost(AddEmployeeDialog.awt.event.FocusEvent evt) {
+                if (jDayChooser1.getText().isEmpty()) {
+                    jDayChooser1.setForeground(AddEmployeeDialog.awt.Color.GRAY);
+                    jDayChooser1.setText("Day");
         TravelDayChooser.setForeground(java.awt.Color.GRAY);
         TravelDayChooser.setValue(0); // Default placeholder value (e.g. 0 = "not selected")
 
@@ -184,19 +198,19 @@ public class UserPortal extends javax.swing.JFrame{
         button.setBorderPainted(false);
         button.setOpaque(false);
 
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
+        button.addMouseListener(new AddEmployeeDialog.awt.event.MouseAdapter() {
             @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(AddEmployeeDialog.awt.event.MouseEvent evt) {
                 button.setContentAreaFilled(true);
-                button.setBackground(new java.awt.Color(173,216,230)); 
-                button.setForeground(java.awt.Color.WHITE); 
-                button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                button.setBackground(new AddEmployeeDialog.awt.Color(173,216,230)); 
+                button.setForeground(AddEmployeeDialog.awt.Color.WHITE); 
+                button.setCursor(new AddEmployeeDialog.awt.Cursor(AddEmployeeDialog.awt.Cursor.HAND_CURSOR));
             }
 
             @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(AddEmployeeDialog.awt.event.MouseEvent evt) {
                 button.setContentAreaFilled(false);
-                button.setForeground(java.awt.Color.WHITE); 
+                button.setForeground(AddEmployeeDialog.awt.Color.WHITE); 
             }
         });
     }
@@ -268,7 +282,7 @@ public class UserPortal extends javax.swing.JFrame{
     }
 
     //It calls Dao, fetches flights and fills the jTable. 
-    private void SearchFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void SearchFlightButtonActionPerformed(AddEmployeeDialog.awt.event.ActionEvent evt) {
         String from = FromTextField.getText();
         String to = ToTextField.getText();
         int year = TravelDateChooser.getYear();
@@ -802,7 +816,10 @@ public class UserPortal extends javax.swing.JFrame{
     private void FromTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FromTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FromTextFieldActionPerformed
-                                         
+
+    private void jDayChooser1ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
 
     private void ShowAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowAllButtonActionPerformed
         // TODO add your handling code here:
