@@ -8,24 +8,18 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 
-
-
 /**
  *
  * @author Aayush Kharel
  */
-public class ButtonRenderer extends JPanel implements TableCellRenderer {
 
-    private final JButton bookButton = new JButton("Book");
+public class EditButtonRenderer extends JPanel implements TableCellRenderer {
+
     private final JButton editButton = new JButton("Edit");
     private final JButton deleteButton = new JButton("Delete");
 
-    public ButtonRenderer() {
+    public EditButtonRenderer() {
         setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
-
-        bookButton.setBackground(new Color(0, 102, 153));
-        bookButton.setForeground(Color.WHITE);
-        bookButton.setFocusPainted(false);
 
         editButton.setBackground(new Color(0, 204, 102));
         editButton.setForeground(Color.WHITE);
@@ -34,28 +28,15 @@ public class ButtonRenderer extends JPanel implements TableCellRenderer {
         deleteButton.setBackground(new Color(255, 0, 0));
         deleteButton.setForeground(Color.WHITE);
         deleteButton.setFocusPainted(false);
+
+        add(editButton);
+        add(deleteButton);
     }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
-        removeAll(); // Clear previous components
-
-        if (value != null && value.toString().equalsIgnoreCase("Book")) {
-            add(bookButton);
-        } else {
-            add(editButton);
-            add(deleteButton);
-        }
-
         return this;
     }
 }
-
-
-
-
-
-
-
 
