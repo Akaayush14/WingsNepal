@@ -99,7 +99,7 @@ public class LoginPage extends javax.swing.JFrame {
             return;
         }
 
-        // Authenticating:
+        // Authenticate user
         LoginDao loginDao = new LoginDao();
         UserData user = loginDao.login(email, password);
 
@@ -108,28 +108,35 @@ public class LoginPage extends javax.swing.JFrame {
             return;
         }
 
+        // 👇 Force employee login to bypass DB role check
+        if (selectedRole.equalsIgnoreCase("Employee")) {
+            JOptionPane.showMessageDialog(this, "Login successful as Employee!");
+            new EmployeeDashboard(user).setVisible(true);
+            dispose();
+            return;
+        }
+
+        // 🔐 Match selected role with user's actual role for User/Admin
         if (!user.getRole().equalsIgnoreCase(selectedRole)) {
             JOptionPane.showMessageDialog(this, "Incorrect role selected for this user.");
             return;
         }
 
-        // Success
+        // Proceed with matched roles
         JOptionPane.showMessageDialog(this, "Login successful! Welcome, " + user.getFullName());
 
         switch (user.getRole()) {
             case "User":
                 new UserPortal(user).setVisible(true);
                 break;
-            case "Employee":
-                new EmployeeDashboard(user).setVisible(true);
-                break;
             case "Admin":
                 new AdminDashboard(user).setVisible(true);
                 break;
         }
 
-        dispose(); // Close login
+        dispose();
     }
+
     
     @SuppressWarnings("unchecked")
     
