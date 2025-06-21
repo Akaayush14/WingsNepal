@@ -1,4 +1,9 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package wingsnepal.view;
+
 aayush
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -22,9 +27,6 @@ import wingsnepal.dao.EmployeeDao;
 main
 
 public class ButtonEditor extends AbstractCellEditor implements TableCellEditor {
-    private final JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
-    private final JButton editButton = new JButton("Edit");
-    private final JButton deleteButton = new JButton("Delete");
 
     private JTable table;
     private AdminDashboard dashboard;
@@ -145,4 +147,6 @@ aayush
         return true;  // Ensure the cell is editable
     }
 }
+
+
 main
