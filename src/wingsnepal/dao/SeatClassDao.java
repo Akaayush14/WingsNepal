@@ -66,28 +66,24 @@ public class SeatClassDao {
     
     public List<String> getAvailableSeats(int flightId, String seatClass) {
         List<String> availableSeats = new ArrayList<>();
-        String sql = "SELECT seat_no FROM seats WHERE flight_id = ? AND class_name = ? AND is_booked = 0";
-
+        String query = "SELECT seat_no FROM seats WHERE flight_id = ? AND class_name = ? AND is_booked = 0";
         DbConnection db = new MySqlConnection();
+        
         try (Connection conn = db.openConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, flightId);
-            stmt.setString(2, seatClass);
-            ResultSet rs = stmt.executeQuery();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, flightId);
+            ps.setString(2, seatClass);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-            availableSeats.add(rs.getString("seat_no"));
+                availableSeats.add(rs.getString("seat_no"));
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-
         return availableSeats;
     }
 
-    
     public int getFlightIdByCode(String flightCode) {    
         int flightId = -1;
         DbConnection db = new MySqlConnection();
@@ -147,7 +143,69 @@ public class SeatClassDao {
             e.printStackTrace();
         }
     }
+    
+        // Simulating fetching available seats based on seat class
+    public List<String> getAvailableSeatsForClass(String seatClass) {
+        List<String> availableSeats = new ArrayList<>();
 
+        // Sample data for available seats based on class
+        switch (seatClass) {
+            case "Economy":
+                availableSeats.add("A1");
+                availableSeats.add("A2");
+                availableSeats.add("A3");
+                break;
+            case "Business":
+                availableSeats.add("B1");
+                availableSeats.add("B2");
+                availableSeats.add("B3");
+                break;
+            case "First Class":
+                availableSeats.add("C1");
+                availableSeats.add("C2");
+                availableSeats.add("C3");
+                break;
+            default:
+                break;
+        }
 
+        return availableSeats;
+    }
+
+    // Fetch price for selected seat class
+    public int getPriceForClass(String class_name) {
+        switch (class_name) {
+            case "Economy":
+                return 5000;  // Sample price for Economy
+            case "Business":
+                return 10000;  // Sample price for Business
+            case "First Class":
+                return 15000;  // Sample price for First Class
+            default:
+                return 0;
+        }
+    }
+    
+    public boolean isSeatAvailable(int seatId) {
+        String checkSeatSql = "SELECT is_booked FROM seats WHERE seat_id = ?";
+        DbConnection db = new MySqlConnection();
+        try (Connection conn = db.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(checkSeatSql)) {
+
+            stmt.setInt(1, seatId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return !rs.getBoolean("is_booked"); // true if available, false if booked
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false; // If seat status couldn't be determined
+    }
 
 }
+
+
+
+

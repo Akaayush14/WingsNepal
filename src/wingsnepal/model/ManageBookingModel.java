@@ -18,18 +18,18 @@ public class ManageBookingModel{
     private int userId;
     private int flightId;
     private String flightCode;
-    private String seatClass;
+    private String className;
     private String seatNo;
     private int tickets;
     private Date travelDate;
     private String paymentMethod;
 
-    public ManageBookingModel(int bookingId, int userId, int flightId, String flightCode, String seatClass, String seatNo, int tickets, Date travelDate, String paymentMethod) {
+    public ManageBookingModel(int bookingId, int userId, int flightId, String flightCode, String className, String seatNo, int tickets, Date travelDate, String paymentMethod) {
         this.bookingId = bookingId;
         this.userId = userId;
         this.flightId = flightId;
         this.flightCode = flightCode;
-        this.seatClass = seatClass;
+        this.className = className;
         this.seatNo = seatNo;
         this.tickets = tickets;
         this.travelDate = travelDate;
@@ -49,8 +49,8 @@ public class ManageBookingModel{
     public String getFlightCode() { return flightCode; }
     public void setFlightCode(String flightCode) { this.flightCode = flightCode; }
 
-    public String getSeatClass() { return seatClass; }
-    public void setSeatClass(String seatClass) { this.seatClass = seatClass; }
+    public String getClassName() { return className; }
+    public void setClassName(String seatClass) { this.className = className; }
 
     public String getSeatNo() { return seatNo; }
     public void setSeatNo(String seatNo) { this.seatNo = seatNo; }

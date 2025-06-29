@@ -4,6 +4,8 @@
  */
 package wingsnepal.view;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -13,11 +15,13 @@ import wingsnepal.dao.EmployeeDao;
 import wingsnepal.model.Employee;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.AbstractCellEditor;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
-
-
-
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.table.TableCellEditor;
 
 public class AdminDashboard extends javax.swing.JFrame {
     private UserData loggedInUser;
@@ -52,8 +56,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         
         setupEmployeeLiveSearch();
         
-
-
         setTitle("Admin Dashboard - Welcome" + user.getFullName());
         setLocationRelativeTo(null);
         
@@ -77,6 +79,36 @@ public class AdminDashboard extends javax.swing.JFrame {
         });
 
     }
+
+        public class AdminButtonEditor extends AbstractCellEditor implements TableCellEditor {
+            private JButton button = new JButton("Edit");
+            private boolean clicked;
+
+            public AdminButtonEditor(JCheckBox checkBox, JFrame parent) {
+                button.setOpaque(true);
+                button.setBackground(Color.GREEN);
+                button.setForeground(Color.WHITE);
+                button.addActionListener(e -> {
+                    // your edit logic here
+                    clicked = true;
+                    fireEditingStopped();
+                });
+            }
+
+            @Override
+            public Component getTableCellEditorComponent(JTable table, Object value,
+                    boolean isSelected, int row, int column) {
+                button.setText("Edit");
+                clicked = false;
+                return button;
+            }
+
+            @Override
+            public Object getCellEditorValue() {
+                return "Edit";
+            }
+        }
+
     
         private void scaleImage1(){
             ImageIcon icon1 = new ImageIcon(getClass().getResource("/imagepicker/WingsNepalLogo.jpg"));
@@ -123,8 +155,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         }
     });
 }
-      
-        
+    public JLabel getWelcomeLabel() {
+        return welcomeLabel;
+    }
+     
     //This method styles buttons to look flat and modern, and adds hover effects for better user experience.
     //It is called after init components to give for which button it is applicable.
     private void styleFlatHoverButton(javax.swing.JButton button) {
@@ -218,13 +252,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             employeeTable.getColumnModel().getColumn(6).setPreferredWidth(160);  // Set width of the Actions column
 
         }
-
-
-
-    
         
-        
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

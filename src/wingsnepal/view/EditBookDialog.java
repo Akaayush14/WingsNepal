@@ -2,20 +2,27 @@ package wingsnepal.view;
 
 import wingsnepal.model.ManageBookingModel;
 import wingsnepal.dao.ManageBookingDao;
+import wingsnepal.dao.SeatClassDao;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class EditBookDialog extends JDialog {
     private int bookingId;
     private UserPortal userPortal;
     private JTextField seatNoTextField;
     private JComboBox<String> seatClassComboBox;
+    private JComboBox<String> seatNoComboBox;
+    private JTextField priceTextField;
+    private SeatClassDao seatClassDao;
 
     public EditBookDialog(UserPortal userPortal, int bookingId) {
         this.userPortal = userPortal;
         this.bookingId = bookingId;
+        this.seatClassDao = new SeatClassDao();
         initComponents();
         loadBookingDetails();
         setTitle("Edit Booking");
@@ -34,8 +41,13 @@ public class EditBookDialog extends JDialog {
         seatClassComboBox.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 
         JLabel seatNoLabel = new JLabel("Seat Number:");
-        seatNoTextField = new JTextField(10);
-        seatNoTextField.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        seatNoComboBox = new JComboBox<>();
+        seatNoComboBox.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+
+        JLabel priceLabel = new JLabel("Price:");
+        priceTextField = new JTextField(10);
+        priceTextField.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        priceTextField.setEditable(false); // Disable editing of price field
 
         JButton saveButton = new JButton("Save");
         saveButton.setFont(new Font("Segoe UI", Font.BOLD, 16));
@@ -72,11 +84,18 @@ public class EditBookDialog extends JDialog {
         add(seatNoLabel, gbc);
 
         gbc.gridx = 1;
-        add(seatNoTextField, gbc);
+        add(seatNoComboBox, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        add(priceLabel, gbc);
+
+        gbc.gridx = 1;
+        add(priceTextField, gbc);
 
         // Add Save and Cancel buttons in a row at the bottom
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.gridwidth = 2;  // Span across 2 columns
         gbc.anchor = GridBagConstraints.CENTER;
         JPanel buttonPanel = new JPanel();
@@ -97,17 +116,21 @@ public class EditBookDialog extends JDialog {
         if (booking != null) {
             // Pre-fill the form with booking details
             seatClassComboBox.setSelectedItem(booking.getSeatClass());
-            seatNoTextField.setText(booking.getSeatNo());
+            seatNoComboBox.addItem(booking.getSeatNo()); // Pre-fill the seat number
+            priceTextField.setText(String.valueOf(getPriceForClass(booking.getSeatClass())));
+
+            // Populate the seat numbers based on the selected class
+            updateSeatNumbersAndPrice();
         }
     }
 
     // Save the edited booking details
     private void saveBookingDetails() {
         String seatClass = (String) seatClassComboBox.getSelectedItem();
-        String seatNo = seatNoTextField.getText();
+        String seatNo = (String) seatNoComboBox.getSelectedItem();
 
-        if (seatNo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter a seat number.");
+        if (seatNo == null || seatNo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select a seat number.");
             return;
         }
 
@@ -121,5 +144,38 @@ public class EditBookDialog extends JDialog {
         } else {
             JOptionPane.showMessageDialog(this, "Failed to update booking.");
         }
+    }
+
+    // Update seat numbers and price based on selected class
+    private void updateSeatNumbersAndPrice() {
+        String selectedClass = (String) seatClassComboBox.getSelectedItem();
+        if (selectedClass != null) {
+            // Fetch available seat numbers based on selected class
+            List<String> seats = seatClassDao.getAvailableSeatsForClass(selectedClass);
+            seatNoComboBox.removeAllItems(); // Clear existing items
+
+            for (String seat : seats) {
+                seatNoComboBox.addItem(seat);
+            }
+
+            // Fetch and display price for selected class
+            priceTextField.setText(String.valueOf(getPriceForClass(selectedClass)));
+        }
+    }
+
+    private int getPriceForClass(String seatClass) {
+        if (seatClass != null) {
+            switch (seatClass) {
+                case "Economy":
+                    return 5000; // Example price for economy class
+                case "Business":
+                    return 10000; // Example price for business class
+                case "First Class":
+                    return 15000; // Example price for first class
+                default:
+                    return 0;
+            }
+        }
+        return 0;
     }
 }

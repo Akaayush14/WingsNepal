@@ -1,16 +1,13 @@
 package wingsnepal.view;
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.table.TableCellEditor;
-import wingsnepal.controller.ManageBookingController;
+import javax.swing.table.*;
+import java.awt.*;
+import wingsnepalController.ManageBookingController;
 
 public class EditButtonEditor extends AbstractCellEditor implements TableCellEditor {
-    private JPanel panel;
-    private JButton editButton;
-    private JButton deleteButton;
-
+    private final JButton editButton;
+    private final JButton deleteButton;
     private final JTable table;
     private final UserPortal userPortal;
     private final ManageBookingController controller;
@@ -20,45 +17,53 @@ public class EditButtonEditor extends AbstractCellEditor implements TableCellEdi
         this.table = table;
         this.controller = new ManageBookingController(userPortal);
 
-        panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        // Create buttons for "Edit" and "Delete"
         editButton = new JButton("Edit");
         deleteButton = new JButton("Delete");
 
-        editButton.setPreferredSize(new Dimension(70, 20));
-        deleteButton.setPreferredSize(new Dimension(75, 20));
+        // Add action listeners for buttons
+        editButton.addActionListener(e -> handleEditAction());
+        deleteButton.addActionListener(e -> handleDeleteAction());
+    }
 
-        editButton.setBackground(new Color(0, 204, 102));
-        editButton.setForeground(Color.WHITE);
-        editButton.setFocusPainted(false);
-
-        deleteButton.setBackground(new Color(255, 0, 0));
-        deleteButton.setForeground(Color.WHITE);
-        deleteButton.setFocusPainted(false);
-
-        panel.add(editButton);
-        panel.add(deleteButton);
-
-        editButton.addActionListener(e -> {
-            int row = table.getSelectedRow();
+    private void handleEditAction() {
+        int row = table.getSelectedRow();
+        if (row >= 0) {
+            int bookingId = (int) table.getValueAt(row, 0); // Get booking ID (Column 0 should be the booking ID)
             controller.handleBookingActions(row, "Edit");
-            fireEditingStopped();
-        });
+        }
+        fireEditingStopped();  // Stop editing after action
+    }
 
-        deleteButton.addActionListener(e -> {
-            int row = table.getSelectedRow();
-            controller.handleBookingActions(row, "Delete");
-            fireEditingStopped();
-        });
+    private void handleDeleteAction() {
+        int row = table.getSelectedRow();
+        if (row >= 0) {
+            int bookingId = (int) table.getValueAt(row, 0); // Get booking ID (Column 0 should be the booking ID)
+            boolean isDeleted = controller.handleBookingActions(row, "Delete");
+            if (isDeleted) {
+                JOptionPane.showMessageDialog(userPortal, "Booking deleted successfully.");
+            } else {
+                JOptionPane.showMessageDialog(userPortal, "Failed to delete booking.");
+            }
+        }
+        fireEditingStopped();  // Stop editing after action
     }
 
     @Override
-    public Component getTableCellEditorComponent(JTable table, Object value,
-            boolean isSelected, int row, int column) {
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        panel.setOpaque(true);
+
+        // Add buttons to the panel
+        panel.add(editButton);
+        panel.add(deleteButton);
+
         return panel;
     }
 
     @Override
     public Object getCellEditorValue() {
-        return "";
+        return null;  // No value to return since the buttons perform actions
     }
 }
+

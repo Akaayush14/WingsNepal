@@ -30,8 +30,9 @@ import wingsnepal.model.BookingFlight;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import wingsnepal.controller.ManageBookingController;
+import wingsnepalController.ManageBookingController;
 import wingsnepal.model.StripePayment;
+import wingsnepal.view.BookButtonRenderer;
 import wingsnepalController.TicketGenerator;
 
 
@@ -180,8 +181,34 @@ public class UserPortal extends javax.swing.JFrame{
             }
         });
     }
+    // Method to refresh the Search Flights tab
+    public void refreshSearchFlights() {
+        // Fetch updated flight data
+        SearchFlightDao searchFlightDao = new SearchFlightDao();
+        List<SearchFlight> flights = searchFlightDao.getAllFlights();  // Or any specific search method
 
-    
+        // Clear the previous search results in jTable1
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);  // Clear existing rows
+
+        // Populate the table with updated flight data
+        for (SearchFlight flight : flights) {
+            model.addRow(new Object[] {
+                flight.getFlightCode(),
+                flight.getFlightName(),
+                flight.getTime(),
+                flight.getPrice(),
+                flight.getDuration(),
+                "Book"
+            });
+        }
+
+        // Ensure the seat availability is updated after deleting the booking
+        TableColumn bookColumn = jTable1.getColumn("Action");
+        bookColumn.setCellRenderer(new BookButtonRenderer());
+        bookColumn.setCellEditor(new BookButtonEditor(this, jTable1));
+    }
+
     //This method styles buttons to look flat and modern, and adds hover effects for better user experience.
     //It is called after init components to give for which button it is applicable.
     private void styleFlatHoverButton(javax.swing.JButton button) {
@@ -854,27 +881,22 @@ public class UserPortal extends javax.swing.JFrame{
     private void SeatComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeatComboBoxActionPerformed
         String selectedSeatClass = (String) SeatComboBox.getSelectedItem();
         String flightCode = FlightCodeTextField.getText();
-        
-        if (!flightCode.isEmpty()) {
-        SeatClassDao dao = new SeatClassDao();
-        int flightId = dao.getFlightIdByCode(flightCode);
 
-        // Populate available seat numbers
-        List<String> seatNumbers = dao.getAvailableSeats(flightId, selectedSeatClass);
-        SeatNoComboBox.removeAllItems(); // clear existing items
-        
-        if (seatNumbers.isEmpty()) {
-            SeatNoComboBox.addItem("No seats available");
-        } else {
-            SeatNoComboBox.removeAllItems();
-            for (String seat : seatNumbers) {
-                SeatNoComboBox.addItem(seat);
+        if (!flightCode.isEmpty()) {
+            SeatClassDao dao = new SeatClassDao();
+            int flightId = dao.getFlightIdByCode(flightCode);
+
+            // Fetch available seats for the selected flight and seat class
+            List<String> seatNumbers = dao.getAvailableSeats(flightId, selectedSeatClass);
+            SeatNoComboBox.removeAllItems(); // clear existing items
+
+            if (seatNumbers.isEmpty()) {
+                SeatNoComboBox.addItem("No seats available");
+            } else {
+                for (String seat : seatNumbers) {
+                    SeatNoComboBox.addItem(seat);
+                }
             }
-        }
-            updateSeatClassPrice();
-        } else {
-            // If flight code is empty, just update price to blank
-            PriceTextField.setText("");
         }
 
     }//GEN-LAST:event_SeatComboBoxActionPerformed
@@ -1078,9 +1100,6 @@ public class UserPortal extends javax.swing.JFrame{
             PriceTextField.setText("Error");
         }
     }
-
-
-    
     private void SeatNoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeatNoComboBoxActionPerformed
 //        String selectedSeatClass = (String) SeatComboBox.getSelectedItem();
 //        String flightCode = FlightCodeTextField.getText();
@@ -1119,6 +1138,13 @@ public class UserPortal extends javax.swing.JFrame{
     jTable2.getColumn("Action").setCellRenderer(new EditButtonRenderer());
     jTable2.getColumn("Action").setCellEditor(new EditButtonEditor(this, jTable2));
     jTable2.getColumn("Action").setPreferredWidth(180); // Ensure enough space
+    
+    jTable2.getSelectionModel().addListSelectionListener(e -> {
+        int row = jTable2.getSelectedRow();
+        if (row >= 0) {
+            System.out.println("Selected row: " + row);  // Debugging to check if a row is selected
+        }
+    });
     }//GEN-LAST:event_ShowMyBookingButtonActionPerformed
     
 

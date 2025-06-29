@@ -16,26 +16,28 @@ public class BookingFlight {
     private int seatId;
     private String fullName;
     private String email;
-    private String seatClass;
+    private String className;
     private String seatNo;
     private int tickets;
-    private Date travelDate;
+    private Date date;
     private String paymentMethod;
+    private boolean isBooked;
 
     //Constructor
-    public BookingFlight(int userId, int flightId, int seatId, String fullName, String email, String seatClass,
-                   String seatNo, int tickets, Date travelDate, String paymentMethod) {
+    public BookingFlight(int userId, int flightId, int seatId, String fullName, String email, String className,
+                   String seatNo, int tickets, Date date, String paymentMethod) {
         this.userId = userId;
         this.flightId = flightId;
         this.seatId = seatId;
         this.fullName = fullName;
         this.email = email;
-        this.seatClass = seatClass;
+        this.className = className;
         this.seatNo = seatNo;
         this.tickets = tickets;
-        this.travelDate = travelDate;
+        this.date = date;
         this.paymentMethod = paymentMethod;
     }
+
     // Getters
     public int getUserId() {
         return userId;
@@ -57,8 +59,8 @@ public class BookingFlight {
         return email;
     }
 
-    public String getSeatClass() {
-        return seatClass;
+    public String getClassName() {
+        return className;
     }
 
     public String getSeatNo() {
@@ -70,12 +72,17 @@ public class BookingFlight {
     }
 
     public Date getTravelDate() {
-        return travelDate;
+        return date;
     }
 
     public String getPaymentMethod() {
         return paymentMethod;
     }
+      
+    public boolean isBooked() {
+        return isBooked;
+    }
+    
     // Setters
     public void setFlightId(int flightId) {
         this.flightId = flightId;
@@ -93,8 +100,8 @@ public class BookingFlight {
         this.email = email;
     }
 
-    public void setSeatClass(String seatClass) {
-        this.seatClass = seatClass;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public void setSeatNo(String seatNo) {
@@ -106,10 +113,14 @@ public class BookingFlight {
     }
 
     public void setTravelDate(Date travelDate) {
-        this.travelDate = travelDate;
+        this.date = date;
     }
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }  
+    public void setBooked(boolean isBooked) {
+        this.isBooked = isBooked;
     }
+    
 }
