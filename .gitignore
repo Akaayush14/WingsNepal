@@ -1,3 +1,4 @@
+aayush
 arbaz
 "nbproject/private/private.xml" 
 "nbproject/private/private.xml" 
@@ -5,3 +6,6 @@ arbaz
  main
 /dist/
 /nbproject/private/
+
+/build/
+ main
