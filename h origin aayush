@@ -1,0 +1,118 @@
+[33m4f5d69a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32maayush[m[33m)[m Restored and pushed final merged version after cleanup
+[33m39f07ec[m[33m ([m[1;31morigin/aayush[m[33m)[m Complete functionality added of edit and delete button in jTable2, some improvement left to perform in edit UI
+[33mc80ac9a[m Merge branch 'main' of https://github.com/Akaayush14/WingsNepal into aayush
+[33m2d9ba08[m made separate button editor and renderer for search flight and managebooking
+[33mb1e1928[m Merge branch 'main' of https://github.com/Akaayush14/WingsNepal into aayush
+[33mf45b29d[m Merge pull request #38 from Akaayush14/aayush
+[33med209bc[m Merge branch 'main' into aayush
+[33m51e0c60[m tried adding managebooking edit and delete button in action column, but failed to adjust it all in a single button editor and button renderer
+[33m7aa8f9f[m Stripe has been successfully implemented
+[33m9baa73a[m Generating ticket feature has been added
+[33m01adad9[m Added payment using stripe
+[33m729881f[m Removed Stripe secret key and replaced with env variable
+[33mb57ca81[m Merge pull request #37 from Akaayush14/arbaz
+[33mdb902b4[m Merge branch 'main' into arbaz
+[33m13d4aa4[m fixed the boders of text field and role changed of edit button as well as add employee button
+[33m70cbbac[m added everything on employees panel of admin dashboard and connected database with the employee role so that employee can login with the data created by the admin directly
+[33mac01c97[m Merge pull request #36 from Akaayush14/arbaz
+[33m329e3d3[m Merge pull request #35 from Akaayush14/aayush
+[33me51e28a[m Stripe has been added and jars related to it
+[33me80fa6a[m Merge pull request #34 from Akaayush14/aayush
+[33m884d76a[m Merge branch 'main' into aayush
+[33me90845d[m Dashboard label and welcome image to the portal is added
+[33mdd9b456[m Updated AdminDashboard UI and restored NetBeans project files
+[33mdb20a8e[m Merge pull request #33 from Akaayush14/arbaz
+[33mebc4705[m Passengers management, flight management and employees management updated
+[33m61c3ebb[m Flight management,passenger management, Reservations and employees management uploaded
+[33mb72e13c[m Reservation, Flight and passengers management frontend added with buttons
+[33m6df7e6c[m Merge pull request #32 from Akaayush14/arbaz
+[33mb11ed9d[m Merge branch 'main' into arbaz
+[33m9e549db[m Buttons, tabbed pane, panels, hovering effect, icons, logo has been added in the wingnepal logo
+[33mb87dae3[m Userportal.java and userportal/form added
+[33m48e1973[m Merge pull request #31 from Akaayush14/aayush
+[33m53437c3[m Merge branch 'main' of https://github.com/Akaayush14/WingsNepal into aayush
+[33mc66e2fd[m Improved database and UI of book flights, added model,dao and others
+[33m9f2a3db[m Merge pull request #30 from Akaayush14/aayush
+[33m0603835[m Merge branch 'main' into aayush
+[33mcfc1559[m clear button has been made functionable in bookflights-UserPortal.java file
+[33m97200a6[m Merge pull request #29 from Akaayush14/aayush
+[33m9a5625c[m Entry field in book flight gets auto filled if selected by user from search flight tab
+[33mfd2f35d[m Merge pull request #28 from Akaayush14/arbaz
+[33mf45800f[m Resolved conflicts and updated EmployeeDashboard, UserPortal UI and settings
+[33m36bd828[m Merge pull request #27 from Akaayush14/aayush
+[33m1b4d253[m Removed eye toogle button, replaced with java swing checkbox
+[33m314afd1[m Merge branch 'main' of https://github.com/Akaayush14/WingsNepal into aayush
+[33mcb6e2f5[m Tried to make toggle button bg similar to panel
+[33mf69dc8c[m Merge pull request #26 from Akaayush14/aayush
+[33m824dc24[m Merge branch 'main' into aayush
+[33mb9ae4a3[m Added eye toggle button, worked but has bg color issues
+[33mcb8a375[m Merge pull request #25 from Akaayush14/ronan
+[33m98315b8[m added logo, changed dashboard, logout
+[33m9e0dc0b[m employe page with updated logo and db
+[33m032b734[m Merge pull request #24 from Akaayush14/aayush
+[33mf454aac[m Solved error of admindashboard.java
+[33m039f525[m Merge branch 'main' of https://github.com/Akaayush14/WingsNepal into aayush
+[33m7aa47df[m Added navigation from login to userportal, admindashboard, employeedashboard
+[33mf128a84[m Restored original EmployeeDashbord.java from origin/main
+[33mf0f2601[m Merge pull request #23 from Akaayush14/aayush
+[33m64e5896[m Merge branch 'main' into aayush
+[33m1c6bb97[m changed BookFlightPanel labels, combobox, buttons, and others variable names
+[33m2b6ec44[m from and to textfield pre-existing text has been made to disapper when user enters to give input
+[33md366c84[m Merge pull request #22 from Akaayush14/aarohi
+[33m51437f1[m Login database is being done
+[33m1085d65[m Merge pull request #21 from Akaayush14/aayush
+[33m0576bd3[m Merge branch 'main' into aayush
+[33m84f3ed8[m Added book button each to all searched flights displayed in jTable1
+[33mf8b3cf3[m Merge pull request #20 from Akaayush14/ronan
+[33m4a14dc8[m Merge branch 'main' into ronan
+[33mc8c6c93[m Employee dashboard updated
+[33mb7194ce[m Changed admin register because admin registration cannot be done logically
+[33m410b7a7[m Merge pull request #19 from Akaayush14/aayush
+[33m3e40b54[m imagepicker method is applied to all files
+[33m90d2a00[m Merge pull request #18 from Akaayush14/aayush
+[33m670b77d[m search flight database, dao, model has been made and run succesfully after facing several errors
+[33m6ceaa7a[m Added some database code to check its functionality and later on removed for future
+[33me897103[m Merge pull request #17 from Akaayush14/aayush
+[33mfbbea7b[m Login button in login page, its bg color is changed
+[33m61349ae[m disabled mazimize window and centered it
+[33m0da14e5[m Merge pull request #16 from Akaayush14/ronan
+[33m96c70a5[m Your commit message for ronan branch
+[33ma8f82fa[m Merge pull request #15 from Akaayush14/aayush
+[33mfc4a2e0[m Merge branch 'main' into aayush
+[33m5a2b703[m Merge pull request #14 from Akaayush14/arbaz
+[33m99906ac[m Added labels, tabbed pane, butttons, icons in userportal
+[33m85efe94[m Sidebar-Updated
+[33mb35bb1b[m Merge pull request #13 from Akaayush14/arbaz
+[33mcc876f5[m Admin Panel UI created
+[33m3c171a9[m Merge pull request #12 from Akaayush14/aayush
+[33m8d1d049[m First i did git pull before pushing or stashing my changes. Then i tried a lot of things in github by merging previous commits to a new branch and merging it to my original branch. But i failed and used the easy method in netbeans by reverting my history.
+[33mf1e5912[m Merge branch 'recovered-changes' into aayush
+[33m112b195[m Resolved merge conflicts after stash pop
+[33mfc8da01[m Merge pull request #11 from Akaayush14/aayush
+[33mc087001[m Merge branch 'main' into aayush
+[33m6d15750[m forgot password is created and login, register UI is enhanced
+[33m732b2d1[m Merge pull request #10 from Akaayush14/ronan
+[33m9f9f9c2[m Merge branch 'main' into ronan
+[33mb9da4c6[m employee frame is created
+[33mc671064[m Merge pull request #9 from Akaayush14/arbaz
+[33m25d1fff[m AdminDashoard minor Changes
+[33ma4e8e79[m Merge pull request #7 from Akaayush14/arbaz
+[33m1e54779[m Merge branch 'main' into arbaz
+[33m4d0b924[m Merge pull request #8 from Akaayush14/aayush
+[33me54fd96[m changes forgotpassword and signup from button to label
+[33m85b60c0[m Ignore private.xml
+[33m5f53786[m Ignore private.xml
+[33m599af27[m Merge pull request #6 from Akaayush14/aayush
+[33mcdfcce1[m UserPortal file is created
+[33m32ea770[m I enhanced loginpage, worked on signup, added bgimage for signup
+[33m9ec6891[m Merge pull request #4 from Akaayush14/Bikrant
+[33m9ff483c[m Added register
+[33mcb34a99[m Merge pull request #3 from Akaayush14/aayush
+[33mf0c3bcb[m Merge pull request #2 from Akaayush14/Bikrant
+[33m206e858[m Learning to push and pull
+[33md986fa9[m login file created
+[33m7310fb4[m Login file created.
+[33m8a63445[m Merge pull request #1 from Akaayush14/arbaz
+[33ma8bd102[m Admin Dashboard Renamed
+[33mbdf87a6[m AdminDashboard Renamed
+[33m71b7e97[m Project initialization
