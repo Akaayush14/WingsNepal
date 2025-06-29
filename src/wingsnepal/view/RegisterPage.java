@@ -6,7 +6,10 @@ package wingsnepal.view;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+ aayush
+
 import javax.swing.JFrame;
+ main
 
 /**
  *
@@ -19,6 +22,13 @@ public class RegisterPage extends javax.swing.JFrame {
      */
     public RegisterPage() {
         initComponents();
+ aayush
+        scaleImage();
+        setResizable(false);         //Disable maximize button
+        setLocationRelativeTo(null); //Center window
+    }
+        public void scaleImage(){
+
             this.addComponentListener(new java.awt.event.ComponentAdapter() {
                 @Override
                 public void componentResized(java.awt.event.ComponentEvent evt) {
@@ -36,6 +46,7 @@ public class RegisterPage extends javax.swing.JFrame {
     }
         public void scaleImage(){
             
+ main
             // Avoid scaling if label is not yet visible or sized
             if (BgImageLabel.getWidth() <= 0 || BgImageLabel.getHeight() <= 0) {
                 return;
@@ -45,7 +56,11 @@ public class RegisterPage extends javax.swing.JFrame {
             BgImageLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
             
             // Load image from path into ImageIcon.
+ aayush
+            ImageIcon icon = new ImageIcon(getClass().getResource("/imagepicker/Aeroplane Image 1.jpg"));
+
             ImageIcon icon = new ImageIcon("C:\\Users\\Aayush Kharel\\Desktop\\Java project\\WingsNepal\\src\\wingsnepal\\image\\Aeroplane Image 2.jpg");
+ main
             
             //Get Image from the icon.
             Image img1 = icon.getImage();
@@ -82,6 +97,23 @@ public class RegisterPage extends javax.swing.JFrame {
         PhoneTextField = new javax.swing.JTextField();
         GenderLabel = new javax.swing.JLabel();
         GenderComboBox = new javax.swing.JComboBox<>();
+ aayush
+        PasswordLabel = new javax.swing.JLabel();
+        ConfirmPasswordLabel = new javax.swing.JLabel();
+        SignUpButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        PasswordField = new javax.swing.JPasswordField();
+        ConfirmPasswordField = new javax.swing.JPasswordField();
+        BgImageLabel = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153, 65));
+
+        NameLabel.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
+        NameLabel.setForeground(new java.awt.Color(255, 255, 255));
+
         IDTypeLabel = new javax.swing.JLabel();
         IDTypeComboBox = new javax.swing.JComboBox<>();
         IDNumberLabel = new javax.swing.JLabel();
@@ -101,6 +133,7 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(153, 153, 153, 80));
 
         NameLabel.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
+ main
         NameLabel.setText("Fullname");
 
         NameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +143,30 @@ public class RegisterPage extends javax.swing.JFrame {
         });
 
         EmailLabel.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
+ aayush
+        EmailLabel.setForeground(new java.awt.Color(255, 255, 255));
+        EmailLabel.setText("Email");
+
+        PhoneLabel.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
+        PhoneLabel.setForeground(new java.awt.Color(255, 255, 255));
+        PhoneLabel.setText("Phone");
+
+        PhoneTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PhoneTextFieldActionPerformed(evt);
+            }
+        });
+
+        GenderLabel.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
+        GenderLabel.setForeground(new java.awt.Color(255, 255, 255));
+        GenderLabel.setText("Gender");
+
+        GenderComboBox.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        GenderComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+        GenderComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenderComboBoxActionPerformed(evt);
+
         EmailLabel.setText("Email");
 
         PhoneLabel.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
@@ -149,10 +206,37 @@ public class RegisterPage extends javax.swing.JFrame {
         IDNumberTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IDNumberTextFieldActionPerformed(evt);
+ main
             }
         });
 
         PasswordLabel.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
+ aayush
+        PasswordLabel.setForeground(new java.awt.Color(255, 255, 255));
+        PasswordLabel.setText("Password");
+
+        ConfirmPasswordLabel.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
+        ConfirmPasswordLabel.setForeground(new java.awt.Color(255, 255, 255));
+        ConfirmPasswordLabel.setText("Confirm Password");
+
+        SignUpButton.setBackground(new java.awt.Color(0, 102, 153));
+        SignUpButton.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
+        SignUpButton.setForeground(new java.awt.Color(255, 255, 255));
+        SignUpButton.setText("Sign up");
+        SignUpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SignUpButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Enter your details to register as an user ");
+
+        PasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PasswordFieldActionPerformed(evt);
+
         PasswordLabel.setText("Password");
 
         ConfirmPasswordLabel.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
@@ -182,6 +266,7 @@ public class RegisterPage extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+ main
             }
         });
 
@@ -190,6 +275,37 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+ aayush
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ConfirmPasswordLabel)
+                            .addComponent(NameLabel)
+                            .addComponent(PasswordLabel))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ConfirmPasswordField)
+                            .addComponent(SignUpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PasswordField)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(GenderLabel)
+                            .addComponent(PhoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EmailLabel))
+                        .addGap(113, 113, 113)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PhoneTextField)
+                            .addComponent(GenderComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(EmailTextField)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
+                .addGap(41, 41, 41))
+
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -228,10 +344,49 @@ public class RegisterPage extends javax.swing.JFrame {
                         .addGap(98, 98, 98)
                         .addComponent(PasswordField)))
                 .addGap(43, 43, 43))
+ main
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+ aayush
+                .addGap(11, 11, 11)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NameLabel)
+                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EmailLabel))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PhoneLabel))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(GenderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(GenderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PasswordLabel))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ConfirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ConfirmPasswordLabel))
+                .addGap(37, 37, 37)
+                .addComponent(SignUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 460, -1));
+
+        BgImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagepicker/Aeroplane image 1.jpg"))); // NOI18N
+        BgImageLabel.setText("BgLabel");
+        getContentPane().add(BgImageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
+
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
@@ -292,8 +447,10 @@ public class RegisterPage extends javax.swing.JFrame {
         BgImageLabel.setText("BgLabel");
         getContentPane().add(BgImageLabel);
         BgImageLabel.setBounds(0, 0, 1400, 770);
+ main
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
@@ -304,6 +461,8 @@ public class RegisterPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PhoneTextFieldActionPerformed
 
+ aayush
+
     private void IDTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDTypeComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_IDTypeComboBoxActionPerformed
@@ -312,9 +471,19 @@ public class RegisterPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_IDNumberTextFieldActionPerformed
 
+ main
     private void GenderComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenderComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_GenderComboBoxActionPerformed
+
+ aayush
+    private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SignUpButtonActionPerformed
+
+    private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PasswordFieldActionPerformed
 
     private void ConfirmPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmPasswordFieldActionPerformed
         // TODO add your handling code here:
@@ -327,6 +496,7 @@ public class RegisterPage extends javax.swing.JFrame {
     private void UserComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UserComboBoxActionPerformed
+ main
 
     /**
      * @param args the command line arguments
@@ -371,19 +541,27 @@ public class RegisterPage extends javax.swing.JFrame {
     private javax.swing.JTextField EmailTextField;
     private javax.swing.JComboBox<String> GenderComboBox;
     private javax.swing.JLabel GenderLabel;
+ aayush
+
     private javax.swing.JLabel IDNumberLabel;
     private javax.swing.JTextField IDNumberTextField;
     private javax.swing.JComboBox<String> IDTypeComboBox;
     private javax.swing.JLabel IDTypeLabel;
+ main
     private javax.swing.JLabel NameLabel;
     private javax.swing.JTextField NameTextField;
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel PasswordLabel;
     private javax.swing.JLabel PhoneLabel;
     private javax.swing.JTextField PhoneTextField;
+ aayush
+    private javax.swing.JButton SignUpButton;
+    private javax.swing.JLabel jLabel1;
+
     private javax.swing.JComboBox<String> UserComboBox;
     private javax.swing.JLabel UserLabel;
     private javax.swing.JButton jButton1;
+ main
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

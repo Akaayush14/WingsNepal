@@ -18,14 +18,22 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+ aayush
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,88,0,0,3,-24"/>
+
     <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-12,0,0,3,32"/>
+ main
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
     <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
+ aayush
+    <Container class="javax.swing.JPanel" name="LoginPanel">
+
     <Container class="javax.swing.JPanel" name="jPanel2">
+ main
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new java.awt.Color(102, 102, 102, 80)" type="code"/>
@@ -33,7 +41,11 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+ aayush
+          <AbsoluteConstraints x="10" y="210" width="370" height="380"/>
+
           <AbsoluteConstraints x="10" y="190" width="290" height="300"/>
+ main
         </Constraint>
       </Constraints>
 
@@ -41,6 +53,63 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+ aayush
+                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="WingsNepal2025" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                          <Component id="NoAccountTextLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="SignUpLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="EmailLabel" min="-2" pref="78" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="EmailTextField" min="-2" pref="226" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="PasswordLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="RoleLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="LoginButton" min="-2" pref="226" max="-2" attributes="0"/>
+                                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                  <Component id="ForgotPasswordLabel" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="PasswordTextField" min="-2" pref="227" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="RoleComboBox" min="-2" pref="227" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Component id="JCheckBox" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="48" max="32767" attributes="0"/>
+
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -88,28 +157,58 @@
                   <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+ main
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
+ aayush
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="EmailTextField" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="EmailLabel" alignment="3" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="UsernameTextField" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="UsernameLabel" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+ main
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="PasswordTextField" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="PasswordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+ aayush
+                  <EmptySpace pref="8" max="32767" attributes="0"/>
+                  <Component id="JCheckBox" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+ main
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="RoleComboBox" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="RoleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
+ aayush
+                  <Component id="ForgotPasswordLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="LoginButton" min="-2" pref="32" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="NoAccountTextLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="SignUpLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="WingsNepal2025" min="-2" max="-2" attributes="0"/>
+
                   <Component id="ForgotButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="LoginButton" min="-2" pref="32" max="-2" attributes="0"/>
@@ -120,17 +219,29 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+ main
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
+ aayush
+        <Component class="javax.swing.JLabel" name="EmailLabel">
+
         <Component class="javax.swing.JLabel" name="UsernameLabel">
+ main
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Emoji" size="16" style="0"/>
             </Property>
+ aayush
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Email"/>
+
             <Property name="text" type="java.lang.String" value="Username"/>
+ main
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="PasswordLabel">
@@ -138,6 +249,12 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Emoji" size="16" style="0"/>
             </Property>
+ aayush
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+
+ main
             <Property name="text" type="java.lang.String" value="Password"/>
           </Properties>
         </Component>
@@ -146,6 +263,17 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Emoji" size="16" style="0"/>
             </Property>
+ aayush
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Role"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="EmailTextField">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EmailTextFieldActionPerformed"/>
+
             <Property name="text" type="java.lang.String" value="Role"/>
           </Properties>
         </Component>
@@ -154,15 +282,22 @@
         <Component class="javax.swing.JPasswordField" name="PasswordTextField">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PasswordTextFieldActionPerformed"/>
+ main
           </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="RoleComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
+ aayush
+                <StringItem index="0" value="User"/>
+                <StringItem index="1" value="Employee"/>
+                <StringItem index="2" value="Admin"/>
+
                 <StringItem index="0" value="Admin"/>
                 <StringItem index="1" value="Employee"/>
                 <StringItem index="2" value="User"/>
+ main
               </StringArray>
             </Property>
           </Properties>
@@ -173,6 +308,19 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
+ aayush
+        <Component class="javax.swing.JButton" name="LoginButton">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="66" red="0" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Emoji" size="16" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+
         <Component class="javax.swing.JButton" name="ForgotButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Forgot password?"/>
@@ -189,13 +337,18 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Emoji" size="16" style="0"/>
             </Property>
+ main
             <Property name="text" type="java.lang.String" value="Login"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoginButtonActionPerformed"/>
           </Events>
         </Component>
+ aayush
+        <Component class="javax.swing.JLabel" name="NoAccountTextLabel">
+
         <Component class="javax.swing.JLabel" name="jLabel7">
+ main
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Emoji" size="14" style="0"/>
@@ -203,12 +356,73 @@
             <Property name="text" type="java.lang.String" value="Don&apos;t have an account?"/>
           </Properties>
         </Component>
+ aayush
+        <Component class="javax.swing.JLabel" name="WingsNepal2025">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Emoji" size="12" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="WingsNepal@2025"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="ForgotPasswordLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Forgot password?"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="SignUpLabel">
+
         <Component class="javax.swing.JButton" name="SignUpButton">
+ main
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Emoji" size="14" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+ aayush
+              <Color blue="0" green="33" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Sign up"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="PasswordTextField">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel6">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Emoji" size="24" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Welcome to the login page!"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="JCheckBox">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new java.awt.Color(102, 102, 102, 80)" type="code"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Show"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="actionCommand" type="java.lang.String" value="Show Password"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Default Cursor"/>
+            </Property>
+            <Property name="focusPainted" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="JCheckBoxItemStateChanged"/>
+          </Events>
+
               <Color blue="33" green="0" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Sign up"/>
@@ -227,13 +441,18 @@
             </Property>
             <Property name="text" type="java.lang.String" value="WingsNepal@2025"/>
           </Properties>
+ main
         </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+ aayush
+          <Font name="Segoe UI Emoji" size="28" style="1"/>
+
           <Font name="Segoe UI Emoji" size="24" style="1"/>
+ main
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -242,14 +461,22 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+ aayush
+          <AbsoluteConstraints x="670" y="10" width="120" height="40"/>
+
           <AbsoluteConstraints x="490" y="10" width="100" height="40"/>
+ main
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+ aayush
+          <Font name="Segoe UI Emoji" size="28" style="1"/>
+
           <Font name="Segoe UI Emoji" size="24" style="1"/>
+ main
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -258,14 +485,22 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+ aayush
+          <AbsoluteConstraints x="670" y="50" width="200" height="40"/>
+
           <AbsoluteConstraints x="490" y="40" width="170" height="40"/>
+ main
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+ aayush
+          <Font name="Segoe UI Emoji" size="22" style="0"/>
+
           <Font name="Segoe UI Emoji" size="18" style="0"/>
+ main
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -274,20 +509,32 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+ aayush
+          <AbsoluteConstraints x="670" y="90" width="290" height="-1"/>
+
           <AbsoluteConstraints x="490" y="80" width="240" height="-1"/>
+ main
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="BgLabel">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+ aayush
+          <Image iconType="3" name="/imagepicker/Aeroplane image 1.jpg"/>
+
           <Image iconType="3" name="/wingsnepal/image/Aeroplane image.jpg"/>
+ main
         </Property>
         <Property name="text" type="java.lang.String" value="BgImageLabel"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+ aayush
+          <AbsoluteConstraints x="0" y="0" width="1000" height="600"/>
+
           <AbsoluteConstraints x="0" y="0" width="800" height="500"/>
+ main
         </Constraint>
       </Constraints>
     </Component>
